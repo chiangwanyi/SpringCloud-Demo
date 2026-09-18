@@ -34,7 +34,12 @@
 	-->
 	<dependencyManagement>
 		<dependencies>
-			<!-- 后续如需引入 Spring Cloud 组件，可在此引入 spring-cloud-dependencies BOM 统一版本 -->
+			<!-- MyBatis Plus -->
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>3.5.3.1</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
