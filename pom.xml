@@ -25,8 +25,7 @@
 
 	<!-- 子模块清单：每个子模块都可作为独立微服务，执行 package 产出可执行 jar -->
 	<modules>
-		<module>springcloud-demo-service</module>
-		<module>ruoyi-system</module>
+		<module>service-system</module>
 	</modules>
 
 	<!--
