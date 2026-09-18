@@ -1,0 +1,30 @@
+server:
+  # 网关对外暴露的单一端口：外部用户只访问这一个地址
+  port: 8080
+
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    gateway:
+      # Spring Boot 4 下 servlet(webmvc) 风味的网关，配置根为 spring.cloud.gateway.server.webmvc
+      server:
+        webmvc:
+          routes:
+            # 用户管理业务 -> service-system (:8081)
+            - id: route-service-system
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/sys-user/**
+            # 认证 / 令牌业务 -> service-auth (:8082)
+            - id: route-service-auth
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/auth/**
+
+# 说明：
+# 1. 路径前缀（/api/sys-user、/api/auth）会原样转发给后端服务，后端 Controller 也用同样的路径，
+#    因此不需要做路径重写（RewritePath）。
+# 2. 当前 uri 写死为 localhost 具体端口，是因为尚未接入 Nacos / 注册中心。
+#    接入后可改为 uri: lb://service-system、uri: lb://service-auth，由注册中心做服务发现与负载均衡。
+# 3. 网关默认会透传请求头（含 Authorization/token），后续可在网关层统一做鉴权、限流、跨域（CORS）。

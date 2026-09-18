@@ -12,6 +12,7 @@
   - api 模块内的 `spring-cloud-starter-openfeign` 设为 `<optional>true</optional>`，避免实现模块被传递引入 spring-cloud 自动配置（Boot4 下 SimpleDiscoveryClientAutoConfiguration 崩溃）。
   - 消费方需自行加 openfeign 依赖 + `@EnableFeignClients`，并用 `interface X extends SysUserApi` 声明 Feign 客户端。
 - 契约接口同时用 `@RequestMapping`（Spring MVC，Controller 继承）与 `@FeignClient`（Feign，消费方启用），保证 HTTP 路径一致。
+- `service-gateway`：API 网关（Spring Cloud Gateway **webmvc 风味 5.0.3**）。Boot 4 必须用 `spring-cloud-starter-gateway-server-webmvc`（非旧 `spring-cloud-starter-gateway`），配置根 `spring.cloud.gateway.server.webmvc.routes`。uri 当前写死 localhost，待接 Nacos 改 `lb://service-name`。
 
 ## 工程操作注意
 - 手动重命名模块目录后，务必同时清理孤儿 `.iml` 与 `.idea`，否则 IDEA 会反复重建旧模块目录。

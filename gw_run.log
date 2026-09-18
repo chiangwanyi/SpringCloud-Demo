@@ -1,0 +1,37 @@
+2026-09-18T16:35:05.336+08:00  INFO 9604 --- [service-gateway] [main] com.jwy.scd.gateway.GatewayApplication   : Starting GatewayApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 9604 (E:\Data\projects\springcloud-demo\service-gateway\target\service-gateway-0.0.1-SNAPSHOT.jar started by jiang in E:\Data\projects\springcloud-demo)
+2026-09-18T16:35:05.341+08:00  INFO 9604 --- [service-gateway] [main] com.jwy.scd.gateway.GatewayApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-09-18T16:35:06.178+08:00  INFO 9604 --- [service-gateway] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=6b2f9bd2-6721-3361-a16e-b5dd1bf6c31d
+2026-09-18T16:35:06.631+08:00  INFO 9604 --- [service-gateway] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 60584 (http)
+2026-09-18T16:35:06.659+08:00  INFO 9604 --- [service-gateway] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-18T16:35:06.660+08:00  INFO 9604 --- [service-gateway] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-18T16:35:06.693+08:00  INFO 9604 --- [service-gateway] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1290 ms
+2026-09-18T16:35:07.594+08:00  WARN 9604 --- [service-gateway] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-09-18T16:35:07.611+08:00  INFO 9604 --- [service-gateway] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-09-18T16:35:07.628+08:00 ERROR 9604 --- [service-gateway] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 60584 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 60584 or configure this application to listen on another port.
+
+2026-09-18T16:39:54.312+08:00  INFO 21812 --- [service-gateway] [main] com.jwy.scd.gateway.GatewayApplication   : Starting GatewayApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 21812 (E:\Data\projects\springcloud-demo\service-gateway\target\service-gateway-0.0.1-SNAPSHOT.jar started by jiang in E:\Data\projects\springcloud-demo)
+2026-09-18T16:39:54.317+08:00  INFO 21812 --- [service-gateway] [main] com.jwy.scd.gateway.GatewayApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-09-18T16:39:55.044+08:00  INFO 21812 --- [service-gateway] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=6b2f9bd2-6721-3361-a16e-b5dd1bf6c31d
+2026-09-18T16:39:55.411+08:00  INFO 21812 --- [service-gateway] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-09-18T16:39:55.430+08:00  INFO 21812 --- [service-gateway] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-18T16:39:55.431+08:00  INFO 21812 --- [service-gateway] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-18T16:39:55.465+08:00  INFO 21812 --- [service-gateway] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1092 ms
+2026-09-18T16:39:56.242+08:00  INFO 21812 --- [service-gateway] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-09-18T16:39:56.263+08:00  INFO 21812 --- [service-gateway] [main] com.jwy.scd.gateway.GatewayApplication   : Started GatewayApplication in 2.506 seconds (process running for 3.05)
+2026-09-18T16:39:58.847+08:00  INFO 21812 --- [service-gateway] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-18T16:39:58.848+08:00  INFO 21812 --- [service-gateway] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-18T16:39:58.849+08:00  INFO 21812 --- [service-gateway] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms

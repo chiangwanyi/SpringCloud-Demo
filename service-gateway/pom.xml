@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- 继承微服务父工程 -->
+    <parent>
+        <groupId>com.jwy</groupId>
+        <artifactId>springcloud-demo</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <!-- 默认 packaging=jar：执行 package 会产出可执行 fat jar -->
+    <artifactId>service-gateway</artifactId>
+    <name>service-gateway</name>
+    <description>API 网关：统一对外入口，按路径把请求路由到 service-system / service-auth</description>
+
+    <dependencies>
+        <!-- Web（Servlet/Tomcat）：与 service-system / service-auth 保持一致的运行模型 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--
+            Spring Cloud Gateway（Spring Boot 4 专用，servlet / webmvc 风味）。
+            注意 Boot 4 下网关 starter 已改名（旧名 spring-cloud-starter-gateway 在 Boot 4 已失效）：
+              - 响应式(Netty): spring-cloud-starter-gateway-server-webflux
+              - Servlet(Tomcat): spring-cloud-starter-gateway-server-webmvc   （本项目选用，与现有服务一致）
+            路由配置根也变为 spring.cloud.gateway.server.webmvc.routes（不再是 spring.cloud.gateway.routes）。
+            当前未接入 Nacos / 注册中心，故 uri 写死为具体服务地址；
+            后续接入注册中心后可改为 lb://service-name 形式做负载均衡。
+        -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway-server-webmvc</artifactId>
+            <version>5.0.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 启用 Spring Boot repackage，产出可执行 jar -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- 继承父工程 pluginManagement 中预置的 lombok 注解处理器路径 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

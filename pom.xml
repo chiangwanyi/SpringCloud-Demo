@@ -27,6 +27,9 @@
 	<modules>
 		<module>service-system</module>
 		<module>service-system-api</module>
+		<module>service-auth</module>
+		<module>service-auth-api</module>
+		<module>service-gateway</module>
 	</modules>
 
 	<!--

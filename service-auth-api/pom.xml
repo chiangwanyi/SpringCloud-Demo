@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- 继承微服务父工程 -->
+    <parent>
+        <groupId>com.jwy</groupId>
+        <artifactId>springcloud-demo</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>service-auth-api</artifactId>
+    <name>service-auth-api</name>
+    <description>service-auth 对外服务契约（DTO + Feign 客户端接口），供其他微服务依赖调用</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- Spring MVC 注解（@RequestMapping / @PostMapping 等），Feign 与 Controller 共用同一套 HTTP 契约 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <!-- OpenFeign：提供 @FeignClient 注解，定义声明式远程调用客户端。
+             设为 optional：api 模块自身用它编译接口；但实现模块（service-auth）依赖本模块时
+             不会传递引入 openfeign / spring-cloud，避免触发与 Spring Boot 4 不兼容的 cloud 自动配置。
+             真正要用 Feign 调用的消费方服务，需自行声明 spring-cloud-starter-openfeign 并加 @EnableFeignClients。 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>4.1.0</version>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+</project>
