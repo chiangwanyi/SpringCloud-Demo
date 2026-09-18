@@ -1,0 +1,11 @@
+﻿USERPROFILE=C:\Users\jiang
+=== spring-cloud-dependencies ===
+NO
+=== spring-cloud-openfeign ===
+NO
+=== starter-openfeign ===
+NO
+=== spring-boot 4.0.8 ===
+EXISTS
+=== mybatis-plus-boot-starter ===
+3.5.3.1

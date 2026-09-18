@@ -1,0 +1,31 @@
+﻿=== folders containing 'mybatis-spring' ===
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis-spring
+C:\Users\jiang\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot
+C:\Users\jiang\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot-autoconfigure
+C:\Users\jiang\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot-starter
+=== spring in org/mybatis ===
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis-parent
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis-spring
+C:\Users\jiang\.m2\repository\org\mybatis\spring
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis\3.5.10
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis\3.5.16
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis\3.5.19
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis-parent\33
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis-parent\34
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis-parent\42
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis-parent\45
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis-parent\48
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis-parent\50
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis-parent\51
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis-spring\2.0.7
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis-spring\3.0.4
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis-spring\3.0.5
+C:\Users\jiang\.m2\repository\org\mybatis\mybatis-spring\4.0.0
+C:\Users\jiang\.m2\repository\org\mybatis\spring\boot
+C:\Users\jiang\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot
+C:\Users\jiang\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot-autoconfigure
+C:\Users\jiang\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot-starter
+C:\Users\jiang\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot\3.0.5
+C:\Users\jiang\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot-autoconfigure\3.0.5
+C:\Users\jiang\.m2\repository\org\mybatis\spring\boot\mybatis-spring-boot-starter\3.0.5

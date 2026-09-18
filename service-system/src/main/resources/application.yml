@@ -1,0 +1,23 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: service-system
+  # 本地演示/测试使用 H2 内存库；接入真实 MySQL 时替换为对应 datasource 即可
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:service_system;DB_CLOSE_DELAY=-1;MODE=MySQL
+    username: sa
+    password: ""
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
