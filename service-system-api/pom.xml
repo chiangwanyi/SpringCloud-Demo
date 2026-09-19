@@ -35,6 +35,15 @@
             <version>4.1.0</version>
             <optional>true</optional>
         </dependency>
+        <!-- SpringDoc OpenAPI 注解（io.swagger.v3.oas.annotations.*）：仅提供注解类，
+             不引入 servlet / UI，保证 api 契约模块轻量。
+             实现模块再加 springdoc-openapi-starter-webmvc-ui 才会真正生成并暴露文档。
+             注意：必须 3.x 线，Boot 3 线的 2.8.x 与 Spring Boot 4 不兼容。 -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+            <version>3.1.1</version>
+        </dependency>
     </dependencies>
 
 </project>

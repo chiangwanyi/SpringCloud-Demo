@@ -61,6 +61,8 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<configuration>
+						<!-- -parameters：保留方法参数名，SpringDoc 生成文档时可直接拿到参数名（Boot 3+ 推荐） -->
+						<parameters>true</parameters>
 						<annotationProcessorPaths>
 							<path>
 								<groupId>org.projectlombok</groupId>

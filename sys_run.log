@@ -43,3 +43,21 @@ Identify and stop the process that's listening on port 60584 or configure this a
 2026-09-18T16:39:58.951+08:00  INFO 12280 --- [service-system] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2026-09-18T16:39:58.952+08:00  INFO 12280 --- [service-system] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2026-09-18T16:39:58.953+08:00  INFO 12280 --- [service-system] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-09-18T17:09:02.039+08:00  INFO 22788 --- [service-system] [main] com.jwy.scd.ServiceSystemApplication     : Starting ServiceSystemApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 22788 (E:\Data\projects\springcloud-demo\service-system\target\service-system-0.0.1-SNAPSHOT.jar started by jiang in E:\Data\projects\springcloud-demo)
+2026-09-18T17:09:02.044+08:00  INFO 22788 --- [service-system] [main] com.jwy.scd.ServiceSystemApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-09-18T17:09:03.516+08:00  INFO 22788 --- [service-system] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-09-18T17:09:03.537+08:00  INFO 22788 --- [service-system] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-18T17:09:03.537+08:00  INFO 22788 --- [service-system] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-18T17:09:03.592+08:00  INFO 22788 --- [service-system] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1463 ms
+2026-09-18T17:09:03.868+08:00  INFO 22788 --- [service-system] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-18T17:09:04.080+08:00  INFO 22788 --- [service-system] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:service_system user=SA
+2026-09-18T17:09:04.083+08:00  INFO 22788 --- [service-system] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-09-18T17:09:04.838+08:00  INFO 22788 --- [service-system] [main] m.e.s.MybatisPlusApplicationContextAware : Register ApplicationContext instances org.springframework.boot.web.server.servlet.context.AnnotationConfigServletWebServerApplicationContext@73163d48
+2026-09-18T17:09:05.041+08:00  INFO 22788 --- [service-system] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2026-09-18T17:09:05.051+08:00  INFO 22788 --- [service-system] [main] com.jwy.scd.ServiceSystemApplication     : Started ServiceSystemApplication in 3.58 seconds (process running for 4.183)
+2026-09-18T17:09:05.055+08:00  WARN 22788 --- [service-system] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-18T17:09:05.055+08:00  WARN 22788 --- [service-system] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-18T17:09:06.393+08:00  INFO 22788 --- [service-system] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-18T17:09:06.394+08:00  INFO 22788 --- [service-system] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-18T17:09:06.395+08:00  INFO 22788 --- [service-system] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-09-18T17:09:06.612+08:00  INFO 22788 --- [service-system] [http-nio-8081-exec-1] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 181 ms

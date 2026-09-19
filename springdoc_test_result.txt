@@ -1,0 +1,6 @@
+﻿service-system started=True
+service-auth started=True
+SYS_API_DOCS_OK
+SYS_UI_STATUS=200
+AUTH_API_DOCS_OK
+AUTH_UI_STATUS=200

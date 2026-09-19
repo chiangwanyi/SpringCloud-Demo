@@ -1,0 +1,18 @@
+2026-09-18T17:09:01.952+08:00  INFO 23456 --- [service-auth] [main] com.jwy.scd.ServiceAuthApplication       : Starting ServiceAuthApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 23456 (E:\Data\projects\springcloud-demo\service-auth\target\service-auth-0.0.1-SNAPSHOT.jar started by jiang in E:\Data\projects\springcloud-demo)
+2026-09-18T17:09:01.957+08:00  INFO 23456 --- [service-auth] [main] com.jwy.scd.ServiceAuthApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-09-18T17:09:03.419+08:00  INFO 23456 --- [service-auth] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8082 (http)
+2026-09-18T17:09:03.441+08:00  INFO 23456 --- [service-auth] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-18T17:09:03.441+08:00  INFO 23456 --- [service-auth] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-18T17:09:03.489+08:00  INFO 23456 --- [service-auth] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1451 ms
+2026-09-18T17:09:03.756+08:00  INFO 23456 --- [service-auth] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-18T17:09:03.967+08:00  INFO 23456 --- [service-auth] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:service_auth user=SA
+2026-09-18T17:09:03.970+08:00  INFO 23456 --- [service-auth] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-09-18T17:09:04.728+08:00  INFO 23456 --- [service-auth] [main] m.e.s.MybatisPlusApplicationContextAware : Register ApplicationContext instances org.springframework.boot.web.server.servlet.context.AnnotationConfigServletWebServerApplicationContext@a5bd950
+2026-09-18T17:09:04.931+08:00  INFO 23456 --- [service-auth] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8082 (http) with context path '/'
+2026-09-18T17:09:04.939+08:00  INFO 23456 --- [service-auth] [main] com.jwy.scd.ServiceAuthApplication       : Started ServiceAuthApplication in 3.543 seconds (process running for 4.139)
+2026-09-18T17:09:04.942+08:00  WARN 23456 --- [service-auth] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-18T17:09:04.943+08:00  WARN 23456 --- [service-auth] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-18T17:09:06.811+08:00  INFO 23456 --- [service-auth] [http-nio-8082-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-18T17:09:06.811+08:00  INFO 23456 --- [service-auth] [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-18T17:09:06.813+08:00  INFO 23456 --- [service-auth] [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-09-18T17:09:07.102+08:00  INFO 23456 --- [service-auth] [http-nio-8082-exec-2] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 246 ms

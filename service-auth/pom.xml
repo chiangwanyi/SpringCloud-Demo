@@ -44,6 +44,14 @@
             <artifactId>service-auth-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!-- SpringDoc OpenAPI：自动生成 OpenAPI 3 文档并内置 Swagger UI。
+             暴露 /v3/api-docs（JSON，可导入 Apifox / Postman）与 /swagger-ui.html（可视化界面）。
+             需 Spring Boot 4 兼容版本（3.x 线）；注解类由 service-auth-api 传递提供。 -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>3.1.1</version>
+        </dependency>
         <!-- 测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
