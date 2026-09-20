@@ -3,7 +3,7 @@
 ## 技术栈与环境兼容性（重要）
 - 父工程 `springcloud-demo`：packaging=pom，groupId=com.jwy，Spring Boot **4.0.8**（即 Spring Framework **7.0.9**）作为 parent。
 - **MyBatis-Plus 必须用 `mybatis-plus-spring-boot4-starter`（本地可用 3.5.16）**，不要用 `mybatis-plus-boot-starter`（老版会拉 mybatis-spring 3.x，与 Spring 7 的 `factoryBeanObjectType` 冲突，报 Invalid bean definition）。
-- 使用 H2 时必须显式声明 `com.h2database:h2`（runtime scope），否则 `Cannot load driver class: org.h2.Driver`。
+- **数据库已从 H2 切到 MySQL**：`service-system` / `service-auth` 的 pom 用 `com.mysql:mysql-connector-j`（runtime scope），application.yml 用 `com.mysql.cj.jdbc.Driver` + `jdbc:mysql://rxs:3306/<db>`。连接信息（主机 rxs / 端口 3306 / root / 123456）见 `mysql.md`。现有 `schema.sql`（AUTO_INCREMENT / TINYINT / DATETIME）已兼容 MySQL，`sql.init.mode=always` 启动时仍会 DROP+CREATE 表（会从真实库清空数据）。
 - 本地 Maven 仓库**没有** spring-cloud / openfeign 的 BOM；openfeign 仅 `4.1.0` 可用，且无与 Boot4 匹配的 spring-cloud-dependencies。
 
 ## 模块约定（微服务）

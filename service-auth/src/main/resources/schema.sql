@@ -15,3 +15,13 @@ CREATE TABLE auth_account (
   PRIMARY KEY (id),
   UNIQUE KEY uk_username (username)
 );
+
+-- =========================================================
+-- 默认演示数据（service-auth，认证账号）
+-- 应用启动时 sql.init.mode=always 会先 DROP 再 CREATE 表，随后执行以下 INSERT。
+-- 密码为明文，仅用于演示。
+-- =========================================================
+
+INSERT INTO auth_account (id, username, password, status) VALUES
+  (1, 'admin', 'admin123', 1),
+  (2, 'zhangsan', '123456', 1);

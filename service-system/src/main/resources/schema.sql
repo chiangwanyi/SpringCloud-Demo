@@ -51,3 +51,24 @@ CREATE TABLE sys_user_role (
   PRIMARY KEY (id),
   UNIQUE KEY uk_user_role (user_id, role_id)
 );
+
+-- =========================================================
+-- 默认演示数据（service-system）
+-- 应用启动时 sql.init.mode=always 会先 DROP 再 CREATE 表，随后执行以下 INSERT，
+-- 因此每次启动都能拿到一份干净的演示数据。密码为明文，仅用于演示。
+-- =========================================================
+
+INSERT INTO sys_dept (id, dept_name, status) VALUES
+  (1, '研发部', 1);
+
+INSERT INTO sys_role (id, role_name, role_code, status) VALUES
+  (1, '管理员', 'ADMIN', 1),
+  (2, '普通用户', 'USER', 1);
+
+INSERT INTO sys_user (id, dept_id, username, password, nickname, status) VALUES
+  (1, 1, 'admin', 'admin123', '管理员', 1),
+  (2, 1, 'zhangsan', '123456', '张三', 1);
+
+INSERT INTO sys_user_role (id, user_id, role_id) VALUES
+  (1, 1, 1),
+  (2, 2, 2);

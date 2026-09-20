@@ -1,0 +1,4 @@
+﻿JAVA_bin_home=False
+PF_Java=False
+MAVEN_WRAPPER=True
+SYSTEM_JAVA=E:\Env\jdk-21.0.12.1\bin\java.exe

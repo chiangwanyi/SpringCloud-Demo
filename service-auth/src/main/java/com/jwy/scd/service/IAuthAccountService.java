@@ -1,9 +1,13 @@
 package com.jwy.scd.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jwy.scd.api.auth.dto.AuthAccountDTO;
+import com.jwy.scd.api.auth.dto.AuthAccountSaveDTO;
 import com.jwy.scd.api.auth.dto.LoginDTO;
 import com.jwy.scd.api.auth.dto.TokenInfoDTO;
 import com.jwy.scd.entity.AuthAccount;
+
+import java.util.List;
 
 /**
  * 认证账号业务接口。
@@ -22,4 +26,19 @@ public interface IAuthAccountService extends IService<AuthAccount> {
 
     /** 注销令牌 */
     void logout(String token);
+
+    /** 新增账号，返回脱敏后的账号信息 */
+    AuthAccountDTO createAccount(AuthAccountSaveDTO dto);
+
+    /** 按主键查询账号（脱敏，不含密码） */
+    AuthAccountDTO getAccount(Long id);
+
+    /** 查询所有账号（脱敏，不含密码） */
+    List<AuthAccountDTO> listAccounts();
+
+    /** 修改账号（按主键），返回脱敏后的账号信息 */
+    AuthAccountDTO updateAccount(Long id, AuthAccountSaveDTO dto);
+
+    /** 逻辑删除账号（del_flag = 1） */
+    void deleteAccount(Long id);
 }

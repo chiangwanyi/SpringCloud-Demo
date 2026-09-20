@@ -1,6 +1,7 @@
 package com.jwy.scd.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jwy.scd.api.dto.SysUserSaveDTO;
 import com.jwy.scd.api.dto.UserInfoDTO;
 import com.jwy.scd.entity.SysUser;
 
@@ -23,4 +24,13 @@ public interface ISysUserService extends IService<SysUser> {
 
     /** 对外返回脱敏后的用户列表 */
     List<UserInfoDTO> listUserInfo();
+
+    /** 新增用户，返回脱敏后的用户信息 */
+    UserInfoDTO createUser(SysUserSaveDTO dto);
+
+    /** 修改用户（按主键），返回脱敏后的用户信息 */
+    UserInfoDTO updateUser(Long id, SysUserSaveDTO dto);
+
+    /** 逻辑删除用户（del_flag = 1），成功返回 true */
+    boolean deleteUser(Long id);
 }

@@ -1,12 +1,17 @@
 package com.jwy.scd.api;
 
+import com.jwy.scd.api.dto.SysUserSaveDTO;
 import com.jwy.scd.api.dto.UserInfoDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -44,4 +49,17 @@ public interface SysUserApi {
     @Operation(summary = "查询用户列表", description = "返回系统中所有用户的列表（演示数据，可能为空）")
     @GetMapping("/list")
     List<UserInfoDTO> listUsers();
+
+    @Operation(summary = "新增用户", description = "创建一个系统用户，成功返回脱敏后的用户信息")
+    @PostMapping
+    UserInfoDTO createUser(@RequestBody SysUserSaveDTO dto);
+
+    @Operation(summary = "修改用户", description = "按主键更新用户（用户名/密码/昵称/部门/状态），成功返回脱敏后的用户信息")
+    @PutMapping("/{id}")
+    UserInfoDTO updateUser(@Parameter(description = "用户主键 ID", example = "1") @PathVariable("id") Long id,
+                           @RequestBody SysUserSaveDTO dto);
+
+    @Operation(summary = "删除用户", description = "按主键逻辑删除用户（del_flag = 1）")
+    @DeleteMapping("/{id}")
+    void deleteUser(@Parameter(description = "用户主键 ID", example = "1") @PathVariable("id") Long id);
 }

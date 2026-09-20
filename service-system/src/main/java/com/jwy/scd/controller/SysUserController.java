@@ -1,6 +1,7 @@
 package com.jwy.scd.controller;
 
 import com.jwy.scd.api.SysUserApi;
+import com.jwy.scd.api.dto.SysUserSaveDTO;
 import com.jwy.scd.api.dto.UserInfoDTO;
 import com.jwy.scd.service.ISysUserService;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,5 +35,20 @@ public class SysUserController implements SysUserApi {
     @Override
     public List<UserInfoDTO> listUsers() {
         return userService.listUserInfo();
+    }
+
+    @Override
+    public UserInfoDTO createUser(SysUserSaveDTO dto) {
+        return userService.createUser(dto);
+    }
+
+    @Override
+    public UserInfoDTO updateUser(Long id, SysUserSaveDTO dto) {
+        return userService.updateUser(id, dto);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userService.deleteUser(id);
     }
 }

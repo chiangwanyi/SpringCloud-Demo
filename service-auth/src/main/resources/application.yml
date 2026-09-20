@@ -4,12 +4,12 @@ server:
 spring:
   application:
     name: service-auth
-  # 本地演示/测试使用 H2 内存库；接入真实 MySQL 时替换为对应 datasource 即可
+  # 连接真实 MySQL（连接信息见 mysql.md）
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:service_auth;DB_CLOSE_DELAY=-1;MODE=MySQL
-    username: sa
-    password: ""
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rxs:3306/service_auth?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: "123456"
   sql:
     init:
       mode: always

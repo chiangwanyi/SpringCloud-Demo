@@ -1,0 +1,81 @@
+﻿[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] springcloud-demo                                                   [pom]
+[INFO] service-system-api                                                 [jar]
+[INFO] service-system                                                     [jar]
+[INFO] service-auth-api                                                   [jar]
+[INFO] service-auth                                                       [jar]
+[INFO] 
+[INFO] ----------------------< com.jwy:springcloud-demo >----------------------
+[INFO] Building springcloud-demo 0.0.1-SNAPSHOT                           [1/5]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] ---------------------< com.jwy:service-system-api >---------------------
+[INFO] Building service-system-api 0.0.1-SNAPSHOT                         [2/5]
+[INFO]   from service-system-api\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ service-system-api ---
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-system-api\src\main\resources
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-system-api\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ service-system-api ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 3 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] -----------------------< com.jwy:service-system >-----------------------
+[INFO] Building service-system 0.0.1-SNAPSHOT                             [3/5]
+[INFO]   from service-system\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ service-system ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ service-system ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 9 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] ----------------------< com.jwy:service-auth-api >----------------------
+[INFO] Building service-auth-api 0.0.1-SNAPSHOT                           [4/5]
+[INFO]   from service-auth-api\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ service-auth-api ---
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-auth-api\src\main\resources
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-auth-api\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ service-auth-api ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 5 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] ------------------------< com.jwy:service-auth >------------------------
+[INFO] Building service-auth 0.0.1-SNAPSHOT                               [5/5]
+[INFO]   from service-auth\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ service-auth ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ service-auth ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 9 source files with javac [debug parameters release 21] to target\classes
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for springcloud-demo 0.0.1-SNAPSHOT:
+[INFO] 
+[INFO] springcloud-demo ................................... SUCCESS [  0.004 s]
+[INFO] service-system-api ................................. SUCCESS [  6.034 s]
+[INFO] service-system ..................................... SUCCESS [  3.615 s]
+[INFO] service-auth-api ................................... SUCCESS [  1.610 s]
+[INFO] service-auth ....................................... SUCCESS [  2.452 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14.145 s
+[INFO] Finished at: 2026-09-20T10:27:57+08:00
+[INFO] ------------------------------------------------------------------------
+EXIT_CODE=0
