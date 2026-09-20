@@ -1,0 +1,30 @@
+﻿removed: of-src
+removed: of-sources.zip
+--- 保留的验证产物 ---
+Inspect.java
+SchemaRunner.java
+Verify.java
+boot_status.txt
+build1_tail.txt
+cleanup.txt
+contract_files.txt
+diag.txt
+e2e.txt
+e2e3.txt
+e2e4.txt
+e2e_gw.txt
+env_check.txt
+jars.txt
+jvm_env.txt
+mysql_inspect.txt
+mysql_probe.txt
+nacos_probe.txt
+nacos_publish.txt
+nacos_readback.txt
+probe.txt
+probe2.txt
+schema_result.txt
+tree_filtered.txt
+verify_err_utf8.txt
+verify_exit.txt
+verify_out.txt

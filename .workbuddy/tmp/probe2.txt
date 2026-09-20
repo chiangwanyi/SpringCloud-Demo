@@ -1,0 +1,16 @@
+﻿settings: True
+repo: C:\Users\jiang\.m2\repository
+repoExists: True
+openfeignCoreExists: True
+openfeignVersions: 4.1.0,4.3.3,5.0.0
+jar: C:\Users\jiang\.m2\repository\org\springframework\cloud\spring-cloud-openfeign-core\5.0.0\spring-cloud-openfeign-core-5.0.0.jar
+---- javap EnableFeignClients ----
+Compiled from "EnableFeignClients.java"
+public interface org.springframework.cloud.openfeign.EnableFeignClients extends java.lang.annotation.Annotation {
+  public abstract java.lang.String[] value();
+  public abstract java.lang.String[] basePackages();
+  public abstract java.lang.Class<?>[] basePackageClasses();
+  public abstract java.lang.Class<?>[] defaultConfiguration();
+  public abstract java.lang.Class<?>[] clients();
+}
+

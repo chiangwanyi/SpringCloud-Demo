@@ -1,0 +1,19 @@
+[安全检查] service_order 中既有表数量 = 0
+[建库] CREATE DATABASE IF NOT EXISTS service_order -> OK
+[执行] DROP TABLE IF EXISTS biz_order_item ... OK
+[执行] DROP TABLE IF EXISTS biz_order ... OK
+[执行] DROP TABLE IF EXISTS biz_product ... OK
+[执行] CREATE TABLE biz_product (   id          BIGINT        NOT NULL AUTO_I ... OK
+[执行] CREATE TABLE biz_order (   id           BIGINT        NOT NULL AUTO_IN ... OK
+[执行] CREATE TABLE biz_order_item (   id           BIGINT        NOT NULL AU ... OK
+[执行] INSERT INTO biz_product (id, name, price, stock, status) VALUES   (1,  ... OK
+[完成] 共执行 7 条语句
+=== service_order 表清单 ===
+  biz_order
+  biz_order_item
+  biz_product
+=== biz_product 演示数据 ===
+  id=1 机械键盘 price=399.00 stock=100 status=1
+  id=2 无线鼠标 price=129.00 stock=200 status=1
+  id=3 显示器 27寸 price=1299.00 stock=30 status=1
+  id=4 已下架商品 price=99.00 stock=50 status=0

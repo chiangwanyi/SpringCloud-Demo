@@ -29,6 +29,8 @@
 		<module>service-system-api</module>
 		<module>service-auth</module>
 		<module>service-auth-api</module>
+		<module>service-order</module>
+		<module>service-order-api</module>
 		<module>service-gateway</module>
 	</modules>
 
@@ -38,12 +40,13 @@
 	-->
 	<dependencyManagement>
 		<dependencies>
-			<!-- MyBatis Plus -->
-			<dependency>
-				<groupId>com.baomidou</groupId>
-				<artifactId>mybatis-plus-boot-starter</artifactId>
-				<version>3.5.3.1</version>
-			</dependency>
+			<!--
+				注意：此处刻意不管理 MyBatis-Plus 的版本。
+				各实现模块统一使用 Spring Boot 4 专用启动器
+				`com.baomidou:mybatis-plus-spring-boot4-starter`（并在模块内显式写版本），
+				不要使用 `mybatis-plus-boot-starter`——后者会传递引入 mybatis-spring 3.x，
+				与 Spring Framework 7 的 factoryBeanObjectType 冲突，报 Invalid bean definition。
+			-->
 
 			<!--
 				Spring Cloud Alibaba BOM（统一管理 Nacos 客户端等版本）。

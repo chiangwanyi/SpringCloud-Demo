@@ -1,0 +1,58 @@
+server:
+  # 订单服务端口（service-system=8081 / service-auth=8082 / service-gateway=8080）
+  port: 8083
+
+spring:
+  application:
+    name: service-order
+  cloud:
+    nacos:
+      # Nacos 已开启认证（见 nacos.md），discovery 与 config 共用账号密码
+      discovery:
+        server-addr: rxs:8848
+        username: nacos
+        password: 123456
+      # 配置中心：datasource 等外部化配置从 Nacos 拉取（dataId=service-order.yaml）
+      config:
+        server-addr: rxs:8848
+        username: nacos
+        password: 123456
+        file-extension: yaml
+        group: DEFAULT_GROUP
+    # ★ OpenFeign 全局配置
+    openfeign:
+      client:
+        config:
+          default:
+            # 连接超时：建立 TCP 连接的时间上限。Nacos 返回的实例若已下线，
+            # 没有这个超时就会长时间挂住（默认值偏长），导致下单接口迟迟不返回。
+            connect-timeout: 3000
+            # 读取超时：等待下游响应的上限
+            read-timeout: 5000
+            # Feign 日志级别：NONE / BASIC / HEADERS / FULL。
+            # BASIC 只记录请求方法、URL、状态码与耗时，调试够用且不会把请求体（可能含敏感信息）打进日志。
+            logger-level: basic
+  # 从 Nacos 配置中心导入 datasource（含 jdbc:mysql url、用户名、密码），不在本地硬编码
+  config:
+    import:
+      - nacos:service-order.yaml
+  sql:
+    init:
+      # never：真实 MySQL 环境不自动建表，避免每次启动 DROP 掉业务数据；
+      # 首次部署请手动执行本模块的 schema.sql（见文件内说明）。
+      mode: never
+      schema-locations: classpath:schema.sql
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+
+logging:
+  level:
+    # Feign 的日志 logger 名就是 Feign 客户端接口的全限定名。
+    # 只把 logger-level 配成 basic 还不够，必须同时把该接口所在包的日志级别设为 debug，
+    # 否则 Feign 的日志会被日志框架过滤掉，看不到任何输出。
+    com.jwy.scd.api.SysUserApi: debug

@@ -28,11 +28,18 @@
         <!-- OpenFeign：提供 @FeignClient 注解，定义声明式远程调用客户端。
              设为 optional：api 模块自身用它编译接口；但实现模块（service-system）依赖本模块时
              不会传递引入 openfeign / spring-cloud，避免触发与 Spring Boot 4 不兼容的 cloud 自动配置。
-             真正要用 Feign 调用的消费方服务，需自行声明 spring-cloud-starter-openfeign 并加 @EnableFeignClients。 -->
+             真正要用 Feign 调用的消费方服务（如 service-order），需自行声明 spring-cloud-starter-openfeign、
+             spring-cloud-starter-loadbalancer，并在启动类加 @EnableFeignClients。
+
+             ⚠️ 这里刻意不写 <version>：版本由父工程 import 的 spring-cloud-dependencies BOM 统一管理
+             （2025.1.0 → openfeign 5.0.0）。
+             历史教训：此处曾硬编码 <version>4.1.0</version>，那是 Spring Cloud 2023.0.x 的版本线；
+             虽然因 optional 不向下传递而暂时没暴露问题，但消费方拿到的却是 BOM 管理的 5.0.x，
+             契约接口与运行期 client 版本线错配，属于本项目踩过的同类坑（HttpRedirects、
+             WebServerInitializedEvent 均因版本线错配导致）。 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>4.1.0</version>
             <optional>true</optional>
         </dependency>
         <!-- SpringDoc OpenAPI 注解（io.swagger.v3.oas.annotations.*）：仅提供注解类，

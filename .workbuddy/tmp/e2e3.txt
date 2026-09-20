@@ -1,0 +1,19 @@
+﻿service-system started: True
+service-order  started: True
+--- 端口 ---
+2026-09-20T14:39:25.461+08:00  INFO 32000 --- [service-system] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-09-20T14:39:29.989+08:00  INFO 32564 --- [service-order] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8083 (http)
+=== 1) 直连 service-system 的 Feign 目标接口（确认被调方正常） ===
+OK {"createTime":"2026-09-20T04:16:17","deptId":1,"id":2,"nickname":"å¼ ä¸","status":1,"username":"zhangsan"}
+=== 2) 订单列表（初始为空） ===
+OK 
+=== 3) ★下单：userId=2(zhangsan)，商品1x2 + 商品2x1（触发 Feign） ===
+HTTP 500 {"success":false,"message":"服务内部错误：JSON parse error: Cannot construct instance of `com.jwy.scd.api.order.dto.OrderCreateDTO` (although at least one Creator exists): no int/Int-argument constructor/factory method to deserialize from Number value (123)"}
+=== 4) 下单：userId=999 不存在（期望 400） ===
+HTTP 500 {"success":false,"message":"服务内部错误：JSON parse error: Cannot construct instance of `com.jwy.scd.api.order.dto.OrderCreateDTO` (although at least one Creator exists): no int/Int-argument constructor/factory method to deserialize from Number value (123)"}
+=== 5) 下单：商品3 库存30 买999（期望 400 库存不足） ===
+HTTP 500 {"success":false,"message":"服务内部错误：JSON parse error: Cannot construct instance of `com.jwy.scd.api.order.dto.OrderCreateDTO` (although at least one Creator exists): no int/Int-argument constructor/factory method to deserialize from Number value (123)"}
+=== 6) 商品列表（确认库存被扣减） ===
+OK [{"createTime":"2026-09-20T06:27:40","id":1,"name":"æºæ¢°é®ç","price":399.00,"status":1,"stock":100},{"createTime":"2026-09-20T06:27:40","id":2,"name":"æ çº¿é¼ æ ","price":129.00,"status":1,"stock":200},{"createTime":"2026-09-20T06:27:40","id":3,"name":"æ¾ç¤ºå¨ 27å¯¸","price":1299.00,"status":1,"stock":30},{"createTime":"2026-09-20T06:27:40","id":4,"name":"å·²ä¸æ¶åå","price":99.00,"status":0,"stock":50}]
+=== service-order 日志：Feign / 下单 痕迹 ===
+2026-09-20T14:39:30.316+08:00  INFO 32564 --- [service-order] [           main] o.s.c.openfeign.FeignClientFactoryBean   : For 'service-system' URL not provided. Will try picking an instance via load-balancing.

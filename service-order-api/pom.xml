@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- 继承微服务父工程 -->
+    <parent>
+        <groupId>com.jwy</groupId>
+        <artifactId>springcloud-demo</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>service-order-api</artifactId>
+    <name>service-order-api</name>
+    <description>service-order 对外服务契约（DTO + Feign 客户端接口），供其他微服务依赖调用</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- Spring MVC 注解（@RequestMapping / @GetMapping 等），Feign 与 Controller 共用同一套 HTTP 契约 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <!-- OpenFeign：提供 @FeignClient 注解。版本由父 BOM 统一管理（2025.1.0 → 5.0.0），切勿手写版本。
+             optional=true：本模块自身用它编译契约接口，但不会向实现模块（service-order）传递
+             openfeign / spring-cloud，避免 Boot 4 下触发不兼容的 cloud 自动配置。 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- SpringDoc OpenAPI 注解：仅提供注解类，不引入 servlet / UI，保证 api 契约模块轻量 -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+    </dependencies>
+
+</project>

@@ -1,0 +1,16 @@
+=== biz_product 名称（应与 schema.sql 中的中文一致）===
+  id=1 name=机械键盘
+  id=2 name=无线鼠标
+  id=3 name=显示器 27寸
+  id=4 name=已下架商品
+=== biz_order 订单（username 由 Feign 从 service-system 取得）===
+  id=1 orderNo=SO20260920143949468 userId=2 username=zhangsan total=927.00 status=0
+  id=2 orderNo=SO20260920144016241 userId=1 username=admin total=1299.00 status=0
+=== biz_order_item 明细快照 ===
+  id=1 orderId=1 productName=机械键盘 price=399.00 qty=2 amount=798.00
+  id=2 orderId=1 productName=无线鼠标 price=129.00 qty=1 amount=129.00
+  id=3 orderId=2 productName=显示器 27寸 price=1299.00 qty=1 amount=1299.00
+=== 库/表字符集 ===
+  biz_order -> utf8mb4_0900_ai_ci
+  biz_order_item -> utf8mb4_0900_ai_ci
+  biz_product -> utf8mb4_0900_ai_ci

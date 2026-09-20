@@ -1,0 +1,12 @@
+﻿=== A) ★下单 userId=2，商品1x2 + 商品2x1（Feign 调 service-system） ===
+OK {"createTime":"2026-09-20T14:39:49.9379546","id":1,"items":[{"amount":798.00,"id":1,"orderId":1,"price":399.00,"productId":1,"productName":"æºæ¢°é®ç","quantity":2},{"amount":129.00,"id":2,"orderId":1,"price":129.00,"productId":2,"productName":"æ çº¿é¼ æ ","quantity":1}],"orderNo":"SO20260920143949468","status":0,"statusDesc":"å·²åå»º","totalAmount":927.00,"userId":2,"username":"zhangsan"}
+=== B) 下单 userId=999（用户不存在，期望 400） ===
+HTTP 400 {"success":false,"message":"下单用户不存在：userId=999"}
+=== C) 下单 商品3 库存30 买999（期望 400 库存不足） ===
+HTTP 400 {"success":false,"message":"商品「显示器 27寸」库存不足，当前库存 30，本次需要 999"}
+=== D) 下单 商品4 已下架（期望 400） ===
+HTTP 400 {"success":false,"message":"商品已下架：已下架商品"}
+=== E) 订单列表 ===
+OK {"createTime":"2026-09-20T14:39:50","id":1,"items":[{"amount":798.00,"id":1,"orderId":1,"price":399.00,"productId":1,"productName":"æºæ¢°é®ç","quantity":2},{"amount":129.00,"id":2,"orderId":1,"price":129.00,"productId":2,"productName":"æ çº¿é¼ æ ","quantity":1}],"orderNo":"SO20260920143949468","status":0,"statusDesc":"å·²åå»º","totalAmount":927.00,"userId":2,"username":"zhangsan"}
+=== F) 商品库存（对比初始 100/200/30/50） ===
+id=1 2 3 4 stock=98 199 30 50

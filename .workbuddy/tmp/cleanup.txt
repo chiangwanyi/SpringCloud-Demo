@@ -1,0 +1,8 @@
+﻿待停止的测试进程数: 3
+--- 端口占用复查（False 表示已释放） ---
+  port 8080 in use: False
+  port 8081 in use: False
+  port 8082 in use: False
+  port 8083 in use: False
+--- 仍存活的 java 进程（不应包含本项目） ---
+  PID 32348 : C:\Users\jiang\.jdks\ms-21.0.12.1\bin\java.exe -Djava.awt.headless=true -Dmaven.defaultProjectBuilder.disableGlobalModel

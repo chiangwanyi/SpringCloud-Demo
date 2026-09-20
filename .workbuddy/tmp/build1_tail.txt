@@ -1,0 +1,22 @@
+﻿[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ service-gateway ---
+[INFO] Recompiling the module because of added or removed source files.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target\classes
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for springcloud-demo 0.0.1-SNAPSHOT:
+[INFO] 
+[INFO] springcloud-demo ................................... SUCCESS [  0.007 s]
+[INFO] service-system-api ................................. SUCCESS [  2.778 s]
+[INFO] service-system ..................................... SUCCESS [  1.125 s]
+[INFO] service-auth-api ................................... SUCCESS [  0.504 s]
+[INFO] service-auth ....................................... SUCCESS [  0.279 s]
+[INFO] service-order-api .................................. SUCCESS [  6.074 s]
+[INFO] service-order ...................................... SUCCESS [  5.086 s]
+[INFO] service-gateway .................................... SUCCESS [  1.923 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  18.924 s
+[INFO] Finished at: 2026-09-20T14:25:43+08:00
+[INFO] ------------------------------------------------------------------------
+MAVEN_EXIT=0

@@ -1,0 +1,9 @@
+﻿java.exe : 错误: 找不到或无法加载主类 .encoding=UTF-8
+所在位置 行:448 字符: 1
++ & "E:\Env\jdk-21.0.12.1\bin\java.exe" -Dfile.encoding=UTF-8 --class-p ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (错误: 找不到或无法加载主类 .encoding=UTF-8:St 
+   ring) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+原因: java.lang.ClassNotFoundException: /encoding=UTF-8

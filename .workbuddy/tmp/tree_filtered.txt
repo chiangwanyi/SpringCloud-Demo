@@ -1,0 +1,13 @@
+﻿[INFO] +- org.springframework.cloud:spring-cloud-starter-openfeign:jar:5.0.0:compile
+[INFO] |  +- org.springframework.cloud:spring-cloud-starter:jar:5.0.0:compile
+[INFO] |  +- org.springframework.cloud:spring-cloud-openfeign-core:jar:5.0.0:compile
+[INFO] |  |  \- io.github.openfeign:feign-form-spring:jar:13.6:compile
+[INFO] |  |     \- io.github.openfeign:feign-form:jar:13.6:compile
+[INFO] |  +- org.springframework.cloud:spring-cloud-commons:jar:5.0.0:compile
+[INFO] |  +- io.github.openfeign:feign-core:jar:13.6:compile
+[INFO] |  \- io.github.openfeign:feign-slf4j:jar:13.6:compile
+[INFO] +- org.springframework.cloud:spring-cloud-starter-loadbalancer:jar:5.0.0:compile
+[INFO] |  \- org.springframework.cloud:spring-cloud-loadbalancer:jar:5.0.0:compile
+[INFO] \- com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:jar:2025.1.0.0:compile
+[INFO]    \- org.springframework.cloud:spring-cloud-context:jar:5.0.0:compile
+MAVEN_EXIT=0

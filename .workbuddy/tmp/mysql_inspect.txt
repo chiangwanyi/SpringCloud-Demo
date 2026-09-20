@@ -1,0 +1,25 @@
+=== DATABASES ===
+  information_schema
+  iot_cshfc_20260320
+  iot_dj_20251111
+  iot_dj_20251122
+  iot_fc_20250828
+  iot_fc_20260119
+  mysql
+  performance_schema
+  ry_nj_20260911
+  service_auth
+  service_system
+  sys
+=== TABLES IN service_order ===
+  (库不存在或没有表)
+=== TABLES IN service_system ===
+  sys_dept
+  sys_role
+  sys_user
+  sys_user_role
+=== TABLES IN service_auth ===
+  auth_account
+=== service_system.sys_user (用于对齐演示用户 ID) ===
+  id=1 username=admin nickname=管理员 status=1
+  id=2 username=zhangsan nickname=张三 status=1

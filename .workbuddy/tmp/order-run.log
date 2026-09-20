@@ -1,0 +1,148 @@
+14:28:42.543 [main] INFO com.alibaba.nacos.plugin.auth.spi.client.ClientAuthPluginManager -- [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+14:28:42.544 [main] INFO com.alibaba.nacos.plugin.auth.spi.client.ClientAuthPluginManager -- [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+14:28:43.776 [main] INFO com.alibaba.nacos.common.ability.AbstractAbilityControlManager -- Ready to get current node abilities...
+14:28:43.778 [main] INFO com.alibaba.nacos.common.ability.AbstractAbilityControlManager -- Ready to initialize current node abilities, support modes: [SDK_CLIENT]
+14:28:43.780 [main] INFO com.alibaba.nacos.common.ability.AbstractAbilityControlManager -- Initialize current abilities finish...
+14:28:43.781 [main] INFO com.alibaba.nacos.common.ability.discover.NacosAbilityManagerHolder -- [AbilityControlManager] Successfully initialize AbilityControlManager
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.8)
+
+2026-09-20T14:28:44.059+08:00  INFO 30088 --- [service-order] [           main] com.jwy.scd.ServiceOrderApplication      : Starting ServiceOrderApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 30088 (E:\Data\projects\springcloud-demo\service-order\target\service-order-0.0.1-SNAPSHOT.jar started by jiang in e:\Data\projects\springcloud-demo)
+2026-09-20T14:28:44.061+08:00  INFO 30088 --- [service-order] [           main] com.jwy.scd.ServiceOrderApplication      : No active profile set, falling back to 1 default profile: "default"
+2026-09-20T14:28:44.137+08:00  INFO 30088 --- [service-order] [           main] c.a.c.n.c.NacosConfigDataLoader          : [Nacos Config] Load config[dataId=service-order.yaml, group=DEFAULT_GROUP] success
+2026-09-20T14:28:45.103+08:00  INFO 30088 --- [service-order] [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=467f28c8-40d9-399d-a5a2-c4678288d51e
+2026-09-20T14:28:45.566+08:00  INFO 30088 --- [service-order] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 62513 (http)
+2026-09-20T14:28:45.584+08:00  INFO 30088 --- [service-order] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-20T14:28:45.584+08:00  INFO 30088 --- [service-order] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-20T14:28:45.620+08:00  INFO 30088 --- [service-order] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1480 ms
+2026-09-20T14:28:46.024+08:00  INFO 30088 --- [service-order] [           main] o.s.c.openfeign.FeignClientFactoryBean   : For 'service-system' URL not provided. Will try picking an instance via load-balancing.
+2026-09-20T14:28:46.053+08:00 ERROR 30088 --- [service-order] [           main] o.s.c.o.support.SpringMvcContract        : Cannot process class: com.jwy.scd.api.SysUserApi. @RequestMapping annotation is not allowed on @FeignClient interfaces.
+2026-09-20T14:28:46.053+08:00  WARN 30088 --- [service-order] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'orderController' defined in URL [jar:nested:/E:/Data/projects/springcloud-demo/service-order/target/service-order-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/com/jwy/scd/controller/OrderController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'orderServiceImpl' defined in URL [jar:nested:/E:/Data/projects/springcloud-demo/service-order/target/service-order-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/com/jwy/scd/service/impl/OrderServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'com.jwy.scd.api.SysUserApi': FactoryBean threw exception on object creation
+2026-09-20T14:28:46.055+08:00  WARN 30088 --- [service-order] [           main] s.c.a.AnnotationConfigApplicationContext : Exception thrown from ApplicationListener handling ContextClosedEvent
+
+org.springframework.beans.factory.BeanCreationNotAllowedException: Error creating bean with name 'nacosGracefulShutdownDelegate': Singleton bean creation not allowed while singletons of this factory are in destruction (Do not request a bean from a BeanFactory in a destroy method implementation!)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:301) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.context.event.AbstractApplicationEventMulticaster.retrieveApplicationListeners(AbstractApplicationEventMulticaster.java:266) ~[spring-context-7.0.9.jar!/:7.0.9]
+	at org.springframework.context.event.AbstractApplicationEventMulticaster.getApplicationListeners(AbstractApplicationEventMulticaster.java:222) ~[spring-context-7.0.9.jar!/:7.0.9]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:140) ~[spring-context-7.0.9.jar!/:7.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:448) ~[spring-context-7.0.9.jar!/:7.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:454) ~[spring-context-7.0.9.jar!/:7.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:381) ~[spring-context-7.0.9.jar!/:7.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1190) ~[spring-context-7.0.9.jar!/:7.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1153) ~[spring-context-7.0.9.jar!/:7.0.9]
+	at org.springframework.cloud.context.named.NamedContextFactory.destroy(NamedContextFactory.java:116) ~[spring-cloud-context-5.0.0.jar!/:5.0.0]
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:209) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:795) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:745) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1507) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:704) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1500) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1246) ~[spring-context-7.0.9.jar!/:7.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:644) ~[spring-context-7.0.9.jar!/:7.0.9]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.8.jar!/:4.0.8]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.8.jar!/:4.0.8]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.8.jar!/:4.0.8]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.8.jar!/:4.0.8]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.8.jar!/:4.0.8]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.8.jar!/:4.0.8]
+	at com.jwy.scd.ServiceOrderApplication.main(ServiceOrderApplication.java:50) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[service-order-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[service-order-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[service-order-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+
+2026-09-20T14:28:46.060+08:00  INFO 30088 --- [service-order] [           main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-09-20T14:28:46.075+08:00  INFO 30088 --- [service-order] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-09-20T14:28:46.090+08:00 ERROR 30088 --- [service-order] [           main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'orderController' defined in URL [jar:nested:/E:/Data/projects/springcloud-demo/service-order/target/service-order-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/com/jwy/scd/controller/OrderController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'orderServiceImpl' defined in URL [jar:nested:/E:/Data/projects/springcloud-demo/service-order/target/service-order-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/com/jwy/scd/service/impl/OrderServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'com.jwy.scd.api.SysUserApi': FactoryBean threw exception on object creation
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1380) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1219) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1225) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1191) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.9.jar!/:7.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.9.jar!/:7.0.9]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.8.jar!/:4.0.8]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.8.jar!/:4.0.8]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.8.jar!/:4.0.8]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.8.jar!/:4.0.8]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.8.jar!/:4.0.8]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.8.jar!/:4.0.8]
+	at com.jwy.scd.ServiceOrderApplication.main(ServiceOrderApplication.java:50) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[service-order-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[service-order-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[service-order-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'orderServiceImpl' defined in URL [jar:nested:/E:/Data/projects/springcloud-demo/service-order/target/service-order-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/com/jwy/scd/service/impl/OrderServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'com.jwy.scd.api.SysUserApi': FactoryBean threw exception on object creation
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1380) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1219) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:229) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1769) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1658) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	... 26 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.jwy.scd.api.SysUserApi': FactoryBean threw exception on object creation
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:209) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:149) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1879) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getObjectForBeanInstance(AbstractAutowireCapableBeanFactory.java:1302) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:343) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:229) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1769) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1658) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	... 40 common frames omitted
+Caused by: java.lang.IllegalArgumentException: @RequestMapping annotation not allowed on @FeignClient interfaces
+	at org.springframework.cloud.openfeign.support.SpringMvcContract.processAnnotationOnClass(SpringMvcContract.java:194) ~[spring-cloud-openfeign-core-5.0.0.jar!/:5.0.0]
+	at feign.Contract$BaseContract.parseAndValidateMetadata(Contract.java:109) ~[feign-core-13.6.jar!/:na]
+	at org.springframework.cloud.openfeign.support.SpringMvcContract.parseAndValidateMetadata(SpringMvcContract.java:205) ~[spring-cloud-openfeign-core-5.0.0.jar!/:5.0.0]
+	at feign.Contract$BaseContract.parseAndValidateMetadata(Contract.java:71) ~[feign-core-13.6.jar!/:na]
+	at feign.ReflectiveFeign$ParseHandlersByName.apply(ReflectiveFeign.java:140) ~[feign-core-13.6.jar!/:na]
+	at feign.ReflectiveFeign.newInstance(ReflectiveFeign.java:59) ~[feign-core-13.6.jar!/:na]
+	at feign.ReflectiveFeign.newInstance(ReflectiveFeign.java:51) ~[feign-core-13.6.jar!/:na]
+	at feign.Feign$Builder.target(Feign.java:202) ~[feign-core-13.6.jar!/:na]
+	at org.springframework.cloud.openfeign.DefaultTargeter.target(DefaultTargeter.java:30) ~[spring-cloud-openfeign-core-5.0.0.jar!/:5.0.0]
+	at org.springframework.cloud.openfeign.FeignClientFactoryBean.loadBalance(FeignClientFactoryBean.java:433) ~[spring-cloud-openfeign-core-5.0.0.jar!/:5.0.0]
+	at org.springframework.cloud.openfeign.FeignClientFactoryBean.getTarget(FeignClientFactoryBean.java:481) ~[spring-cloud-openfeign-core-5.0.0.jar!/:5.0.0]
+	at org.springframework.cloud.openfeign.FeignClientFactoryBean.getObject(FeignClientFactoryBean.java:456) ~[spring-cloud-openfeign-core-5.0.0.jar!/:5.0.0]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:203) ~[spring-beans-7.0.9.jar!/:7.0.9]
+	... 50 common frames omitted
+
+2026-09-20T14:28:46.092+08:00  INFO 30088 --- [service-order] [       Thread-7] c.a.n.common.http.HttpClientBeanHolder   : [HttpClientBeanHolder] Start destroying common HttpClient
+2026-09-20T14:28:46.092+08:00  INFO 30088 --- [service-order] [       Thread-9] c.a.nacos.common.notify.NotifyCenter     : [NotifyCenter] Start destroying Publisher
+2026-09-20T14:28:46.092+08:00  INFO 30088 --- [service-order] [       Thread-1] c.a.n.common.executor.ThreadPoolManager  : [ThreadPoolManager] Start destroying ThreadPool
+2026-09-20T14:28:46.092+08:00  INFO 30088 --- [service-order] [       Thread-9] c.a.nacos.common.notify.NotifyCenter     : [NotifyCenter] Completed destruction of Publisher
+2026-09-20T14:28:46.092+08:00  INFO 30088 --- [service-order] [       Thread-1] c.a.n.common.executor.ThreadPoolManager  : [ThreadPoolManager] Completed destruction of ThreadPool

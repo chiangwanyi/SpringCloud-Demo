@@ -1,7 +1,8 @@
 -- =========================================================
 -- 首次部署时由 DBA 在 MySQL 上执行一次：
--- 为 service-system 与 service-auth 分别创建独立数据库。
--- 表结构由各自应用的 src/main/resources/schema.sql 在启动时自动建表（sql.init.mode=always）。
+-- 为 service-system / service-auth / service-order 分别创建独立数据库。
+-- 表结构由各自应用的 src/main/resources/schema.sql 手动执行一次
+-- （application.yml 里 sql.init.mode=never，启动时不会自动建表，避免清空业务数据）。
 -- =========================================================
 
 CREATE DATABASE IF NOT EXISTS service_system
@@ -9,6 +10,10 @@ CREATE DATABASE IF NOT EXISTS service_system
   COLLATE utf8mb4_general_ci;
 
 CREATE DATABASE IF NOT EXISTS service_auth
+  DEFAULT CHARACTER SET utf8mb4
+  COLLATE utf8mb4_general_ci;
+
+CREATE DATABASE IF NOT EXISTS service_order
   DEFAULT CHARACTER SET utf8mb4
   COLLATE utf8mb4_general_ci;
 
