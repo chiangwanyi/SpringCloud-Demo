@@ -19,6 +19,14 @@ spring:
         password: 123456
         file-extension: yaml
         group: DEFAULT_GROUP
+    # ★ Sentinel 流量治理（限流 / 熔断 / 降级）
+    sentinel:
+      transport:
+        # 控制台地址：本服务把实时指标报给这个 Dashboard，并从它接收动态下发的规则。
+        # Dashboard 部署在局域网 rxs 的 Docker 里（见 sentinel-dashboard.md），端口 8858。
+        dashboard: rxs:8858
+        # 本服务本地用于接收 Dashboard 下发规则的端口（默认 8719 即可，多个实例需各自区分）
+        port: 8719
     # ★ OpenFeign 全局配置
     openfeign:
       client:

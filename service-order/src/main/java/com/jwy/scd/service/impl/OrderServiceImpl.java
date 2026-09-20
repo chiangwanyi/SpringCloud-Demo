@@ -2,8 +2,8 @@ package com.jwy.scd.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.jwy.scd.api.SysUserApi;
 import com.jwy.scd.api.dto.UserInfoDTO;
+import com.jwy.scd.remote.SysUserRemoteService;
 import com.jwy.scd.api.order.dto.OrderCreateDTO;
 import com.jwy.scd.api.order.dto.OrderDTO;
 import com.jwy.scd.api.order.dto.OrderItemCreateDTO;
@@ -47,23 +47,23 @@ public class OrderServiceImpl extends ServiceImpl<BizOrderMapper, BizOrder> impl
     public static final int STATUS_CANCELLED = 2;
 
     /**
-     * ★ Feign 客户端代理。
+     * ★ 跨服务调用组件（带 Sentinel 降级）。
      *
-     * <p>这个 Bean 由启动类上的 {@code @EnableFeignClients(clients = SysUserApi.class)}
-     * 依据 service-system-api 里的 {@code @FeignClient(name = "service-system")} 声明生成。
-     * 注入进来后，调用它的方法就像调用本地方法，底层自动完成
-     * 「向 Nacos 查 service-system 实例 → LoadBalancer 选一个 → 拼 HTTP 请求 → 反序列化响应」。
+     * <p>{@link SysUserRemoteService} 内部注入 Feign 客户端（由启动类 {@code @EnableFeignClients}
+     * 生成的 SysUserApi 代理），并用 {@code @SentinelResource + fallback} 声明了降级。之所以把
+     * 远程调用抽成独立 Bean 而不是本类 private 方法，是因为 {@code @SentinelResource} 依赖 AOP
+     * 拦截，private 方法 + 类内自调用都会让注解静默失效。通过注入这个组件调用，AOP 才能正确拦截。
      */
-    private final SysUserApi sysUserApi;
+    private final SysUserRemoteService sysUserRemoteService;
 
     private final BizProductMapper productMapper;
 
     private final BizOrderItemMapper orderItemMapper;
 
-    public OrderServiceImpl(SysUserApi sysUserApi,
+    public OrderServiceImpl(SysUserRemoteService sysUserRemoteService,
                             BizProductMapper productMapper,
                             BizOrderItemMapper orderItemMapper) {
-        this.sysUserApi = sysUserApi;
+        this.sysUserRemoteService = sysUserRemoteService;
         this.productMapper = productMapper;
         this.orderItemMapper = orderItemMapper;
     }
@@ -236,20 +236,12 @@ public class OrderServiceImpl extends ServiceImpl<BizOrderMapper, BizOrder> impl
     /**
      * 通过 Feign 调用 service-system 查询用户。
      *
-     * <p>这里显式捕获异常并转换成 503，是为了给调用方一个「下游服务不可用」的明确信号，
-     * 而不是把 Feign 的原始异常（含连接超时、404 等细节）直接抛给前端。
-     * 注意：这也是后续引入 Sentinel 熔断降级的天然切入点。
+     * <p>降级由 {@link SysUserRemoteService#getUserById} 上的 {@code @SentinelResource + fallback}
+     * 完成：当下游 service-system 不可用 / 超时 / 熔断时，Sentinel 自动切入降级方法，抛出明确的
+     * 业务异常，再由全局异常处理器转成 503 响应。因此这里无需再手写 try-catch。
      */
     private UserInfoDTO queryUserByFeign(Long userId) {
-        try {
-            return sysUserApi.getUserById(userId);
-        } catch (OrderException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            log.error("跨服务调用失败：service-system.getUserById(userId={})", userId, ex);
-            throw OrderException.serviceUnavailable(
-                    "调用用户服务(service-system)失败，请稍后重试：" + ex.getMessage());
-        }
+        return sysUserRemoteService.getUserById(userId);
     }
 
     /** 生成业务订单号：SO + 时间戳 + 3 位随机数（演示用，生产应保证全局唯一） */

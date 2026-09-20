@@ -22,6 +22,14 @@ Lettuce 默认用 **Netty 自带 DNS 解析器**（只发标准 DNS 查询），
 - 网关策略：**默认拦截 + 白名单放行**（判据是「在不在白名单」，不是「有没有 `/api/` 前缀」）。白名单仅 `/api/auth/login`；logout 不在白名单（注销必须先持有效令牌）。`AntPathMatcher` 支持通配。401 必须带 `WWW-Authenticate: Bearer`（RFC 7235）。Redis 不可用回 **503 而非 401**（否则抖动会把在线用户全踢下线）。
 - 身份透传：网关注入 `X-User-Id`/`X-Username`，**必须覆盖客户端自带的同名头**（追加会让下游 `getHeader` 拿到伪造值）；用 `HttpServletRequestWrapper` 实现。
 
+## ⚠️ Sentinel 接入（SCA 2025.x 的坑，2026-09-20 实测）
+- 依赖 `spring-cloud-starter-alibaba-sentinel`（版本 BOM 管理 → Sentinel 1.8.9）；Dashboard 见 `sentinel-dashboard.md`（rxs:8858，sentinel/sentinel）。
+- **`@SentinelResource` 依赖 AOP，private 方法 + 类内自调用会静默失效**：受保护方法必须抽成独立 Spring Bean 的 public 方法，经代理调用才生效。
+- **`sentinel-annotation-aspectj` 不自动注册切面**：必须手动 `@Bean SentinelResourceAspect`，否则注解静默失效（无任何报错）。
+- **SCA 2025.x 移除了 `spring-cloud-alibaba-sentinel-feign` 模块**，`feign.sentinel.enabled` 老开关 + `@FeignClient(fallbackFactory=...)` 实测**静默不生效**（openfeign 5.0 的默认 builder 与之冲突）。**Feign 降级用 `@SentinelResource` 方式（抽独立 Bean）最可靠**。
+- `fallback`（业务异常）vs `blockHandler`（被规则挡：限流/熔断，对应 `BlockException`）——签名都是「原方法参数 + 一个异常参数」，返回类型一致。
+- Sentinel transport 端口(8719)是**懒加载**的，首次有请求经过 Sentinel 资源后才监听；下发规则 `GET http://127.0.0.1:8719/setRules?type=flow&data=<URL编码JSON>`（POST 会 415）。
+
 ## 模块与契约约定
 - 结构：`service-xxx`（实现）+ `service-xxx-api`（契约：DTO + `@FeignClient` 接口）。api 模块 openfeign 设 `<optional>true</optional>`，只引 springdoc `webmvc-api`；实现模块引 `webmvc-ui`。
 - **契约接口四条铁律**：
