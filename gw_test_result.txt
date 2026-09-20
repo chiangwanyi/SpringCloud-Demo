@@ -1,4 +1,0 @@
-﻿java=E:\Env\jdk-21.0.12.1\bin\java.exe
-service-system started=True (pid 12280)
-service-gateway started=True (pid 21812)
-GATEWAY_PROXY_OK status=200 body=
