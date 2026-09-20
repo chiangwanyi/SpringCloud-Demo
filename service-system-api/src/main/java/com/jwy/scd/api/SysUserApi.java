@@ -1,5 +1,6 @@
 package com.jwy.scd.api;
 
+import com.jwy.scd.api.dto.PasswordVerifyDTO;
 import com.jwy.scd.api.dto.SysUserSaveDTO;
 import com.jwy.scd.api.dto.UserInfoDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -56,6 +57,17 @@ public interface SysUserApi {
     @Operation(summary = "按用户名查询用户", description = "根据登录用户名 username 返回用户详情")
     @GetMapping("/api/sys-user/by-username")
     UserInfoDTO getUserByUsername(@Parameter(description = "登录用户名", example = "admin") @RequestParam("username") String username);
+
+    /**
+     * 校验登录密码：用户名 + 密码是否匹配且账号可用（存在、未逻辑删除、状态正常）。
+     *
+     * <p>这是「统一用户中心」模式下的关键接口：认证服务（service-auth）登录时不再保存账号密码，
+     * 而是通过 Feign 调本接口完成校验。只返回布尔结果，不返回用户详情，避免密码相关信息离开用户中心。
+     * 密码比对放在 service-system 内部（SysUserServiceImpl），对外 DTO 仍然不含 password 字段。
+     */
+    @Operation(summary = "校验登录密码", description = "校验用户名+密码是否匹配且账号可用（存在、未删除、状态正常）；供认证服务登录时远程调用，仅返回布尔结果")
+    @PostMapping("/api/sys-user/verify-password")
+    Boolean verifyPassword(@Parameter(description = "用户名与密码") @RequestBody PasswordVerifyDTO dto);
 
     @Operation(summary = "查询用户列表", description = "返回系统中所有用户的列表（演示数据，可能为空）")
     @GetMapping("/api/sys-user/list")

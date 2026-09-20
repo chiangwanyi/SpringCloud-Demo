@@ -1,6 +1,7 @@
 package com.jwy.scd.controller;
 
 import com.jwy.scd.api.SysUserApi;
+import com.jwy.scd.api.dto.PasswordVerifyDTO;
 import com.jwy.scd.api.dto.SysUserSaveDTO;
 import com.jwy.scd.api.dto.UserInfoDTO;
 import com.jwy.scd.service.ISysUserService;
@@ -35,6 +36,11 @@ public class SysUserController implements SysUserApi {
     @Override
     public List<UserInfoDTO> listUsers() {
         return userService.listUserInfo();
+    }
+
+    @Override
+    public Boolean verifyPassword(PasswordVerifyDTO dto) {
+        return userService.verifyPassword(dto);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.jwy.scd.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jwy.scd.api.dto.PasswordVerifyDTO;
 import com.jwy.scd.api.dto.SysUserSaveDTO;
 import com.jwy.scd.api.dto.UserInfoDTO;
 import com.jwy.scd.entity.SysUser;
@@ -33,4 +34,10 @@ public interface ISysUserService extends IService<SysUser> {
 
     /** 逻辑删除用户（del_flag = 1），成功返回 true */
     boolean deleteUser(Long id);
+
+    /**
+     * 校验登录密码：用户名 + 密码是否匹配且账号可用。
+     * 供认证服务（service-auth）登录时远程调用；密码比对在本服务内部完成，不对外泄露。
+     */
+    boolean verifyPassword(PasswordVerifyDTO dto);
 }

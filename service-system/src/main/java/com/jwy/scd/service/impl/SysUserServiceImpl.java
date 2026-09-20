@@ -1,6 +1,7 @@
 package com.jwy.scd.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jwy.scd.api.dto.PasswordVerifyDTO;
 import com.jwy.scd.api.dto.SysUserSaveDTO;
 import com.jwy.scd.api.dto.UserInfoDTO;
 import com.jwy.scd.entity.SysUser;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,6 +59,30 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public boolean deleteUser(Long id) {
         return removeById(id);
+    }
+
+    /**
+     * 校验登录密码。只返回布尔结果，不做任何用户信息回传：
+     * <ul>
+     *     <li>用户不存在（含已被逻辑删除，del_flag = 1）→ false</li>
+     *     <li>用户被禁用（status != 1）→ false</li>
+     *     <li>密码不匹配 → false</li>
+     *     <li>全部通过 → true</li>
+     * </ul>
+     * 统一返回 false 而非区分具体原因，避免向认证侧泄露「账号是否存在」这类信息。
+     */
+    @Override
+    public boolean verifyPassword(PasswordVerifyDTO dto) {
+        if (dto == null
+                || !StringUtils.hasText(dto.getUsername())
+                || !StringUtils.hasText(dto.getPassword())) {
+            return false;
+        }
+        SysUser user = getByUsername(dto.getUsername());
+        if (user == null || user.getStatus() == null || user.getStatus() != 1) {
+            return false;
+        }
+        return Objects.equals(user.getPassword(), dto.getPassword());
     }
 
     /** 将写入 DTO 的字段拷贝到实体（null 字段不覆盖，便于部分更新） */
