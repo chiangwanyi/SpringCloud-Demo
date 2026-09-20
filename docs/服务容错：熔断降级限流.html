@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>服务容错：熔断 / 降级 / 限流（springcloud-demo）</title>
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --card: #ffffff;
+    --text: #2c2c2a;
+    --muted: #5f5e5a;
+    --border: #e3e2dc;
+    --purple: #534ab7;
+    --teal: #0f6e56;
+    --coral: #993c1d;
+    --blue: #185fa5;
+    --amber: #854f0b;
+    --green: #3b6d11;
+    --red: #a32d2d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+    line-height: 1.75;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+  h1 { font-size: 26px; font-weight: 600; margin: 0 0 8px; }
+  .sub { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+  h2 {
+    font-size: 20px; font-weight: 600; margin: 48px 0 16px;
+    padding-left: 12px; border-left: 4px solid var(--purple);
+  }
+  h3 { font-size: 16px; font-weight: 600; margin: 28px 0 12px; }
+  p { margin: 12px 0; }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 24px; margin: 16px 0;
+  }
+  .tag {
+    display: inline-block; font-size: 12px; padding: 2px 10px;
+    border-radius: 20px; margin-right: 8px; font-weight: 500;
+  }
+  .tag-purple { background: #eef0fb; color: var(--purple); }
+  .tag-teal { background: #e6f4ee; color: var(--teal); }
+  .tag-coral { background: #fbeae7; color: var(--coral); }
+  .tag-blue { background: #e8f1fb; color: var(--blue); }
+  .tag-amber { background: #faf0dd; color: var(--amber); }
+  .tag-red { background: #fcebeb; color: var(--red); }
+  code {
+    background: #f1efe8; padding: 1px 6px; border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Courier New", monospace;
+    font-size: 13px;
+  }
+  pre {
+    background: #2c2c2a; color: #f1efe8; border-radius: 10px;
+    padding: 16px 20px; overflow-x: auto; font-size: 13px; line-height: 1.6;
+  }
+  pre code { background: none; color: inherit; padding: 0; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 14px; }
+  th, td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+  th { background: #f1efe8; font-weight: 600; }
+  .highlight {
+    border-left: 4px solid var(--amber); background: #faf6ec;
+    padding: 12px 18px; border-radius: 0 8px 8px 0; margin: 16px 0;
+  }
+  .highlight.blue { border-left-color: var(--blue); background: #f0f6fb; }
+  .highlight.red { border-left-color: #c0392b; background: #fdf0ef; }
+  .highlight.green { border-left-color: var(--teal); background: #eef7f3; }
+  ul { padding-left: 22px; }
+  li { margin: 6px 0; }
+  .muted { color: var(--muted); }
+  .divider { height: 1px; background: var(--border); margin: 48px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>服务容错：熔断 / 降级 / 限流</h1>
+<p class="sub">springcloud-demo 项目 · 归档日期 2026-09-20 · 学习路线「负载均衡 → 服务容错」的下一步 · 围绕三个核心概念、它们与项目真实代码的对应、以及选型 Sentinel 的完整说明</p>
+
+<div class="card">
+<p style="margin:0">本项目的网关已经用 <code>lb://</code> 走负载均衡、order 服务通过 Feign 调 service-system，链路已经跑通。负载均衡解决的是「<strong>正常时怎么走</strong>」，服务容错解决的是「<strong>坏了怎么办</strong>」。这是微服务在生产环境真正的难点，也是本项目代码里早已埋好的下一步方向——<code>OrderServiceImpl.queryUserByFeign</code> 里那句手写的 try-catch，正是熔断降级要自动化的东西。</p>
+</div>
+
+<h2>一、三个概念：不是一回事，别混着说</h2>
+
+<p>它们在「请求进来 → 调下游 → 返回」这条链路上，各管一段。先看全景：</p>
+
+<table>
+  <tr>
+    <th>机制</th><th>英文</th><th>作用对象</th><th>解决的问题</th>
+  </tr>
+  <tr><td><strong>熔断</strong></td><td>Circuit Breaker</td><td>下游服务</td><td>下游挂了，快速失败，不傻等</td></tr>
+  <tr><td><strong>降级</strong></td><td>Fallback</td><td>业务结果</td><td>失败后给一个兜底返回</td></tr>
+  <tr><td><strong>限流</strong></td><td>Rate Limit</td><td>入口流量</td><td>流量太猛，超阈值直接拒绝</td></tr>
+</table>
+
+<h2>二、熔断（Circuit Breaker）—— 保护「下游」</h2>
+
+<h3>它防的是什么：雪崩</h3>
+<p>设想 <code>service-order</code> 每次下单都要调 <code>service-system</code> 查用户。某天 system 挂了，每个请求都要等 3 秒超时才失败。流量一大，order 的线程全被这些「注定失败的等待」占满，最后 <strong>order 自己也被拖垮</strong>——这就是微服务里著名的「雪崩效应」：一个点故障，沿调用链传染，整片瘫痪。</p>
+
+<h3>熔断器像电路里的保险丝</h3>
+<p>它盯住对下游的调用，有三个状态：</p>
+<ul>
+  <li><strong>闭合（Closed，正常）</strong>：请求照常发出去。</li>
+  <li><strong>打开（Open，熔断）</strong>：失败率或慢调用比例超过阈值后，一段时间内<strong>不再真的发请求</strong>，直接快速失败——不浪费等待时间，也给了下游喘息机会。</li>
+  <li><strong>半开（Half-Open）</strong>：熔断时长过后，试探性放一个请求过去：成了 → 回到闭合；又失败 → 继续熔断。</li>
+</ul>
+
+<div class="highlight red">
+<p style="margin:0"><strong>一句话：熔断是「下游坏了，我不再傻等，快速失败」。</strong> 它保护的是<strong>调用方自己</strong>（避免被拖垮），同时也给了下游恢复的时间。</p>
+</div>
+
+<h2>三、降级（Fallback）—— 保住「业务体验」</h2>
+
+<p>熔断打开后，请求被快速拒绝了，但用户还在等结果。降级就是<strong>兜底逻辑</strong>：系统坏了，给一个「说得过去」的返回，而不是干巴巴的异常。</p>
+
+<p><strong>对应到你的代码</strong>：现在 <code>OrderServiceImpl.queryUserByFeign</code> 里 catch 异常后抛一个 <code>OrderException("调用用户服务失败，请稍后重试")</code>——这其实就是<strong>最原始的手写降级</strong>。用 Sentinel 之后，可以把这个兜底抽成一个独立的 <code>fallback</code> 方法（比如「返回缓存里的用户信息」或「返回一个明确错误码」），框架在熔断/异常时自动调它。</p>
+
+<div class="highlight">
+<p style="margin:0"><strong>一句话：降级是「坏了之后，给用户/调用方一个兜底结果」。</strong> 它和熔断常搭配出现，但概念不同——<strong>熔断决定「要不要发请求」，降级决定「不发/失败后返回什么」</strong>。</p>
+</div>
+
+<h2>四、限流（Rate Limit）—— 挡住「入口」</h2>
+
+<p>前两个管「出去调用别人」，限流管「别人进来调我」。</p>
+<p>比如你的下单接口一秒只能扛 500 个请求，突然来了 5000 个（秒杀/爬虫），服务会被打爆。限流规则会说：<strong>QPS 超过阈值，多出来的请求直接拒绝</strong>。</p>
+
+<div class="highlight blue">
+<p style="margin:0"><strong>一句话：限流是「流量太猛，我按能力放行，超出的直接挡掉」。</strong> 它保护的是<strong>入口</strong>，对象是自己的资源。</p>
+</div>
+
+<div class="divider"></div>
+
+<h2>五、三者的关系：为什么总被一起讲</h2>
+
+<p>它们都是「服务容错」这个母题下的手段，目标一致：<strong>让系统在部分组件出问题时，还能有尊严地活着，而不是整体雪崩</strong>。一个完整场景串起来：</p>
+
+<pre><code>秒杀高峰
+   │
+   ▼
+① 限流 —— 挡住超出能力的请求（保护入口）
+   │  少数放行
+   ▼
+② 调 service-system 时发现它已熔断
+   │  快速失败，不等待
+   ▼
+③ 降级 —— 立即返回兜底结果
+   │
+   ▼
+用户看到「稍后重试」，而不是页面卡死</code></pre>
+
+<h3>落在本项目哪里</h3>
+<table>
+  <tr>
+    <th>机制</th><th>对应位置</th>
+  </tr>
+  <tr><td>熔断</td><td><code>order → system</code> 的 Feign 调用，盯 <code>getUserById</code></td></tr>
+  <tr><td>降级</td><td>现在 <code>queryUserByFeign</code> 里的 catch → 改成 Sentinel 的 <code>fallback</code></td></tr>
+  <tr><td>限流</td><td>下单接口 <code>/api/order/**</code>（或网关层）配 QPS 阈值</td></tr>
+</table>
+
+<div class="divider"></div>
+
+<h2>六、选型：Sentinel</h2>
+
+<p>为什么是 Sentinel（而非 Resilience4j / Hystrix）：</p>
+<ul>
+  <li><strong>同源生态</strong>：Sentinel 是阿里巴巴开源的流量治理组件，属于 Spring Cloud Alibaba 生态，和本项目已经用的 Nacos 同源，接入最顺。</li>
+  <li><strong>可视化控制台 Dashboard</strong>：能实时看到每个接口的 QPS、熔断状态、被拒绝的请求数。亲手把 system 停掉，就能在面板上看到熔断器从「闭合」跳到「打开」——学习体感极强。</li>
+  <li><strong>规则动态生效</strong>：不用重启服务，在控制台改阈值秒级生效。</li>
+</ul>
+
+<div class="highlight green">
+<p style="margin:0"><strong>备选对照：</strong> Resilience4j 是 Spring Cloud 官方推荐、轻量纯 Java，但无自带可视化控制台；Hystrix 已停止维护，本项目的 Boot 4 + Cloud 2025 环境根本不会用。学习项目首选 Sentinel。</p>
+</div>
+
+<h3>该覆盖的知识点（按顺序）</h3>
+<ol>
+  <li>三个核心概念的区别（本文档已覆盖）。</li>
+  <li>流控规则：QPS 限流、线程数限流、关联/链路模式。</li>
+  <li>熔断降级规则：慢调用比例、异常比例、异常数。</li>
+  <li><code>@SentinelResource</code> + <code>blockHandler</code> + <code>fallback</code>。</li>
+  <li>整合 Feign：<code>feign.sentinel.enabled=true</code>，给 <code>SysUserApi</code> 配降级实现。</li>
+</ol>
+
+<div class="divider"></div>
+
+<h2>七、核心要点速记</h2>
+<div class="card">
+<ul style="margin:0">
+  <li>熔断（Circuit Breaker）：下游挂了快速失败，保护调用方自己，防雪崩。</li>
+  <li>降级（Fallback）：失败后给兜底返回，保住业务体验。</li>
+  <li>限流（Rate Limit）：流量超阈值直接拒绝，保护入口资源。</li>
+  <li>三者目标一致：让系统在部分故障时「有尊严地活着」，而非整体雪崩。</li>
+  <li>熔断决定「要不要发请求」，降级决定「失败后返回什么」——不是一回事。</li>
+  <li>本项目已手写降级（queryUserByFeign 的 catch），接入 Sentinel 后改由框架自动化。</li>
+  <li>选型：Sentinel（同源 Nacos + Dashboard 可视化 + 规则动态生效）。</li>
+</ul>
+</div>
+
+</div>
+</body>
+</html>
