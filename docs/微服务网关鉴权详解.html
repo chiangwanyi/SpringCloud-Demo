@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>微服务网关鉴权详解（springcloud-demo）</title>
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --card: #ffffff;
+    --text: #2c2c2a;
+    --muted: #5f5e5a;
+    --border: #e3e2dc;
+    --purple: #534ab7;
+    --teal: #0f6e56;
+    --coral: #993c1d;
+    --blue: #185fa5;
+    --amber: #854f0b;
+    --green: #3b6d11;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+    line-height: 1.75;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+  h1 { font-size: 26px; font-weight: 600; margin: 0 0 8px; }
+  .sub { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+  h2 {
+    font-size: 20px; font-weight: 600; margin: 48px 0 16px;
+    padding-left: 12px; border-left: 4px solid var(--purple);
+  }
+  h3 { font-size: 16px; font-weight: 600; margin: 28px 0 12px; }
+  p { margin: 12px 0; }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 24px; margin: 16px 0;
+  }
+  .tag {
+    display: inline-block; font-size: 12px; padding: 2px 10px;
+    border-radius: 20px; margin-right: 8px; font-weight: 500;
+  }
+  .tag-purple { background: #eef0fb; color: var(--purple); }
+  .tag-teal { background: #e6f4ee; color: var(--teal); }
+  .tag-coral { background: #fbeae7; color: var(--coral); }
+  .tag-blue { background: #e8f1fb; color: var(--blue); }
+  .tag-amber { background: #faf0dd; color: var(--amber); }
+  code {
+    background: #f1efe8; padding: 1px 6px; border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Courier New", monospace;
+    font-size: 13px;
+  }
+  pre {
+    background: #2c2c2a; color: #f1efe8; border-radius: 10px;
+    padding: 16px 20px; overflow-x: auto; font-size: 13px; line-height: 1.6;
+  }
+  pre code { background: none; color: inherit; padding: 0; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 14px; }
+  th, td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+  th { background: #f1efe8; font-weight: 600; }
+  .highlight {
+    border-left: 4px solid var(--amber); background: #faf6ec;
+    padding: 12px 18px; border-radius: 0 8px 8px 0; margin: 16px 0;
+  }
+  .highlight.blue { border-left-color: var(--blue); background: #f0f6fb; }
+  .highlight.red { border-left-color: #c0392b; background: #fdf0ef; }
+  ul { padding-left: 22px; }
+  li { margin: 6px 0; }
+  .muted { color: var(--muted); }
+  .divider { height: 1px; background: var(--border); margin: 48px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>微服务网关鉴权详解</h1>
+<p class="sub">springcloud-demo 项目 · 归档日期 2026-09-20 · 围绕「网关鉴权 vs Spring Security」「token 流转」「身份头」「过滤器链」四个问题的完整解答</p>
+
+<div class="card">
+<p style="margin:0">这套内容是从一段「我不太懂微服务，想搞清楚鉴权是怎么回事」的提问逐步展开的。为了好理解，全文都落到本项目的真实代码上。核心结论一句话：<strong>网关鉴权解决「服务之间怎么信任」，Spring Security 解决「单个服务内部怎么授权」，两者不是一回事，也不是二选一。</strong></p>
+</div>
+
+<h2>一、网关鉴权 vs Spring Security：本质区别</h2>
+
+<h3>它俩根本不是同一层的东西</h3>
+<p><strong>网关鉴权</strong>解决的是「服务之间怎么信任」的问题——请求还没进到业务服务，在网关这一层就把「你是谁」验掉了。</p>
+<p><strong>Spring Security</strong> 是一个「单体/单个服务内部」的通用安全框架——它管的是当前这个进程里，哪些接口能访问、密码怎么加密、角色怎么划分、Session 怎么维护。</p>
+<p>一句话：<strong>网关鉴权是「架构层」的职责，Spring Security 是「应用层」的工具。</strong></p>
+
+<table>
+  <tr>
+    <th>维度</th><th>网关鉴权</th><th>Spring Security</th>
+  </tr>
+  <tr><td>运行位置</td><td>网关服务（唯一入口）</td><td>每个服务各自进程内</td></tr>
+  <tr><td>作用范围</td><td>横跨所有下游服务，验一次</td><td>只管当前一个服务</td></tr>
+  <tr><td>鉴权次数</td><td>N 个服务只验 1 次</td><td>每个服务各验一次（重复）</td></tr>
+  <tr><td>会话/令牌存储</td><td>通常是无状态 Token（JWT / Redis 存 token）</td><td>常是有状态 Session（存服务器内存）</td></tr>
+  <tr><td>典型产物</td><td>校验通过后透传 X-User-Id 等身份头</td><td>生成 SecurityContext / Authentication 对象</td></tr>
+  <tr><td>是否重复造轮子</td><td>服务不再引 Security</td><td>每个服务都要引、都要配</td></tr>
+</table>
+
+<div class="highlight blue">
+<p style="margin:0"><strong>为什么微服务里通常在网关做鉴权，服务里不再上 Security？</strong> 如果每个服务都上 Security，一个请求经网关 → order，order 内部还要自己再验一次 token，N 个服务 = N 次重复验证，且每个服务都要维护一套相同的密码/角色/白名单配置，改一处要同步 N 处。只在网关验一次，下游默认信任、零鉴权代码，验证逻辑只写一份。</p>
+</div>
+
+<h3>但它们不是「二选一」，而是「分工」</h3>
+<ul>
+  <li><strong>网关</strong> = 解决「我是谁、能不能进来」（认证 + 粗粒度的放行/拦截）。</li>
+  <li><strong>Spring Security</strong> = 解决「进来之后，这个角色能不能做这件事」（细粒度授权、方法级权限 @PreAuthorize、密码加密 BCrypt）。</li>
+</ul>
+<p class="muted">真实企业常见做法：网关做统一认证和 token 校验，敏感服务内部仍可能用 Security 做方法级授权。对本学习项目，业务服务里再叠一层 Security 是多余的。</p>
+
+<div class="divider"></div>
+
+<h2>二、本项目的鉴权机制：Redis Session Token</h2>
+
+<p>本项目采用的方案叫 <strong>Redis Session Token（有状态令牌）</strong>，区别于 JWT（无状态令牌）。本质：</p>
+<div class="card">
+<p style="margin:0"><strong>token 本身只是一串随机数，不含任何信息；真正的「用户身份」存在 Redis 里。网关每次请求拿 token 去 Redis 查一次，查到就把身份塞进请求头转给下游服务。</strong></p>
+</div>
+
+<h3>完整的 token 流转</h3>
+<p><strong>第 1 步：登录签发</strong>（<code>SessionTokenService.issue</code>）</p>
+<pre><code>前端 POST /api/auth/login {username, password}
+  → 网关：/api/auth/login 在白名单里 → 直接放行
+  → service-auth：Feign 调 service-system 校验密码 + 取用户详情
+  → SessionTokenService.issue：
+       token = UUID.randomUUID().toString().replace("-", "")   // 随机 32 位
+       组装 AuthSession {token, userId, username, nickname, loginTime}
+       Redis 写入：key = "auth:session:" + token
+                  value = JSON 字符串
+                  TTL = 1800 秒
+  → 返回前端：{token, tokenType:"Bearer", expiresIn, userId, username, nickname}</code></pre>
+
+<p><strong>第 2 步：前端存储并携带</strong></p>
+<pre><code>Authorization: Bearer 3f2a1b9c8d7e6f5a4b3c2d1e0f9a8b7c</code></pre>
+
+<p><strong>第 3 步：网关验票</strong>（<code>TokenAuthFilter.doFilterInternal</code>，每个请求都跑）</p>
+<pre><code>1. AuthHeaders.resolveToken(...) 从 Authorization 头抠出 token 本体
+2. 拿 token 拼 key = "auth:session:" + token，去 Redis GET 一次
+3. 三种结果：
+   - Redis 挂了（异常）        → 503 "认证会话存储不可用"
+   - 查不到 / JSON 解析失败     → 401 "令牌无效或已过期"
+   - 查到了（拿到 AuthSession） → 通过，进入第 4 步</code></pre>
+
+<p><strong>第 4 步：注入身份头，转发</strong>（<code>SessionHeaderRequestWrapper</code>）</p>
+<pre><code>X-User-Id   : 2
+X-Username  : zhangsan
+// 下游服务在 Controller 里直接 request.getHeader("X-User-Id") 拿到「当前是谁」</code></pre>
+
+<div class="highlight">
+<p style="margin:0"><strong>token 和 Redis 会话是同一个东西的两个形态。</strong> <code>auth:session:&lt;token&gt;</code> 这个 key 里就存着 token 自己，所以「Redis 里有没有这个 key」就是「这个 token 还有没有效」的唯一判据。注销 = DEL 掉 key = 下次查不到 = 立即 401。这就是它比 JWT 强的地方——<strong>能即时吊销</strong>。</p>
+</div>
+
+<div class="divider"></div>
+
+<h2>三、身份头是什么，以及两个关键设计</h2>
+
+<p><strong>身份头</strong> = 网关验票通过后，往转发请求里塞的两个自定义头 <code>X-User-Id</code>、<code>X-Username</code>。唯一目的：把「这是谁」告诉下游服务，让下游不必再验一遍 token。</p>
+<p>为什么叫「身份头」而不直接转发 token？因为下游拿到 <code>X-User-Id: 2</code> 就能直接用，不用再查 Redis。这是这套方案的精髓——<strong>验一次，处处用</strong>。</p>
+
+<h3>设计要点 ①：为什么「覆盖」而不是「追加」</h3>
+<p>如果不覆盖、直接追加，攻击者可伪造 <code>X-User-Id: 1</code>（假设 1 是管理员）发到网关，网关再追加自己的 <code>X-User-Id: 999</code>。下游用 <code>getHeader()</code> 取到的通常是第一个值，即攻击者伪造的 1——普通人冒充管理员。</p>
+<p>所以 <code>SessionHeaderRequestWrapper</code> 采取「先删客户端带来的同名头，只放网关解析出的唯一值」策略。<strong>这是防越权的关键防线。</strong></p>
+
+<h3>设计要点 ②：为什么身份头里没有「昵称」</h3>
+<p>最初想透传 <code>X-User-Nickname</code>（如「张三」），结果下游收到的是 <code>"??"</code>。原因是 <strong>HTTP 头只能承载 ASCII（ISO-8859-1）</strong>，中文昵称会被发送端静默替换成问号（实测踩过的坑）。所以身份头只放 ASCII 安全的 <code>X-User-Id</code>（数字）和 <code>X-Username</code>（登录名），下游要昵称自己拿 userId 回查。</p>
+
+<div class="highlight red">
+<p style="margin:0"><strong>隐含前提：</strong>下游服务只有在「只能通过网关访问」的前提下才能信任这些头。业务服务端口绝不能直接暴露到公网。</p>
+</div>
+
+<div class="divider"></div>
+
+<h2>四、TokenAuthFilter 为什么「没被显式调用」却在跑</h2>
+
+<p>核心答案：<code>@Component</code> 让它被 Spring 自动注册，Servlet 容器在每次请求进来时自动触发它。</p>
+
+<h3>三个关键</h3>
+<pre><code>@Component                                    // 1. 让 Spring 扫描并创建实例
+@Order(Ordered.HIGHEST_PRECEDENCE + 10)
+public class TokenAuthFilter extends OncePerRequestFilter {  // 2. 继承 Filter
+    // ...
+    filterChain.doFilter(...);   // 3. 放行还是拦截，取决于调不调这一行
+}</code></pre>
+
+<ul>
+  <li><code>@Component</code>：Spring 启动时扫描到它，发现是 <code>Filter</code> 类型，自动注册进 Servlet 容器的过滤器链。</li>
+  <li><code>OncePerRequestFilter</code>：保证同一请求整条链里只被过滤一次（避免内部转发如 /error 时重复鉴权）。</li>
+  <li><code>filterChain.doFilter()</code>：过滤器模式的核心。验证通过就调它让请求继续往后走；验证失败就 writeProblem(401) + return，不调 doFilter，请求到此为止。</li>
+</ul>
+
+<div class="highlight blue">
+<p style="margin:0"><strong>与 Spring Security 同源：</strong>Spring Security 的核心也是一堆这样的 Filter 组成的过滤器链（UsernamePasswordAuthenticationFilter 等），同样「没被显式调用」，靠 Spring 自动注册、容器逐个调用。本项目的 TokenAuthFilter 本质是「自己手写的简化版 Security 鉴权链」。</p>
+</div>
+
+<div class="divider"></div>
+
+<h2>五、过滤器链的第一个节点是谁</h2>
+
+<p>先厘清：<strong>网关里其实有两层过滤器链</strong>。</p>
+<ul>
+  <li><strong>Servlet Filter 链</strong>（jakarta.servlet.Filter）——容器层，TokenAuthFilter 在这里。</li>
+  <li><strong>Spring Cloud Gateway 路由过滤器链</strong>（GlobalFilter / GatewayFilter）——路由层，做 lb:// 转发、负载均衡。</li>
+</ul>
+
+<h3>Servlet Filter 链的完整顺序</h3>
+<pre><code>请求进入 Tomcat
+   │
+   ▼
+① CharacterEncodingFilter          ← 第 1 个：设字符编码（Spring Boot 自动配）
+② RequestContextFilter             ← 绑定 RequestContext（ThreadLocal）
+③ TokenAuthFilter                  ← @Order(HIGHEST_PRECEDENCE + 10)，业务鉴权
+④ 其他过滤器（如有）
+⑤ DispatcherServlet                ← 终点：分发到路由/Controller</code></pre>
+
+<p><strong>第一个节点是 <code>CharacterEncodingFilter</code></strong>，Spring Boot 自动配的基础设施过滤器，负责在业务逻辑执行前统一设置字符编码（UTF-8），防止中文乱码。</p>
+
+<h3>关于 @Order 的几个要点</h3>
+<ul>
+  <li><code>@Order</code> 值越小越靠前；<code>Ordered.HIGHEST_PRECEDENCE = Integer.MIN_VALUE</code>。</li>
+  <li>CharacterEncodingFilter / RequestContextFilter 用最高优先级，所以天然排在 TokenAuthFilter（+10）前面。</li>
+  <li>TokenAuthFilter 用 +10 而非 +0，是给基础设施过滤器让位置。硬抢到最前会跑到编码过滤器前面，请求体还没解码，处理会出问题。</li>
+  <li><code>DispatcherServlet</code> 是 Servlet 不是 Filter，是链的「终点」，负责分发到 Controller / 路由处理器。</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>六、白名单配置位置</h2>
+<p>白名单在 <code>service-gateway/src/main/resources/application.yml</code> 的 <code>app.auth.whitelist</code>（YAML 列表）。当前只有一条：</p>
+<pre><code>app:
+  auth:
+    whitelist:
+      - /api/auth/login      # 唯一的「无票入口」
+    session-timeout: 1800
+    refresh-on-access: true</code></pre>
+
+<h3>两个注意点</h3>
+<ul>
+  <li><code>/api/auth/logout</code> 刻意不在白名单：注销要删自己的 Redis 会话，必须持有有效 token 才能做，否则任何人都能注销别人。</li>
+  <li>YAML 列表<strong>不能用 @Value 读</strong>（会静默读到空列表，导致「连登录都被 401 拦住且无报错」），只能用 @ConfigurationProperties 绑定。</li>
+</ul>
+
+<div class="divider"></div>
+
+<h2>七、核心要点速记</h2>
+<div class="card">
+<ul style="margin:0">
+  <li>网关鉴权 = 「在门口验一次票」，进来后各服务默认信任，不再重复验证。</li>
+  <li>Spring Security = 「每个房间都装锁」，即使在一个进程内也要层层校验。</li>
+  <li>token 只是随机数，不装信息 → 身份全在 Redis → 删 key 即可即时吊销。</li>
+  <li>网关每次请求读 Redis 验票（0 次 RPC，auth 不参与请求链路，auth 挂了不影响已登录用户）。</li>
+  <li>身份头只放 ASCII 安全的信息（ID、登录名），中文昵称会被压成 ??。</li>
+  <li>覆盖客户端伪造的同名头 → 防越权。</li>
+  <li>放行/拦截的本质 = 调不调 filterChain.doFilter()。</li>
+</ul>
+</div>
+
+</div>
+</body>
+</html>
