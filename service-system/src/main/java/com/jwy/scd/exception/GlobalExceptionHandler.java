@@ -15,31 +15,25 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.net.URI;
 
 /**
- * 全局异常处理：统一输出 RFC 7807 ProblemDetail。
+ * 全局异常处理：统一输出 RFC 7807 ProblemDetail（JSON 结构见下）。
  *
- * <p>与 service-system / service-auth 保持一致的结构（三个微服务统一错误契约）：
+ * <p><b>统一错误契约（三个微服务一致）</b>：
  * <pre>
- * { "type": "about:blank", "title": "Bad Request", "status": 400,
- *   "detail": "商品「xx」库存不足", "instance": "/api/order/create" }
+ * {
+ *   "type": "about:blank",
+ *   "title": "Bad Request",        // HTTP 状态码的标准短语，程序按此分类
+ *   "status": 400,                  // HTTP 状态码承载成败语义
+ *   "detail": "具体业务信息",        // 人类可读的中文描述
+ *   "instance": "/api/sys-user/1"   // 出错请求的路径
+ * }
  * </pre>
- * 订单业务异常（OrderException）沿用异常自带的状态码（400 / 404 / 503 等）。
+ * 遵循微服务最佳实践：<b>用 HTTP 状态码表达结果，不把成功数据包进 code/msg/data</b>；
+ * 前端/网关按 status 判断，按 detail 展示，无需各自发明 code 字典。
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
-    /** 订单业务异常：状态码随异常携带（400 入参/规则、404 不存在、503 下游不可用） */
-    @ExceptionHandler(OrderException.class)
-    public ResponseEntity<ProblemDetail> handleOrderException(OrderException ex, HttpServletRequest request) {
-        // 503（下游不可用）属于需要运维关注的异常，打 error；其余业务拒绝打 warn 即可
-        if (ex.getStatus().is5xxServerError()) {
-            log.error("订单业务异常: {}", ex.getMessage());
-        } else {
-            log.warn("订单业务异常: {}", ex.getMessage());
-        }
-        return toProblem(ex.getStatus(), ex.getMessage(), request);
-    }
 
     /** 400：请求体 JSON 解析失败 / 路径参数类型不匹配 */
     @ExceptionHandler({HttpMessageNotReadableException.class, MethodArgumentTypeMismatchException.class})
