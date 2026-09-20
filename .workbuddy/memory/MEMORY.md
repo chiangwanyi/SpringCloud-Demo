@@ -30,8 +30,9 @@
 - 父 POM `dependencyManagement` 同时 import 两个 BOM：`com.alibaba.cloud:spring-cloud-alibaba-dependencies:2025.1.0.0`（先 import）与 `org.springframework.cloud:spring-cloud-dependencies:2025.1.0`（后 import 优先生效，统一 spring-cloud-* 到 5.0.x 线，与网关一致）。**注意：这两个版本曾误配成 `2025.0.0.0`/`2025.0.3`（4.3.x 线），导致三服务启动失败，已修正为 5.0.x 线（详见上文「版本线铁律」）。**
 - 三个服务（service-system / service-auth / service-gateway）均引入 `spring-cloud-starter-alibaba-nacos-discovery`，并在 `application.yml` 配置 `spring.cloud.nacos.discovery.server-addr: rxs:8848` + 认证账号；启动类加 `@EnableDiscoveryClient`。
 - 网关路由 uri 改 `lb://service-system`、`lb://service-auth`（需 `spring-cloud-starter-loadbalancer`）。服务名取各模块 `spring.application.name`。
-- 注意：仅接入“服务注册/发现”，未接入 Nacos Config 配置中心（如需把 application.yml 外置到 Nacos，需再加 `spring-cloud-starter-alibaba-nacos-config` + `spring.config.import`）。
-- 验证：离线 `mvn -B -DskipTests compile` 全模块 BUILD SUCCESS（nacos-discovery / loadbalancer 依赖经代理从 Maven Central 下载成功）。
+- **已接入 Nacos Config 配置中心（2026-09-20）**：service-system / service-auth 额外引入 `spring-cloud-starter-alibaba-nacos-config`（同 BOM 管理，无需写版本），在 `application.yml` 用 `spring.cloud.nacos.config`（server-addr / file-extension=yaml / group）+ `spring.config.import: nacos:<服务名>.yaml` 从 Nacos 拉取 `datasource`（jdbc:mysql url、用户名、密码），本地不再硬编码连接信息。Nacos 控制台「配置管理」中 dataId 为 `service-system.yaml` / `service-auth.yaml`（group=DEFAULT_GROUP，type=yaml）。启动需 Nacos(rxs:8848) 与 MySQL(rxs:3306) 均可达；`spring.config.import` 为必填，缺失对应 dataId 会启动失败。
+- **Nacos 3.x 配置管理 API 已变更**：旧 `/nacos/v1/cs/configs` 在 v3.x 返回 404。发布/读取用 `POST/GET /nacos/v3/admin/cs/config`（参数 dataId/groupName/content/type，带 `accessToken` 请求头；登录拿 token：`POST /nacos/v3/auth/user/login` -d username/password）。读取另可用 `/nacos/v3/client/cs/config`。
+- 验证：离线 `mvn -B -DskipTests compile` 全模块 BUILD SUCCESS（nacos-discovery / nacos-config / loadbalancer 依赖经代理从 Maven Central 下载成功）。
 
 ## 工程操作注意
 - 手动重命名模块目录后，务必同时清理孤儿 `.iml` 与 `.idea`，否则 IDEA 会反复重建旧模块目录。
