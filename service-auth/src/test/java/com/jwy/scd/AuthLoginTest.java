@@ -4,90 +4,135 @@ import com.jwy.scd.api.SysUserApi;
 import com.jwy.scd.api.auth.dto.LoginDTO;
 import com.jwy.scd.api.auth.dto.TokenInfoDTO;
 import com.jwy.scd.api.dto.PasswordVerifyDTO;
+import com.jwy.scd.api.dto.UserInfoDTO;
 import com.jwy.scd.exception.AuthException;
 import com.jwy.scd.service.IAuthService;
-import com.jwy.scd.service.TokenService;
+import com.jwy.scd.service.SessionTokenService;
 import com.jwy.scd.service.impl.AuthServiceImpl;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * service-auth 登录 / 令牌 流程验证（纯单元测试）。
+ * service-auth 登录流程单元测试（纯 Mockito）。
  *
- * <p>登录链路的凭据校验已改为通过 Feign 远程调用 service-system（verifyPassword），
- * 单测中用 Mockito mock 掉 {@link SysUserApi}，只验证本服务的业务逻辑：
- * 凭据校验通过 → 签发令牌；凭据错误 / 远程异常 → 统一抛「用户名或密码错误」；
- * 令牌校验 / 注销的正常与异常分支。
- *
- * <p>真实 Feign 调用链（Nacos 发现 + service-system 在线）属于端到端场景，
- * 需启动全部服务后验证，不属于本单元测试范围。
+ * <p>凭据校验与用户查询都要通过 Feign 走 service-system，单测中 mock 掉 {@link SysUserApi}；
+ * 会话写入 Redis，单测中 mock 掉 {@link SessionTokenService}（它自己的行为由
+ * {@link SessionTokenServiceTest} 覆盖）。本测试只关心 AuthServiceImpl 的编排逻辑：
+ * <ul>
+ *     <li>凭据通过 → 查用户 → 用 userId/username/nickname 签发会话；</li>
+ *     <li>凭据失败 / 远程异常 / 校验通过但查不到用户 → 统一抛「用户名或密码错误」或「稍后重试」；</li>
+ *     <li>参数为空 → 不发起任何远程调用；</li>
+ *     <li>注销 → 把令牌透传给 SessionTokenService。</li>
+ * </ul>
  */
 class AuthLoginTest {
 
     private final SysUserApi sysUserApi = mock(SysUserApi.class);
-    private final TokenService tokenService = new TokenService();
-    private final IAuthService authService = new AuthServiceImpl(sysUserApi, tokenService);
 
-    @Test
-    void testLoginValidateAndLogout() {
-        // 凭据校验通过（service-system 返回 true）
-        when(sysUserApi.verifyPassword(any(PasswordVerifyDTO.class))).thenReturn(Boolean.TRUE);
+    private final SessionTokenService sessionTokenService = mock(SessionTokenService.class);
 
-        LoginDTO loginDTO = new LoginDTO();
-        loginDTO.setUsername("admin");
-        loginDTO.setPassword("admin123");
-        TokenInfoDTO tokenInfo = authService.login(loginDTO);
+    private final IAuthService authService = new AuthServiceImpl(sysUserApi, sessionTokenService);
 
-        assertNotNull(tokenInfo.getToken());
-        assertEquals("Bearer", tokenInfo.getTokenType());
-        assertNotNull(tokenInfo.getExpiresIn());
-        assertEquals("admin", tokenInfo.getUsername());
+    private static LoginDTO login(String username, String password) {
+        LoginDTO dto = new LoginDTO();
+        dto.setUsername(username);
+        dto.setPassword(password);
+        return dto;
+    }
 
-        // 校验令牌有效
-        assertTrue(authService.validateToken(tokenInfo.getToken()));
-
-        // 注销后令牌失效
-        authService.logout(tokenInfo.getToken());
-        assertFalse(authService.validateToken(tokenInfo.getToken()));
+    private static UserInfoDTO user(long id, String username, String nickname) {
+        UserInfoDTO dto = new UserInfoDTO();
+        dto.setId(id);
+        dto.setUsername(username);
+        dto.setNickname(nickname);
+        return dto;
     }
 
     @Test
-    void testLoginWithWrongPassword() {
-        // 凭据校验失败（service-system 返回 false）→ 统一抛「用户名或密码错误」
+    void loginIssuesSessionWithUserIdAndNickname() {
+        when(sysUserApi.verifyPassword(any(PasswordVerifyDTO.class))).thenReturn(Boolean.TRUE);
+        when(sysUserApi.getUserByUsername("zhangsan")).thenReturn(user(2L, "zhangsan", "张三"));
+        when(sessionTokenService.issue(anyLong(), anyString(), anyString())).thenReturn(new TokenInfoDTO());
+
+        authService.login(login("zhangsan", "123456"));
+
+        // 会话必须以「用户中心返回的」userId / nickname 签发，而不是只存用户名
+        ArgumentCaptor<Long> userId = ArgumentCaptor.forClass(Long.class);
+        ArgumentCaptor<String> username = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> nickname = ArgumentCaptor.forClass(String.class);
+        verify(sessionTokenService).issue(userId.capture(), username.capture(), nickname.capture());
+        assertEquals(2L, userId.getValue());
+        assertEquals("zhangsan", username.getValue());
+        assertEquals("张三", nickname.getValue());
+    }
+
+    @Test
+    void loginRejectedWhenCredentialInvalid() {
         when(sysUserApi.verifyPassword(any(PasswordVerifyDTO.class))).thenReturn(Boolean.FALSE);
 
-        LoginDTO loginDTO = new LoginDTO();
-        loginDTO.setUsername("admin");
-        loginDTO.setPassword("wrong");
-        AuthException ex = assertThrows(AuthException.class, () -> authService.login(loginDTO));
+        AuthException ex = assertThrows(AuthException.class, () -> authService.login(login("admin", "wrong")));
         assertEquals("用户名或密码错误", ex.getMessage());
+
+        // 凭据都没过，不应该去查用户、更不应该签发会话
+        verify(sysUserApi, never()).getUserByUsername(anyString());
+        verify(sessionTokenService, never()).issue(anyLong(), anyString(), anyString());
     }
 
     @Test
-    void testLoginWithBlankFields() {
-        // 空用户名 / 空密码：不发起远程调用，直接抛异常
-        LoginDTO blank = new LoginDTO();
-        assertThrows(AuthException.class, () -> authService.login(blank));
-
-        LoginDTO noPassword = new LoginDTO();
-        noPassword.setUsername("admin");
-        assertThrows(AuthException.class, () -> authService.login(noPassword));
-    }
-
-    @Test
-    void testLoginWhenRemoteServiceDown() {
-        // service-system 不可用（Feign 抛异常）→ 不暴露内部细节，同样统一提示
+    void loginRejectedWhenVerifyServiceDown() {
         when(sysUserApi.verifyPassword(any(PasswordVerifyDTO.class)))
                 .thenThrow(new RuntimeException("connection refused"));
 
-        LoginDTO loginDTO = new LoginDTO();
-        loginDTO.setUsername("admin");
-        loginDTO.setPassword("admin123");
-        AuthException ex = assertThrows(AuthException.class, () -> authService.login(loginDTO));
+        AuthException ex = assertThrows(AuthException.class, () -> authService.login(login("admin", "admin123")));
+        // 不向客户端暴露「service-system 不可用」，但提示可以重试
         assertTrue(ex.getMessage().contains("稍后重试"));
+        verify(sessionTokenService, never()).issue(anyLong(), anyString(), anyString());
+    }
+
+    @Test
+    void loginRejectedWhenUserDisappearedAfterVerify() {
+        // 边界场景：校验凭据刚通过，用户就被删了（用户中心数据异常）
+        when(sysUserApi.verifyPassword(any(PasswordVerifyDTO.class))).thenReturn(Boolean.TRUE);
+        when(sysUserApi.getUserByUsername("admin")).thenReturn(null);
+
+        AuthException ex = assertThrows(AuthException.class, () -> authService.login(login("admin", "admin123")));
+        assertTrue(ex.getMessage().contains("稍后重试"));
+        verify(sessionTokenService, never()).issue(anyLong(), anyString(), anyString());
+    }
+
+    @Test
+    void loginRejectedWhenUserQueryThrows() {
+        when(sysUserApi.verifyPassword(any(PasswordVerifyDTO.class))).thenReturn(Boolean.TRUE);
+        when(sysUserApi.getUserByUsername("admin")).thenThrow(new RuntimeException("timeout"));
+
+        AuthException ex = assertThrows(AuthException.class, () -> authService.login(login("admin", "admin123")));
+        assertTrue(ex.getMessage().contains("稍后重试"));
+        verify(sessionTokenService, never()).issue(anyLong(), anyString(), anyString());
+    }
+
+    @Test
+    void loginRejectedWithBlankFieldsWithoutRemoteCall() {
+        assertThrows(AuthException.class, () -> authService.login(null));
+        assertThrows(AuthException.class, () -> authService.login(new LoginDTO()));
+        assertThrows(AuthException.class, () -> authService.login(login("admin", " ")));
+
+        // 参数校验必须在最前面，不能白白打一次远程调用
+        verify(sysUserApi, never()).verifyPassword(any(PasswordVerifyDTO.class));
+        verify(sessionTokenService, never()).issue(anyLong(), anyString(), anyString());
+    }
+
+    @Test
+    void logoutDelegatesTokenToSessionStore() {
+        authService.logout("abc123");
+        verify(sessionTokenService).revoke("abc123");
     }
 }

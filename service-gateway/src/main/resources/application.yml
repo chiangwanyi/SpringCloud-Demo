@@ -5,6 +5,18 @@ server:
 spring:
   application:
     name: service-gateway
+  # ★ Redis：网关鉴权的唯一数据来源（Redis Session Token 方案）
+  #   service-auth 登录时把会话写到这个库，网关直接读 —— 没有 Feign、不需要任何校验接口。
+  #   ⚠️ 库号必须与 service-auth 的配置一致（都是 2），否则表现为「登录成功但所有请求 401」。
+  data:
+    redis:
+      host: rxs
+      port: 6379
+      database: 2
+      # 无密码（本环境未开启 requirepass）
+      # password:
+      connect-timeout: 3000ms
+      timeout: 3000ms
   cloud:
     # Nacos 服务发现：网关自身注册到 Nacos，并从中发现后端微服务
     nacos:
@@ -39,10 +51,38 @@ spring:
               predicates:
                 - Path=/api/product/**
 
+# ============================ 网关鉴权（TokenAuthFilter） ============================
+# 策略：默认拦截 —— 不在白名单里的请求一律要求 Authorization: Bearer <token>。
+# 白名单支持 Ant 风格通配（如 /api/public/**）。
+app:
+  auth:
+    whitelist:
+      # 登录是唯一的「无票入口」，否则没人能拿到第一张票
+      - /api/auth/login
+      # 注意：/api/auth/logout 刻意【不在】白名单里。
+      # 注销需要删除自己的 Redis 会话，因此必须先持有有效令牌 ——
+      # 这样「注销」就天然只有会话主人自己做得到，也避免任何人都能拿令牌去注销别人。
+    # 会话续期时长（秒），必须与 service-auth 的 app.auth.session-timeout 保持一致
+    session-timeout: 1800
+    # 滑动过期：每次读到有效会话就续期，用户持续活动就不会掉线。
+    # 代价是每个请求多一条 Redis EXPIRE 写命令；压测若证明有影响可关掉。
+    refresh-on-access: true
+
+logging:
+  level:
+    # 想看每个请求的鉴权结果（放行/拒绝）时打开；生产建议保持 info
+    com.jwy.scd.gateway.filter.TokenAuthFilter: info
+
 # 说明：
 # 1. 路径前缀（/api/sys-user、/api/auth）会原样转发给后端服务，后端 Controller 也用同样的路径，
 #    因此不需要做路径重写（RewritePath）。
 # 2. uri 使用 lb://<服务名> 形式：lb 表示走 Spring Cloud LoadBalancer，<服务名> 即各服务的
-#    spring.application.name（service-system / service-auth），由 Nacos 注册中心提供实例列表并做负载均衡。
-# 3. 前提：service-system / service-auth 已引入 Nacos  discovery 并成功注册到 rxs:8848。
-# 4. 网关默认会透传请求头（含 Authorization/token），后续可在网关层统一做鉴权、限流、跨域（CORS）。
+#    spring.application.name，由 Nacos 注册中心提供实例列表并做负载均衡。
+# 3. 鉴权通过后，网关会向下游注入两个身份头（并覆盖客户端自带的同名头，防伪造）：
+#      X-User-Id / X-Username
+#    下游服务读取这些头即可知道「当前是谁」，无需再查一次会话或解析令牌。
+#    ⚠️ 刻意不注入用户昵称：HTTP 头只能承载 ASCII，中文昵称（如「张三」）会被发送端
+#       静默替换成 "??"。下游需要昵称/展示名时请用 X-User-Id 回查用户中心。
+# 4. 查看/清理会话（库 2）：
+#      redis-cli -h rxs -p 6379 -n 2 KEYS 'auth:session:*'
+#      redis-cli -h rxs -p 6379 -n 2 GET  'auth:session:<token>'

@@ -1,54 +1,43 @@
 # 项目长期记忆（springcloud-demo）
 
-## 技术栈与环境兼容性（重要）
-- 父工程 `springcloud-demo`：packaging=pom，groupId=com.jwy，Spring Boot **4.0.8**（即 Spring Framework **7.0.9**）作为 parent。
-- **MyBatis-Plus 必须用 `mybatis-plus-spring-boot4-starter`（本地可用 3.5.16）**，不要用 `mybatis-plus-boot-starter`（老版会拉 mybatis-spring 3.x，与 Spring 7 的 `factoryBeanObjectType` 冲突，报 Invalid bean definition）。
-- **数据库已从 H2 切到 MySQL**：`service-system` / `service-auth` 的 pom 用 `com.mysql:mysql-connector-j`（runtime scope），application.yml 用 `com.mysql.cj.jdbc.Driver` + `jdbc:mysql://rxs:3306/<db>`。连接信息（主机 rxs / 端口 3306 / root / 123456）见 `mysql.md`。现有 `schema.sql`（AUTO_INCREMENT / TINYINT / DATETIME）已兼容 MySQL，`sql.init.mode=always` 启动时仍会 DROP+CREATE 表（会从真实库清空数据）。
-- 本地 Maven 仓库初始离线，但 `settings.xml` 配置了可用代理（`127.0.0.1:7897`，环境另有 `127.0.0.1:60711`），可访问 Maven Central 下载依赖。父 POM `dependencyManagement` import 两个 BOM：`spring-cloud-alibaba-dependencies:2025.1.0.0` 与 `spring-cloud-dependencies:2025.1.0`（见 Nacos 段）。**api 模块的 openfeign 已去掉硬编码版本（原为 `4.1.0`，属 2023.0.x 线，与 BOM 的 5.0.0 错配），现由父 BOM 统一管理。所有 spring-cloud 依赖一律不写 `<version>`。**
+## ⚠️ 版本铁律（Spring Boot 4.0.8 / Spring Framework 7）
+- 父 POM：packaging=pom，groupId=com.jwy，Spring Boot **4.0.8**。
+- **Spring Cloud 必须 `2025.1.x` 列车（`spring-cloud-*` 为 5.0.x）**；`2025.0.x`（4.3.x 线）编译于 Boot 4 里程碑版，与 4.0.8 GA **不兼容，绝不能再用**。现象：网关 `NoClassDefFoundError: HttpRedirects`、service 端 `WebServerInitializedEvent`。
+- 正确组合（dependencyManagement 依次 import）：`spring-cloud-alibaba-dependencies:2025.1.0.0` + `spring-cloud-dependencies:2025.1.0`。**所有 spring-cloud-* 依赖一律不写 `<version>`。**
+- 网关用 `spring-cloud-starter-gateway-server-webmvc`（Boot 4 改名，旧 `spring-cloud-starter-gateway` 失效），配置根 `spring.cloud.gateway.server.webmvc.routes`，`lb://` 需额外引 `spring-cloud-starter-loadbalancer`。
+- **JSON 库是 Jackson 3，包名 `tools.jackson.*`**。自动配置的 `ObjectMapper` bean 类型是 `tools.jackson.databind.ObjectMapper`；**注入老包名 `com.fasterxml.jackson.databind.ObjectMapper` 会启动失败**（Jackson 2 只是被 nacos/yaml 间接带入，不再自动配置）。`JacksonException extends RuntimeException`（非受检），构造器 `protected`（测试造实例要用匿名子类）。
+- MyBatis-Plus 用 `mybatis-plus-spring-boot4-starter`；API 文档用 SpringDoc **3.x**（2.8.x 是 Boot 3 线）。
+- **YAML 列表（list）只能用 `@ConfigurationProperties` 绑定，不能用 `@Value`**：YAML 列表在 Spring 内部是 `xxx[0]`/`xxx[1]` 索引键，不存在 `xxx` 属性，`@Value("${xxx:}")` 会静默取默认空值。踩过：网关白名单为空 → 连登录都 401，且启动无任何报错。
+- **HTTP 头只能承载 ASCII**：非 ASCII（如中文昵称「张三」）会被发送端**静默替换成 `?`**。故网关只透传 `X-User-Id`/`X-Username`，不透传昵称。
+- MySQL 见 `mysql.md`；`sql.init.mode=always` 启动会 DROP+CREATE **清空真实库**。Nacos 见 `nacos.md`（rxs:8848，nacos/123456）；service-system 走 Nacos Config 拉 datasource（`spring.config.import: nacos:<服务名>.yaml`，缺 dataId 启动失败），Nacos 3.x 配置 API 是 `/nacos/v3/admin/cs/config`（v1 已 404）。
+- **Redis**：rxs:6379 / **database 2** / 无密码，服务端版本 5.0.14（别用 6.2+ 才有的命令）。会话 key `auth:session:<token>`。
 
-## ⚠️ Spring Cloud 版本线铁律（Boot 4.0.8 必读，曾因此三服务启动失败）
-- **Spring Boot 4.0.8（GA）只能搭配 Spring Cloud `2025.1.x` 发布列车（对应 `spring-cloud-*` **5.0.x** 线）**。
-- **`2025.0.x` 列车（对应 `spring-cloud-*` **4.3.x** 线）编译于 Boot 4.0 里程碑版本，与 Boot 4.0.8 GA 不兼容，绝不能再用。**
-- 错误现象（已踩坑）：用 `2025.0.x` BOM 时——
-  - 网关报 `NoClassDefFoundError: org/springframework/boot/http/client/HttpRedirects`（被 `spring-cloud-gateway-server-mvc:4.3.5` 拉入，引用了 Boot 4.0.8 已移走的 `HttpRedirects`）；
-  - service 模块报 `NoClassDefFoundError: org/springframework/boot/web/context/WebServerInitializedEvent`（被 `spring-cloud-commons:4.3.3`/`spring-cloud-context:4.3.3` 拉入，Boot 4.0.8 已重定位该类）。
-- 同理 Spring Cloud Alibaba：`2025.0.0.0`（parent `spring-cloud-dependencies-parent:4.3.0`，4.3.x 线）✗；必须用 `2025.1.0.0`（parent `5.0.0`，5.0.x 线）✓。
-- **正确组合（当前生效）**：`spring-cloud-alibaba-dependencies:2025.1.0.0` + `spring-cloud-dependencies:2025.1.0`。其余 spring-cloud-*（commons/context/loadbalancer/gateway-server-webmvc）均随之落到 5.0.x。
-- 网关 `spring-cloud-gateway-server-webmvc` 用 5.0.x 后**不再依赖** `spring-cloud-gateway-server-mvc`（后者根本没有 5.0.x，最新仅 4.3.5，是 2025.0.x 线专属），从根上避免 `HttpRedirects` 错误。
+## ⚠️ Lettuce 主机名解析坑
+Lettuce 默认用 **Netty 自带 DNS 解析器**（只发标准 DNS 查询），**不读 hosts 文件、不支持 LLMNR/NetBIOS/mDNS**。`rxs` 靠 LLMNR 解析到 192.168.1.45，DNS 服务器无此记录 → `UnknownHostException: Failed to resolve 'rxs' [A(1)]`（NXDOMAIN）；而 JDBC/Nacos 用 JDK `InetAddress` 所以一直正常。**解法：定义 `ClientResources` bean 并设 `DnsResolvers.JVM_DEFAULT`**（Boot 自动配置会采用它）。service-auth 与 service-gateway 各有一份 `RedisLettuceConfig`。
 
-## 模块约定（微服务）
-- `service-system`：实现模块（entity / mapper / service / controller / 启动类 / 测试）。
-- `service-system-api`：对外契约模块（DTO + Feign 契约接口），供其他微服务依赖。
-  - api 模块内的 `spring-cloud-starter-openfeign` 设为 `<optional>true</optional>`，避免实现模块被传递引入 spring-cloud 自动配置（Boot4 下 SimpleDiscoveryClientAutoConfiguration 崩溃）。**版本不写，交给父 BOM。**
-  - 消费方（如 service-order）需自行加 `spring-cloud-starter-openfeign` + **`spring-cloud-starter-loadbalancer`**（按服务名调用必需，openfeign starter 不自带）+ 依赖被调方的 api 模块，启动类加 `@EnableFeignClients(clients = SysUserApi.class)` 后直接 `@Autowired` 注入契约接口即可，**不需要再写 `interface X extends SysUserApi`**。
-  - **`@EnableFeignClients` 必须用 `clients = ...` 精确指定，绝不能用 `basePackages` 宽范围扫描**：契约接口包 `com.jwy.scd.api` 是启动类包 `com.jwy.scd` 的子包，宽范围扫描会把「本服务自己要实现的契约」也生成 Feign 代理，与其 `@RestController` 实现撞成两个同类型 bean → `NoUniqueBeanDefinitionException` 启动失败。同理实现模块（service-system）也绝不能加宽范围的 `@EnableFeignClients`。
-- **⚠️ 契约接口铁律（2026-09-20 踩坑修正）：带 `@FeignClient` 的接口上绝不能出现类级 `@RequestMapping`。**
-  - Spring Cloud OpenFeign **5.0.0** 的 `SpringMvcContract#processAnnotationOnClass` 用 `findMergedAnnotation` 检查，命中即抛 `IllegalArgumentException: @RequestMapping annotation not allowed on @FeignClient interfaces`，**服务直接启动失败**。因用 `findMergedAnnotation`（沿接口继承链查找），让消费方 `extends` 契约接口也绕不过去。
-  - 因此本项目约定：**路径前缀写在每个方法的映射注解里**（如 `@GetMapping("/api/sys-user/{id}")`），实现方 Controller 用 `implements` 继承这些方法级映射，对外路径不变，网关路由无需改动。原「类级 @RequestMapping + Controller 继承」的写法已全部废除（SysUserApi / AuthApi / OrderApi / ProductApi 均已改造）。
-  - 同一 `@FeignClient` name 下若有多个契约接口（如 OrderApi / ProductApi 都指向 service-order），**必须显式指定不同的 `contextId`**，否则 FeignClientSpecification bean 名冲突导致启动失败。
-- **`AuthApi` 曾误用 Swagger 的 `RequestBody`**（`io.swagger.v3.oas.annotations.parameters.RequestBody`）代替 Spring 的 `org.springframework.web.bind.annotation.RequestBody`，导致 login / createAccount / updateAccount 实际没有请求体绑定注解，JSON 请求体绑不进去（服务端拿到 null 用户名密码）。已修正为 Spring 注解。**后续写契约接口务必检查 import 来源。**
-- `service-gateway`：API 网关（Spring Cloud Gateway **webmvc 风味 5.0.3**）。Boot 4 必须用 `spring-cloud-starter-gateway-server-webmvc`（非旧 `spring-cloud-starter-gateway`），配置根 `spring.cloud.gateway.server.webmvc.routes`。路由 uri 用 `lb://<服务名>`（走 Nacos 服务发现 + LoadBalancer），并额外引入 `spring-cloud-starter-loadbalancer`（lb:// 必需）。现有 4 条路由：`/api/sys-user/**`→service-system、`/api/auth/**`→service-auth、`/api/order/**`→service-order、`/api/product/**`→service-order。
-- `service-order`（订单服务，端口 **8083**）：实现模块，含商品/订单/订单明细 CRUD 与下单流程；`service-order-api` 为其契约模块（OrderApi / ProductApi + DTO）。**下单时会通过 Feign 调 service-system 校验用户**——这是本项目第一个真实的服务间调用场景。
-- **API 文档用 SpringDoc OpenAPI（非 Springfox）**：Boot 4 必须用 **3.x 线**（`springdoc-openapi-starter-webmvc-ui:3.1.1`，本地离线仓库的 `2.8.16` 是 Boot 3 线不可用于 Boot 4）。api 契约模块只引 `webmvc-api`（注解类），实现模块引 `webmvc-ui`（UI+端点）。文档注解标在 api 契约接口/DTO 上，实现 `implements` 自动继承。暴露 `/v3/api-docs`（JSON）与 `/swagger-ui.html`。
+## 鉴权架构（Redis Session Token，2026-09-20 定案）
+- service-auth 登录：Feign 调 `verifyPassword` 校验密码 → 再调 `getUserByUsername` 取 userId/nickname → 组装 `AuthSession`（JSON）写 Redis + TTL → 返回 TokenInfoDTO。注销即 `DEL`，**令牌立即失效**。
+- **网关不调 auth、不调任何校验接口**：`TokenAuthFilter` 直接读 Redis，0 次 RPC；auth 挂掉不影响已登录用户（已实测）。
+- **契约里不应有 `validateToken` 这类接口**：它为「远程问票」而生，代价是 +1 RPC、可用性耦合、只回 Boolean 拿不到身份、还得额外做接口隔离。跨进程共享的是「Redis key + JSON 格式」，放在 `service-auth-api`：`AuthSession` / `AuthSessionKeys` / `AuthHeaders`。
+- 网关策略：**默认拦截 + 白名单放行**（判据是「在不在白名单」，不是「有没有 `/api/` 前缀」）。白名单仅 `/api/auth/login`；logout 不在白名单（注销必须先持有效令牌）。`AntPathMatcher` 支持通配。401 必须带 `WWW-Authenticate: Bearer`（RFC 7235）。Redis 不可用回 **503 而非 401**（否则抖动会把在线用户全踢下线）。
+- 身份透传：网关注入 `X-User-Id`/`X-Username`，**必须覆盖客户端自带的同名头**（追加会让下游 `getHeader` 拿到伪造值）；用 `HttpServletRequestWrapper` 实现。
 
-## Nacos 服务注册与发现（2026-09-20 接入）
-- Nacos 服务器（局域网）：控制台 `http://rxs:8080/next/#/login`，客户端 API 端口 `8848`（gRPC `9848`）。账号 `nacos` / `123456`（见 `nacos.md`）。docker 已开启认证（`NACOS_AUTH_TOKEN` 等），故客户端必须带 `username/password=nacos/123456`。
-- 父 POM `dependencyManagement` 同时 import 两个 BOM：`com.alibaba.cloud:spring-cloud-alibaba-dependencies:2025.1.0.0`（先 import）与 `org.springframework.cloud:spring-cloud-dependencies:2025.1.0`（后 import 优先生效，统一 spring-cloud-* 到 5.0.x 线，与网关一致）。**注意：这两个版本曾误配成 `2025.0.0.0`/`2025.0.3`（4.3.x 线），导致三服务启动失败，已修正为 5.0.x 线（详见上文「版本线铁律」）。**
-- 三个服务（service-system / service-auth / service-gateway）均引入 `spring-cloud-starter-alibaba-nacos-discovery`，并在 `application.yml` 配置 `spring.cloud.nacos.discovery.server-addr: rxs:8848` + 认证账号；启动类加 `@EnableDiscoveryClient`。
-- 网关路由 uri 改 `lb://service-system`、`lb://service-auth`（需 `spring-cloud-starter-loadbalancer`）。服务名取各模块 `spring.application.name`。
-- **已接入 Nacos Config 配置中心（2026-09-20）**：service-system / service-auth 额外引入 `spring-cloud-starter-alibaba-nacos-config`（同 BOM 管理，无需写版本），在 `application.yml` 用 `spring.cloud.nacos.config`（server-addr / file-extension=yaml / group）+ `spring.config.import: nacos:<服务名>.yaml` 从 Nacos 拉取 `datasource`（jdbc:mysql url、用户名、密码），本地不再硬编码连接信息。Nacos 控制台「配置管理」中 dataId 为 `service-system.yaml` / `service-auth.yaml` / `service-order.yaml`（group=DEFAULT_GROUP，type=yaml）。启动需 Nacos(rxs:8848) 与 MySQL(rxs:3306) 均可达；`spring.config.import` 为必填，缺失对应 dataId 会启动失败。
-- **Nacos 3.x 配置管理 API 已变更**：旧 `/nacos/v1/cs/configs` 在 v3.x 返回 404。发布/读取用 `POST/GET /nacos/v3/admin/cs/config`（参数 dataId/groupName/content/type，带 `accessToken` 请求头；登录拿 token：`POST /nacos/v3/auth/user/login` -d username/password）。读取另可用 `/nacos/v3/client/cs/config`。
-- 验证：离线 `mvn -B -DskipTests compile` 全模块 BUILD SUCCESS（nacos-discovery / nacos-config / loadbalancer 依赖经代理从 Maven Central 下载成功）。
+## 模块与契约约定
+- 结构：`service-xxx`（实现）+ `service-xxx-api`（契约：DTO + `@FeignClient` 接口）。api 模块 openfeign 设 `<optional>true</optional>`，只引 springdoc `webmvc-api`；实现模块引 `webmvc-ui`。
+- **契约接口四条铁律**：
+  1. 带 `@FeignClient` 的接口上**绝不能有类级 `@RequestMapping`**（OpenFeign 5.0.0 `SpringMvcContract` 直接抛异常，启动失败）；路径前缀写在每个方法上，实现方 Controller 用 `implements` 继承。
+  2. 同一 FeignClient name 下多个契约接口**必须指定不同 `contextId`**（OrderApi/ProductApi）。
+  3. `@EnableFeignClients` **必须 `clients = XxxApi.class` 精确指定**，禁用 `basePackages` 宽扫描（会把本服务自己要实现的契约也生成代理 → `NoUniqueBeanDefinitionException`）。
+  4. `@RequestBody` 必须用 Spring 的 `org.springframework.web.bind.annotation`（曾误用 swagger 的，导致请求体绑不进去）。
+- 服务清单：service-system（sys_user，:8081，admin/admin123、zhangsan/123456）、service-auth（登录/会话，:8082，不连库）、service-order（订单+商品，:8083）、service-gateway（:8080）。
+- 网关路由 4 条：`/api/sys-user/**`、`/api/auth/**`、`/api/order/**`、`/api/product/**`，uri 用 `lb://服务名`。
 
-## 工程操作注意
-- 手动重命名模块目录后，务必同时清理孤儿 `.iml` 与 `.idea`，否则 IDEA 会反复重建旧模块目录。
-- 测试/演示资源（schema.sql、application.yml）有时会被外部进程清除，重建时放到 `src/main/resources` 让运行与测试共用。
-
-## 本机运行与验证环境（沙箱内自动化验证用）
-- JDK：`E:\Env\jdk-21.0.12.1`（`JAVA_HOME` 需显式设置）；Maven：`E:\Env\apache-maven-3.9.16\bin\mvn.cmd`；本地仓库 `C:\Users\jiang\.m2\repository`。
-- Bash 工具在本机缺 coreutils（无 ls/grep/head/cat/dirname），**只能用绝对路径调可执行文件**；查文件请用 Read/Glob/Grep 工具，跑命令用 PowerShell。
-- PowerShell 里给 java 传 `-Dfile.encoding=UTF-8` **必须加引号**，否则被拆成主类名报 ClassNotFoundException。
-- **沙箱会把 Spring Boot 的 `server.port` 覆盖成随机端口**（现象：Tomcat initialized with port 62513，两个服务撞同一端口）。环境变量里查不到来源。绕过办法：启动时显式加 `--server.port=8081` 等命令行参数（Spring Boot 里命令行参数优先级最高）。
-- 无 MySQL 客户端，用 JDK 单文件模式 + 驱动跑 SQL：`java -cp C:\Users\jiang\.m2\repository\com\mysql\mysql-connector-j\9.7.0\mysql-connector-j-9.7.0.jar X.java`（脚本模板见 `.workbuddy/tmp/` 下的 Inspect.java / SchemaRunner.java / Verify.java）。MySQL 与 Nacos 从沙箱可达。
-- 日志重定向：`*>` 写出的是 UTF-16，Read 工具读不了；需 `Get-Content | Set-Content -Encoding UTF8` 转一次再读。Java 程序内直接以 UTF-8 写文件最省事。
-- PowerShell 的 `Invoke-RestMethod` **不能把 `byte[]` 当 `-Body` 传**（会被拼成 "123,34,..." 数字串），要直接传 JSON 字符串；它对 UTF-8 响应默认按 ISO-8859-1 解码，会显示中文乱码，**属显示假象，数据本身正确**（用 JDBC 查库可验证）。
+## 本机验证环境
+- JDK `E:\Env\jdk-21.0.12.1`（需显式 `JAVA_HOME`）；Maven `E:\Env\apache-maven-3.9.16\bin\mvn.cmd`；本地仓库 `C:\Users\jiang\.m2\repository`；settings.xml 配代理可访问 Maven Central。
+- **Bash 工具缺 coreutils（ls/grep/head/tail/dirname 全无），PowerShell 工具不回显 stdout**：查文件用 Read/Glob/Grep，列目录/跑脚本用 **Python**（`C:/Users/jiang/.workbuddy/binaries/python/versions/3.13.12/python.exe`）。**命令里不要用 `| tail`/`grep`。**
+- **沙箱把 `server.port` 覆盖成随机端口**，启动必须显式加 `--server.port=8081`。给 java 传 `-Dfile.encoding=UTF-8` **必须加引号**。
+- **YAML 列表无法用命令行参数局部追加**（`--a.routes[4].id=x` 会把整个列表覆盖成带空位的列表并绑定失败）。要临时加路由，用 `--spring.config.additional-location=file:<外部yml>` 给完整列表（模板 `.workbuddy/tmp/gateway-e2e.yml`）。
+- 无 mysql/redis 客户端：Redis 用 Python 手写 RESP 客户端（`.workbuddy/tmp/redis_probe.py`）；MySQL 用 JDK 单文件模式 + 驱动。
+- 可复用验证脚本：`.workbuddy/tmp/e2e_auth.py`（鉴权 23 项用例）、`.workbuddy/tmp/echo_server.py`（回显请求头，验证透传）。
+- 日志重定向 `*>` 出 UTF-16 读不了，需 `Get-Content | Set-Content -Encoding UTF8`；Java 内直接以 UTF-8 写文件最省事。
+- 手动重命名模块目录后要清理孤儿 `.iml` 与 `.idea`。

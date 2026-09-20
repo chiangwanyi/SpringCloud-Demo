@@ -13,7 +13,7 @@
     <!-- 默认 packaging=jar：执行 package 会产出可执行 fat jar -->
     <artifactId>service-auth</artifactId>
     <name>service-auth</name>
-    <description>service-auth 认证微服务（登录 / 令牌签发 / 校验 / 注销；账号密码统一由 service-system 校验，本服务不落库）</description>
+    <description>service-auth 认证微服务（登录 / 会话签发 / 注销；会话存 Redis，账号密码统一由 service-system 校验，本服务不落库）</description>
 
     <dependencies>
         <dependency>
@@ -66,10 +66,20 @@
         </dependency>
 
         <!-- Nacos 服务注册与发现：本服务启动后自动注册到 Nacos，供网关通过 lb://service-auth 发现。
-             注意：本服务无状态（不连数据库），因此不再引入 nacos-config 配置中心。 -->
+             注意：本服务不连数据库，因此不再引入 nacos-config 配置中心。 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!-- ★ Redis：本项目鉴权方案的存储底座（Redis Session Token）。
+             登录成功后把会话写入 Redis（rxs:6379 / db 2），注销时删除 key，TTL 到期自动失效。
+             网关侧也会引入同一个 starter，直接读这里写入的会话 —— 这就是「不写校验接口」的全部秘密。
+             版本由 spring-boot-starter-parent（Boot 4.0.8）统一管理，不要手写版本号。
+             默认客户端为 Lettuce。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
         <!-- 测试 -->

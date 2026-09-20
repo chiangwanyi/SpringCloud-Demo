@@ -27,14 +27,12 @@
             注意 Boot 4 下网关 starter 已改名（旧名 spring-cloud-starter-gateway 在 Boot 4 已失效）：
               - 响应式(Netty): spring-cloud-starter-gateway-server-webflux
               - Servlet(Tomcat): spring-cloud-starter-gateway-server-webmvc   （本项目选用，与现有服务一致）
-            路由配置根也变为 spring.cloud.gateway.server.webmvc.routes（不再是 spring.cloud.gateway.routes）。
-            当前未接入 Nacos / 注册中心，故 uri 写死为具体服务地址；
-            后续接入注册中心后可改为 lb://service-name 形式做负载均衡。
+            路由配置根为 spring.cloud.gateway.server.webmvc.routes（不再是 spring.cloud.gateway.routes）。
+            版本由父 BOM（spring-cloud-dependencies:2025.1.0 → 5.0.x 线）统一管理，不手写版本号。
         -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway-server-webmvc</artifactId>
-            <version>5.0.3</version>
         </dependency>
 
         <!-- 负载均衡：配合网关路由 uri: lb://<服务名> 做服务发现后的实例选择（lb:// 必需） -->
@@ -43,10 +41,36 @@
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
 
-        <!-- Nacos 服务注册与发现：网关本身注册到 Nacos，并从 Nacos 发现 service-system / service-auth -->
+        <!-- Nacos 服务注册与发现：网关本身注册到 Nacos，并从 Nacos 发现各后端服务 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!-- ★ Redis：网关鉴权的唯一依赖来源（Redis Session Token 方案）。
+             鉴权过滤器直接读 service-auth 登录时写入的会话（rxs:6379 / db 2），
+             查得到即令牌有效，并从中取出 userId / username 透传给下游。
+             注意：这里【没有】openfeign、也没有 service-auth-api 的 Feign 客户端 ——
+             网关不需要知道「怎么调认证服务」，只需要知道「会话存在哪个 Redis key 上」。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- ★ 认证契约模块：这里只为了拿到 AuthSession / AuthSessionKeys / AuthHeaders 这几个
+             「跨进程共享的常量与数据模型」。它不引入任何 Feign 运行时（api 模块里 openfeign 是 optional），
+             所以网关仍然是「零服务间调用」的。 -->
+        <dependency>
+            <groupId>com.jwy</groupId>
+            <artifactId>service-auth-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- 测试：过滤器单测（MockHttpServletRequest / Mockito / JUnit） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

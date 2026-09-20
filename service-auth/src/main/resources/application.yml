@@ -4,6 +4,19 @@ server:
 spring:
   application:
     name: service-auth
+  # ★ Redis：会话令牌的存储底座（Redis Session Token 方案的写入方）
+  data:
+    redis:
+      host: rxs
+      port: 6379
+      # 库号 2：与业务缓存、其他组件的 Redis 数据隔离，避免 KEYS / FLUSHDB 时误伤
+      database: 2
+      # 无密码（本环境未开启 requirepass）
+      # password:
+      # 连接超时：Redis 不可达时快速失败，不要让登录接口长时间挂住
+      connect-timeout: 3000ms
+      # 命令超时
+      timeout: 3000ms
   cloud:
     nacos:
       # Nacos 已开启认证（见 nacos.md），discovery 需带上用户名密码
@@ -25,6 +38,13 @@ spring:
             # BASIC 只记录请求方法、URL、状态码与耗时，调试够用且不会把请求体（可能含密码）打进日志。
             logger-level: basic
 
+# 会话有效期（秒），默认 30 分钟。
+# ⚠️ 网关侧（service-gateway）也有一份同名配置，用于「读会话时续期」；
+#    两侧默认值必须保持一致，否则会出现「网关续期比认证服务签发的 TTL 更长」的诡异现象。
+app:
+  auth:
+    session-timeout: 1800
+
 logging:
   level:
     # Feign 的日志 logger 名就是 Feign 客户端接口的全限定名。
@@ -33,7 +53,10 @@ logging:
     com.jwy.scd.api.SysUserApi: debug
 
 # 说明：
-# 1. 本服务为无状态认证服务：不连数据库（无 mybatis / mysql 依赖）、不保存账号密码，
-#    因此也不再从 Nacos 配置中心拉取 datasource（不再需要 service-auth.yaml）。
+# 1. 本服务不连数据库（无 mybatis / mysql 依赖）、不保存账号密码，
+#    因此不从 Nacos 配置中心拉取 datasource（不需要 service-auth.yaml）。
 # 2. 登录时通过 Feign 调用 service-system 的 /api/sys-user/verify-password 校验凭据，
-#    校验通过后仅签发内存令牌（TokenService，30 分钟过期）。
+#    再调 /api/sys-user/by-username 取 userId/nickname，最后把会话写入 Redis。
+# 3. ⚠️ 本服务不再提供「校验令牌」接口：令牌有效性由 service-gateway 直接读 Redis 判定，
+#    认证服务不在请求主链路上，auth 挂掉不影响已登录用户。
+#    查看会话：redis-cli -h rxs -p 6379 -n 2 GET 'auth:session:<token>'

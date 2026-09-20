@@ -1,0 +1,38 @@
+Compiled from "JacksonException.java"
+public class tools.jackson.core.JacksonException extends java.lang.RuntimeException {
+  protected tools.jackson.core.TokenStreamLocation _location;
+  protected java.util.LinkedList<tools.jackson.core.JacksonException$Reference> _path;
+  protected transient java.io.Closeable _processor;
+  protected tools.jackson.core.JacksonException(java.lang.String);
+  protected tools.jackson.core.JacksonException(java.lang.Throwable);
+  protected tools.jackson.core.JacksonException(java.lang.String, java.lang.Throwable);
+  protected tools.jackson.core.JacksonException(java.lang.String, tools.jackson.core.TokenStreamLocation, java.lang.Throwable);
+  protected tools.jackson.core.JacksonException(java.io.Closeable, java.lang.Throwable);
+  protected tools.jackson.core.JacksonException(java.io.Closeable, java.lang.String, tools.jackson.core.TokenStreamLocation, java.lang.Throwable);
+  protected tools.jackson.core.JacksonException(java.io.Closeable, java.lang.String);
+  protected tools.jackson.core.JacksonException(java.io.Closeable, java.lang.String, java.lang.Throwable);
+  protected tools.jackson.core.JacksonException(java.io.Closeable, java.lang.String, tools.jackson.core.TokenStreamLocation);
+  public tools.jackson.core.JacksonException withCause(java.lang.Throwable);
+  public tools.jackson.core.JacksonException clearLocation();
+  public static tools.jackson.core.JacksonException wrapWithPath(java.lang.Throwable, java.lang.Object, java.lang.String);
+  public static tools.jackson.core.JacksonException wrapWithPath(java.lang.Throwable, java.lang.Object, int);
+  public static tools.jackson.core.JacksonException wrapWithPath(java.lang.Throwable, tools.jackson.core.JacksonException$Reference);
+  public static tools.jackson.core.JacksonException wrapWithPath(java.lang.Throwable, tools.jackson.core.JacksonException$Reference, java.util.function.BiFunction<java.lang.String, java.lang.Throwable, tools.jackson.core.JacksonException>);
+  public static java.lang.String _exceptionMessage(java.lang.Throwable);
+  public tools.jackson.core.JacksonException prependPath(java.lang.Object, java.lang.String);
+  public tools.jackson.core.JacksonException prependPath(java.lang.Object, int);
+  public tools.jackson.core.JacksonException prependPath(tools.jackson.core.JacksonException$Reference);
+  public java.util.List<tools.jackson.core.JacksonException$Reference> getPath();
+  public java.lang.String getPathReference();
+  public java.lang.StringBuilder getPathReference(java.lang.StringBuilder);
+  public tools.jackson.core.TokenStreamLocation getLocation();
+  public java.lang.String getOriginalMessage();
+  public java.lang.Object processor();
+  protected java.lang.String messageSuffix();
+  public java.lang.String getLocalizedMessage();
+  public java.lang.String getMessage();
+  protected java.lang.String _buildMessage();
+  public java.lang.String toString();
+  protected java.lang.StringBuilder _appendReferenceChain(java.lang.StringBuilder);
+  protected java.lang.StringBuilder _appendPathDesc(java.lang.StringBuilder);
+}
