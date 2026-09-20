@@ -37,6 +37,18 @@
             <version>5.0.3</version>
         </dependency>
 
+        <!-- 负载均衡：配合网关路由 uri: lb://<服务名> 做服务发现后的实例选择（lb:// 必需） -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
+        <!-- Nacos 服务注册与发现：网关本身注册到 Nacos，并从 Nacos 发现 service-system / service-auth -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

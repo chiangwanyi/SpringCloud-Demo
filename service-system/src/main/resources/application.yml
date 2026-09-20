@@ -4,6 +4,14 @@ server:
 spring:
   application:
     name: service-system
+  # Nacos 服务发现：服务启动后自动注册到 Nacos，供网关通过 lb://service-system 发现
+  cloud:
+    nacos:
+      discovery:
+        server-addr: rxs:8848
+        # Nacos 已开启认证（见 nacos.md），客户端注册/查询需带上用户名密码
+        username: nacos
+        password: 123456
   # 连接真实 MySQL（连接信息见 mysql.md）
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -2,6 +2,7 @@ package com.jwy.scd.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * API 网关启动类。
@@ -14,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 由网关按路径把请求转发到后端的 service-system(:8081) / service-auth(:8082)。</p>
  */
 @SpringBootApplication
+@EnableDiscoveryClient
 public class GatewayApplication {
 
     public static void main(String[] args) {

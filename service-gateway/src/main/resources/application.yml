@@ -6,25 +6,33 @@ spring:
   application:
     name: service-gateway
   cloud:
+    # Nacos 服务发现：网关自身注册到 Nacos，并从中发现后端微服务
+    nacos:
+      discovery:
+        server-addr: rxs:8848
+        # Nacos 已开启认证（见 nacos.md），客户端注册/查询需带上用户名密码
+        username: nacos
+        password: 123456
     gateway:
       # Spring Boot 4 下 servlet(webmvc) 风味的网关，配置根为 spring.cloud.gateway.server.webmvc
       server:
         webmvc:
           routes:
-            # 用户管理业务 -> service-system (:8081)
+            # 用户管理业务 -> service-system（通过 Nacos 服务发现 + 负载均衡，不再写死地址）
             - id: route-service-system
-              uri: http://localhost:8081
+              uri: lb://service-system
               predicates:
                 - Path=/api/sys-user/**
-            # 认证 / 令牌业务 -> service-auth (:8082)
+            # 认证 / 令牌业务 -> service-auth
             - id: route-service-auth
-              uri: http://localhost:8082
+              uri: lb://service-auth
               predicates:
                 - Path=/api/auth/**
 
 # 说明：
 # 1. 路径前缀（/api/sys-user、/api/auth）会原样转发给后端服务，后端 Controller 也用同样的路径，
 #    因此不需要做路径重写（RewritePath）。
-# 2. 当前 uri 写死为 localhost 具体端口，是因为尚未接入 Nacos / 注册中心。
-#    接入后可改为 uri: lb://service-system、uri: lb://service-auth，由注册中心做服务发现与负载均衡。
-# 3. 网关默认会透传请求头（含 Authorization/token），后续可在网关层统一做鉴权、限流、跨域（CORS）。
+# 2. uri 使用 lb://<服务名> 形式：lb 表示走 Spring Cloud LoadBalancer，<服务名> 即各服务的
+#    spring.application.name（service-system / service-auth），由 Nacos 注册中心提供实例列表并做负载均衡。
+# 3. 前提：service-system / service-auth 已引入 Nacos  discovery 并成功注册到 rxs:8848。
+# 4. 网关默认会透传请求头（含 Authorization/token），后续可在网关层统一做鉴权、限流、跨域（CORS）。

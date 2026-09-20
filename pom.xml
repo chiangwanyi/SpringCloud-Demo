@@ -44,6 +44,35 @@
 				<artifactId>mybatis-plus-boot-starter</artifactId>
 				<version>3.5.3.1</version>
 			</dependency>
+
+			<!--
+				Spring Cloud Alibaba BOM（统一管理 Nacos 客户端等版本）。
+				2025.1.0.0 对应 Spring Cloud 2025.1.x（spring-cloud-* 5.0.x 线），
+				与本项目网关 starter 5.0.3（同样属于 2025.1.x / 5.0.x 线）以及 Spring Boot 4.0.8 兼容。
+				注意：旧的 2025.0.0.0 属于 spring-cloud 4.3.x 线，编译于 Boot 4.0 里程碑版本，
+				在 Boot 4.0.8 GA 上会缺失类（如 WebServerInitializedEvent），必须升级到 2025.1.x。
+			-->
+			<dependency>
+				<groupId>com.alibaba.cloud</groupId>
+				<artifactId>spring-cloud-alibaba-dependencies</artifactId>
+				<version>2025.1.0.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!--
+				Spring Cloud BOM（统一管理 commons / context / loadbalancer / gateway 等版本）。
+				2025.1.0 对应 Spring Cloud 2025.1.x（spring-cloud-* 5.0.x 线），是 Spring Boot 4.0.8 GA 的兼容线。
+				放在 alibaba BOM 之后，使其管理的 spring-cloud-* 版本（5.0.x）优先生效，
+				与网关 starter 5.0.3 保持一致，避免被旧的 4.3.x（2025.0.x）线强制降级。
+			-->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>2025.1.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
