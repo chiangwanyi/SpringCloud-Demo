@@ -1,0 +1,39 @@
+<svg viewBox="0 0 680 300" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>微服务架构中 CORS 应统一配置在网关</title>
+<desc>浏览器只访问网关，网关作为唯一出口统一写入 CORS 响应头，后端服务不参与跨域处理。</desc>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<rect x="40" y="72" width="130" height="56" rx="10" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="105" y="93" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#2C2C2A">浏览器 / 前端</text>
+<text x="105" y="111" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5F5E5A">只认网关地址</text>
+
+<rect x="248" y="48" width="170" height="104" rx="12" fill="#E6F1FB" stroke="#378ADD" stroke-width="0.5"/>
+<text x="333" y="70" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#0C447C">API 网关 :8080</text>
+<rect x="262" y="86" width="142" height="50" rx="8" fill="#B5D4F4" stroke="#378ADD" stroke-width="0.5"/>
+<text x="333" y="104" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#042C53">CORS 统一放行</text>
+<text x="333" y="122" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#0C447C">唯一出口，只此一处</text>
+
+<rect x="496" y="48" width="144" height="104" rx="12" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.5"/>
+<rect x="508" y="58" width="120" height="26" rx="7" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="568" y="71" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#2C2C2A">service-system</text>
+<rect x="508" y="89" width="120" height="26" rx="7" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="568" y="102" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#2C2C2A">service-auth</text>
+<rect x="508" y="120" width="120" height="26" rx="7" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="568" y="133" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#2C2C2A">service-order</text>
+<text x="568" y="160" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5F5E5A">不配 CORS</text>
+
+<line x1="175" y1="88" x2="243" y2="88" stroke="#378ADD" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="243" y1="112" x2="175" y2="112" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="423" y1="88" x2="491" y2="88" stroke="#378ADD" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="491" y1="112" x2="423" y2="112" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<text x="340" y="180" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5F5E5A">上箭头＝浏览器请求　　下箭头＝响应（CORS 头由网关写入）</text>
+
+<rect x="40" y="202" width="600" height="74" rx="10" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="60" y="226" dominant-baseline="central" font-size="13" fill="#2C2C2A">响应头 Access-Control-Allow-Origin 由网关写入一次，全站单份</text>
+<text x="60" y="250" dominant-baseline="central" font-size="13" fill="#A32D2D">若后端服务也配 CORS，该响应头会出现两次，浏览器直接拒绝</text>
+</svg>

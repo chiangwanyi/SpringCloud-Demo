@@ -1,0 +1,38 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.8)
+
+2026-09-21T10:21:04.721+08:00  INFO 19968 --- [service-gateway] [           main] com.jwy.scd.gateway.GatewayApplication   : Starting GatewayApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 19968 (E:\Data\projects\springcloud-demo\service-gateway\target\service-gateway-0.0.1-SNAPSHOT.jar started by jiang in E:\Data\projects\springcloud-demo)
+2026-09-21T10:21:04.728+08:00  INFO 19968 --- [service-gateway] [           main] com.jwy.scd.gateway.GatewayApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-09-21T10:21:06.675+08:00  INFO 19968 --- [service-gateway] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-09-21T10:21:06.680+08:00  INFO 19968 --- [service-gateway] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-09-21T10:21:06.742+08:00  INFO 19968 --- [service-gateway] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 32 ms. Found 0 Redis repository interfaces.
+2026-09-21T10:21:07.376+08:00  INFO 19968 --- [service-gateway] [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=a5437e8e-3797-341c-9e60-afb60e01c38e
+2026-09-21T10:21:08.221+08:00  INFO 19968 --- [service-gateway] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-09-21T10:21:08.307+08:00  INFO 19968 --- [service-gateway] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-21T10:21:08.307+08:00  INFO 19968 --- [service-gateway] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-21T10:21:08.360+08:00  INFO 19968 --- [service-gateway] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 3506 ms
+2026-09-21T10:21:12.496+08:00  WARN 19968 --- [service-gateway] [           main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-09-21T10:21:12.600+08:00  INFO 19968 --- [service-gateway] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-09-21T10:21:12.629+08:00  INFO 19968 --- [service-gateway] [           main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapterBuilder
+2026-09-21T10:21:12.630+08:00  INFO 19968 --- [service-gateway] [           main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapter match ch.qos.logback.classic.Logger success.
+2026-09-21T10:21:12.631+08:00  INFO 19968 --- [service-gateway] [           main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.log4j2.Log4j2NacosLoggingAdapterBuilder
+2026-09-21T10:21:12.632+08:00  INFO 19968 --- [service-gateway] [       Thread-3] c.a.n.c.a.r.identify.CredentialWatcher   : null No credential found
+2026-09-21T10:21:13.018+08:00  INFO 19968 --- [service-gateway] [           main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2026-09-21T10:21:13.019+08:00  INFO 19968 --- [service-gateway] [           main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2026-09-21T10:21:14.131+08:00  INFO 19968 --- [service-gateway] [           main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to get current node abilities...
+2026-09-21T10:21:14.133+08:00  INFO 19968 --- [service-gateway] [           main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to initialize current node abilities, support modes: [SDK_CLIENT]
+2026-09-21T10:21:14.134+08:00  INFO 19968 --- [service-gateway] [           main] c.a.n.c.a.AbstractAbilityControlManager  : Initialize current abilities finish...
+2026-09-21T10:21:14.135+08:00  INFO 19968 --- [service-gateway] [           main] c.a.n.c.a.d.NacosAbilityManagerHolder    : [AbilityControlManager] Successfully initialize AbilityControlManager
+2026-09-21T10:21:14.179+08:00  INFO 19968 --- [service-gateway] [           main] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP service-gateway 192.168.1.129:8080 register finished
+2026-09-21T10:21:14.209+08:00  INFO 19968 --- [service-gateway] [           main] com.jwy.scd.gateway.GatewayApplication   : Started GatewayApplication in 10.384 seconds (process running for 11.787)
+2026-09-21T10:21:14.212+08:00  WARN 19968 --- [service-gateway] [           main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-21T10:21:41.364+08:00  INFO 19968 --- [service-gateway] [nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-21T10:21:41.365+08:00  INFO 19968 --- [service-gateway] [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-21T10:21:41.366+08:00  INFO 19968 --- [service-gateway] [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms

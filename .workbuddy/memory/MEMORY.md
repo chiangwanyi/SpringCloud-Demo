@@ -30,6 +30,14 @@ Lettuce 默认用 **Netty 自带 DNS 解析器**（只发标准 DNS 查询），
 - `fallback`（业务异常）vs `blockHandler`（被规则挡：限流/熔断，对应 `BlockException`）——签名都是「原方法参数 + 一个异常参数」，返回类型一致。
 - Sentinel transport 端口(8719)是**懒加载**的，首次有请求经过 Sentinel 资源后才监听；下发规则 `GET http://127.0.0.1:8719/setRules?type=flow&data=<URL编码JSON>`（POST 会 415）。
 
+## ⚠️ CORS 跨域（2026-09-21 定案 + 实测）
+- **CORS 只在网关配置一处**（微服务惯例：网关是唯一外部出口，CORS 属横切关注点）。实测：网关与 service-order 同时开启时，**经网关的响应出现 2 个 `Access-Control-Allow-Origin`** → 浏览器报 `header contains multiple values` 直接拒绝（直连 8083 时 1 个，经网关时 2 个）。**只要两层都写这个头，就是错的。**
+- **Boot 4 的 WebMVC 风味网关【没有】`globalcors` 配置项**（那是 WebFlux 风味才有的）。实测扫 `spring-cloud-gateway-server-webmvc` 5.0.x jar：**0 个 Cors 相关类、26 个配置属性里无一条 cors** → 网上 `spring.cloud.gateway.globalcors.cors-configurations` 那套教程照搬会**静默失效**。正解：注册 Servlet `CorsFilter`（`FilterRegistrationBean`，`order = Ordered.HIGHEST_PRECEDENCE`，先于 `TokenAuthFilter` 的 `HIGHEST_PRECEDENCE+10`）。
+- `allowedOrigins("*")` 与 `allowCredentials(true)` **互斥**（Spring 直接抛异常）；必须用 `allowedOriginPatterns(List.of("*"))`——它会把请求 Origin **原样回显**，因此也覆盖 `file://` 页面发来的 `Origin: null`（实测 `ACAO: null` 正常返回）。
+- 网关 `CorsFilter` 在过滤器链**之前**写头 → **401 响应也带 CORS 头**，浏览器能读到真实错误信息而非笼统的「CORS 错误」（实测通过）。而 `TokenAuthFilter` 的 `shouldNotFilter` 已放行 OPTIONS，预检不会被鉴权拦。
+- service-order 保留一份 CORS 但**默认关闭**：`@ConditionalOnProperty(name="app.cors.direct-enabled", havingValue="true")`，仅供浏览器**直连 :8083 调试**（启动加 `--app.cors.direct-enabled=true`）。**切勿与网关的 CORS 同时开启。**
+- 验证手法：用 `http.client` 的 `r.getheaders()` —— 它返回**保留重复项的原始头列表**；`urllib` 的 `dict(r.headers)` 会合并/丢失重复头，**测不出这个 bug**。
+
 ## 模块与契约约定
 - 结构：`service-xxx`（实现）+ `service-xxx-api`（契约：DTO + `@FeignClient` 接口）。api 模块 openfeign 设 `<optional>true</optional>`，只引 springdoc `webmvc-api`；实现模块引 `webmvc-ui`。
 - **契约接口四条铁律**：
@@ -49,3 +57,4 @@ Lettuce 默认用 **Netty 自带 DNS 解析器**（只发标准 DNS 查询），
 - 可复用验证脚本：`.workbuddy/tmp/e2e_auth.py`（鉴权 23 项用例）、`.workbuddy/tmp/echo_server.py`（回显请求头，验证透传）。
 - 日志重定向 `*>` 出 UTF-16 读不了，需 `Get-Content | Set-Content -Encoding UTF8`；Java 内直接以 UTF-8 写文件最省事。
 - 手动重命名模块目录后要清理孤儿 `.iml` 与 `.idea`。
+- **⚠️ Edit 工具不要对同一文件并发调用**：两次编辑都基于同一份旧内容写回，**后写的会静默覆盖先写的**。本次实际踩到两次——`service-order/CorsConfig.java` 丢了 `import ConditionalOnProperty`（编译才报错）、`tools/qps-tester.html` 丢了 `data()` 改动与 `login()` 方法（表面编辑全部"成功"）。**同一文件的多次修改必须串行，改完立刻用 Grep 核对落盘。**

@@ -51,6 +51,15 @@ spring:
       mode: never
       schema-locations: classpath:schema.sql
 
+# ============================ 跨域（CORS）· 仅开发直连时开启 ============================
+# 微服务惯例：CORS 统一配置在网关（见 service-gateway 的 CorsConfig），后端服务不参与跨域。
+# 只有需要「不经网关、用浏览器页面直连本服务 :8083 调试」时，才把下面两行取消注释。
+# ⚠️ 千万不要与网关的 CORS 同时生效：请求经网关转发时两边各写一遍响应头，
+#    客户端会收到两个 Access-Control-Allow-Origin，浏览器直接拒绝该响应。
+# app:
+#   cors:
+#     direct-enabled: true
+
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
