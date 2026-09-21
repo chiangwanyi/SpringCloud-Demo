@@ -50,6 +50,14 @@ spring:
               uri: lb://service-order
               predicates:
                 - Path=/api/product/**
+            # 分布式发号 -> service-id-gen（Leaf-segment 号段模式）
+            # ⚠️ 业务服务发号走的是服务内 Feign（lb://service-id-gen），不经过网关；
+            #    这条路由只是为了能直接在浏览器/curl 上观察号段状态与调试。
+            #    也正因如此它【不需要】加进白名单——号段状态属于内部信息，让持有令牌的人看即可。
+            - id: route-service-id-gen
+              uri: lb://service-id-gen
+              predicates:
+                - Path=/api/id/**
 
 # ============================ 网关鉴权（TokenAuthFilter） ============================
 # 策略：默认拦截 —— 不在白名单里的请求一律要求 Authorization: Bearer <token>。

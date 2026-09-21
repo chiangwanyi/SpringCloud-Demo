@@ -1,0 +1,32 @@
+2026-09-21T11:52:21.382+08:00  INFO 38552 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : Starting ServiceIdGenApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 38552 (E:\Data\projects\springcloud-demo\service-id-gen\target\service-id-gen-0.0.1-SNAPSHOT.jar started by jiang in E:\Data\projects\springcloud-demo)
+2026-09-21T11:52:21.385+08:00  INFO 38552 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : No active profile set, falling back to 1 default profile: "default"
+2026-09-21T11:52:22.225+08:00  INFO 38552 --- [service-id-gen] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=4b115470-e102-3e16-a08a-7cafcd631966
+2026-09-21T11:52:22.556+08:00  INFO 38552 --- [service-id-gen] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8085 (http)
+2026-09-21T11:52:22.571+08:00  INFO 38552 --- [service-id-gen] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-21T11:52:22.571+08:00  INFO 38552 --- [service-id-gen] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-21T11:52:22.600+08:00  INFO 38552 --- [service-id-gen] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1150 ms
+2026-09-21T11:52:23.226+08:00  INFO 38552 --- [service-id-gen] [main] m.e.s.MybatisPlusApplicationContextAware : Register ApplicationContext instances org.springframework.boot.web.server.servlet.context.AnnotationConfigServletWebServerApplicationContext@54227100
+2026-09-21T11:52:23.402+08:00  INFO 38552 --- [service-id-gen] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8085 (http) with context path '/'
+2026-09-21T11:52:23.415+08:00  INFO 38552 --- [service-id-gen] [Thread-3] c.a.n.c.a.r.identify.CredentialWatcher   : null No credential found
+2026-09-21T11:52:23.419+08:00  INFO 38552 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapterBuilder
+2026-09-21T11:52:23.421+08:00  INFO 38552 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapter match ch.qos.logback.classic.Logger success.
+2026-09-21T11:52:23.421+08:00  INFO 38552 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.log4j2.Log4j2NacosLoggingAdapterBuilder
+2026-09-21T11:52:23.624+08:00  INFO 38552 --- [service-id-gen] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2026-09-21T11:52:23.624+08:00  INFO 38552 --- [service-id-gen] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2026-09-21T11:52:24.302+08:00  INFO 38552 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to get current node abilities...
+2026-09-21T11:52:24.304+08:00  INFO 38552 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to initialize current node abilities, support modes: [SDK_CLIENT]
+2026-09-21T11:52:24.305+08:00  INFO 38552 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Initialize current abilities finish...
+2026-09-21T11:52:24.305+08:00  INFO 38552 --- [service-id-gen] [main] c.a.n.c.a.d.NacosAbilityManagerHolder    : [AbilityControlManager] Successfully initialize AbilityControlManager
+2026-09-21T11:52:24.339+08:00  INFO 38552 --- [service-id-gen] [main] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP service-id-gen 192.168.1.129:8085 register finished
+2026-09-21T11:52:24.349+08:00  INFO 38552 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : Started ServiceIdGenApplication in 3.512 seconds (process running for 4.032)
+2026-09-21T11:52:24.362+08:00  INFO 38552 --- [service-id-gen] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-21T11:52:24.490+08:00  INFO 38552 --- [service-id-gen] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@614361fa
+2026-09-21T11:52:24.491+08:00  INFO 38552 --- [service-id-gen] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-09-21T11:52:24.554+08:00  INFO 38552 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 初始化服务端号段缓冲：bizTag=order, 首段=[4001, 6000] 剩余 2000/2000
+2026-09-21T11:52:24.558+08:00  INFO 38552 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 预热完成：bizTag=order, SegmentBuffer{bizTag=order, current=[4001, 6000] 剩余 2000/2000, next=null, issued=0}
+2026-09-21T11:52:24.559+08:00  INFO 38552 --- [service-id-gen] [main] c.j.scd.idgen.support.IdGenWarmUpRunner  : [id-gen] 启动预热结束，耗时 207 ms
+2026-09-21T11:52:24.561+08:00  WARN 38552 --- [service-id-gen] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-21T11:52:24.561+08:00  WARN 38552 --- [service-id-gen] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-21T11:52:45.281+08:00  INFO 38552 --- [service-id-gen] [http-nio-8085-exec-4] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-21T11:52:45.282+08:00  INFO 38552 --- [service-id-gen] [http-nio-8085-exec-4] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-21T11:52:45.284+08:00  INFO 38552 --- [service-id-gen] [http-nio-8085-exec-4] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms

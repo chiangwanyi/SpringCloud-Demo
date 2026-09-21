@@ -66,6 +66,26 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+    # 本服务的 ID 只有两个来源，没有第三种：
+    #   · 表主键（biz_order / biz_product / biz_order_item）：交给 MySQL 自增，见本行 id-type: auto；
+    #   · 订单号 orderNo：由 service-id-gen 批发号段、本服务在内存里发号，
+    #     见 support/SegmentIdGenerator 与 support/OrderNoGenerator。
+    #
+    # 号段模式的唯一性来自 MySQL leaf_alloc 那一行的行锁，与实例身份完全无关：
+    # 多实例部署时不需要为任何实例分配 ID 相关的环境变量，
+    # 起几个实例、在哪台机器上起，代码和配置都完全一样。
+
+# ============================ 号段发号（service-id-gen） ============================
+app:
+  id-gen:
+    # 本服务在号段账本 leaf_alloc 里的业务标签，必须与那里的种子行 biz_tag 完全一致。
+    # 这个值会在启动时打进日志（SegmentIdGenerator 构造器），配错了启动日志里就能看见，
+    # 不至于等到第一次下单才报「bizTag 未初始化」。
+    biz-tag: order
+    # 启动时先把「当前段 + 预备段」领回内存（见 support/IdGenWarmUpRunner）。
+    # 关掉它服务照样能发号（首次下单时懒加载），区别只是第一单要等一次 Feign 往返。
+    # 这也是为什么它不写成 @PostConstruct：那时 Feign / 负载均衡 / Nacos 都还没就绪。
+    warm-up-on-startup: true
 
 logging:
   level:
@@ -73,3 +93,8 @@ logging:
     # 只把 logger-level 配成 basic 还不够，必须同时把该接口所在包的日志级别设为 debug，
     # 否则 Feign 的日志会被日志框架过滤掉，看不到任何输出。
     com.jwy.scd.api.SysUserApi: debug
+    # 领段会走 Feign 调 service-id-gen。排查「多久领一次号段」时打开下面这行，
+    # 能看到每次 /api/id/segment 的耗时（正常情况下几秒到几分钟才一次）
+    # com.jwy.scd.api.idgen.IdGenApi: debug
+    # 想看本地双 buffer 的状态（预取是否成功、何时换段）打开下面这行
+    # com.jwy.scd.support.SegmentIdGenerator: debug

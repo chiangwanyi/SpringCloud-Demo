@@ -65,7 +65,11 @@ public class OrderServiceImpl extends ServiceImpl<BizOrderMapper, BizOrder> impl
      *
      * <p>曾把「SO + 秒级时间戳 + 3 位随机数」写在本类里，压测时必然撞唯一索引
      * （同秒 100 单的碰撞概率 99.4%）。生成策略抽成独立 Bean 后统一走
-     * {@link OrderNoGenerator}，唯一性由雪花算法保证。
+     * {@link OrderNoGenerator}，唯一性由 service-id-gen 批发的号段保证——
+     * 见 {@link com.jwy.scd.support.SegmentIdGenerator}。
+     *
+     * <p>号段模式的唯一性来自 MySQL 单行行锁，与实例身份无关：多实例部署时
+     * 不需要为任何实例编排 ID 相关的环境变量，漏配也不会造成重号。
      */
     private final OrderNoGenerator orderNoGenerator;
 
@@ -257,13 +261,14 @@ public class OrderServiceImpl extends ServiceImpl<BizOrderMapper, BizOrder> impl
     /**
      * 写订单主表，并在 order_no 撞唯一索引时换号重试。
      *
-     * <p>为什么已经用雪花算法了还要重试？因为两者的角色不同：
+     * <p>为什么已经用号段了还要重试？因为两者的角色不同：
      * <ul>
-     *     <li>雪花算法是<strong>生成侧</strong>的保证——单实例内数学上不会重复；</li>
+     *     <li>号段模式是<strong>生成侧</strong>的保证——每个实例领到的区间互不重叠；</li>
      *     <li>{@code uk_order_no} 唯一索引是<strong>存储侧</strong>的保证——数据的最后一道防线。</li>
      * </ul>
-     * 只有生成侧的假设（比如多实例推导出同一个机器号）被打破时，才会落到这里。
-     * 未雨绸缪地兜一层，代价是几行代码，收益是「理论上的小概率」不会变成用户看到的 500。
+     * 生成侧的假设被打破时才会落到这里，典型场景是有人手工把 {@code leaf_alloc.max_id}
+     * 改小、或号段库从旧备份恢复过。未雨绸缪地兜一层，代价是几行代码，
+     * 收益是「理论上的小概率」不会变成用户看到的 500。
      *
      * <p><b>事务安全性</b>：这里的重试在同一个 {@code @Transactional} 内进行是安全的。
      * MySQL 遇到重复键只回滚<strong>那一条语句</strong>，不会作废整个事务；MyBatis-Spring 也不会
@@ -284,7 +289,8 @@ public class OrderServiceImpl extends ServiceImpl<BizOrderMapper, BizOrder> impl
                 log.warn("订单号撞唯一索引，第 {}/{} 次尝试：orderNo={}",
                         attempt, ORDER_NO_MAX_ATTEMPTS, order.getOrderNo());
                 if (attempt >= ORDER_NO_MAX_ATTEMPTS) {
-                    log.error("订单号连续 {} 次冲突，生成器可能已失效（机器号撞车/时钟回拨？）",
+                    log.error("订单号连续 {} 次冲突，发号器可能已失效"
+                                    + "（leaf_alloc 的 max_id 被人工改小？号段库从旧备份恢复过？）",
                             attempt, ex);
                     throw OrderException.serviceUnavailable("订单号生成冲突，请稍后重试");
                 }

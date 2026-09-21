@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- 继承微服务父工程 -->
+    <parent>
+        <groupId>com.jwy</groupId>
+        <artifactId>springcloud-demo</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>service-id-gen-api</artifactId>
+    <name>service-id-gen-api</name>
+    <description>service-id-gen 对外服务契约（DTO + Feign 接口 + 号段消费组件），供业务服务依赖</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Spring MVC 注解（@GetMapping / @RequestParam 等），Feign 与 Controller 共用同一套 HTTP 契约 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+        <!-- OpenFeign：提供 @FeignClient 注解。版本由父 BOM 统一管理（2025.1.0 → 5.0.0），切勿手写版本。
+             optional=true：本模块自身用它编译契约接口，但不会向实现模块（service-id-gen）传递
+             openfeign / spring-cloud，避免 Boot 4 下触发不兼容的 cloud 自动配置，也避免
+             provider 侧因为 classpath 上有 @FeignClient 而被自动注册成消费者。 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- SpringDoc OpenAPI 注解：仅提供注解类，不引入 servlet / UI，保证 api 契约模块轻量 -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
+        <!-- ★ 号段消费组件（Segment / SegmentBuffer）要打日志。
+             这里必须显式声明：api 模块不是可启动服务，没有 spring-boot-starter-logging，
+             而 openfeign 虽然会传递 slf4j-api，但它是 optional 的 —— 依赖一个 optional 依赖
+             的传递结果属于「碰巧能编译」，一旦哪天换掉 openfeign 就断。显式写出来。
+             版本由 Boot 父 BOM 管理。 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

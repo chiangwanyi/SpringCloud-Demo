@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Data
 @TableName("sys_dept")
 public class SysDept {
-    @TableId(type = IdType.ASSIGN_ID)
+    @TableId(type = IdType.AUTO)
     private Long id;
     private Long parentId;
     private String deptName;

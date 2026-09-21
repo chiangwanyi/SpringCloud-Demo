@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Data
 @TableName("sys_role")
 public class SysRole {
-    @TableId(type = IdType.ASSIGN_ID)
+    @TableId(type = IdType.AUTO)
     private Long id;
     private String roleName;
     private String roleCode;

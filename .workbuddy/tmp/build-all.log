@@ -1,0 +1,314 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] springcloud-demo                                                   [pom]
+[INFO] service-system-api                                                 [jar]
+[INFO] service-system                                                     [jar]
+[INFO] service-auth-api                                                   [jar]
+[INFO] service-auth                                                       [jar]
+[INFO] service-order-api                                                  [jar]
+[INFO] service-id-gen-api                                                 [jar]
+[INFO] service-order                                                      [jar]
+[INFO] service-id-gen                                                     [jar]
+[INFO] service-gateway                                                    [jar]
+[INFO] 
+[INFO] ----------------------< com.jwy:springcloud-demo >----------------------
+[INFO] Building springcloud-demo 0.0.1-SNAPSHOT                          [1/10]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ springcloud-demo ---
+[INFO] Installing E:\Data\projects\springcloud-demo\pom.xml to C:\Users\jiang\.m2\repository\com\jwy\springcloud-demo\0.0.1-SNAPSHOT\springcloud-demo-0.0.1-SNAPSHOT.pom
+[INFO] 
+[INFO] ---------------------< com.jwy:service-system-api >---------------------
+[INFO] Building service-system-api 0.0.1-SNAPSHOT                        [2/10]
+[INFO]   from service-system-api\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ service-system-api ---
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-system-api\src\main\resources
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-system-api\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ service-system-api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ service-system-api ---
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-system-api\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ service-system-api ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ service-system-api ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ service-system-api ---
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ service-system-api ---
+[INFO] Installing E:\Data\projects\springcloud-demo\service-system-api\pom.xml to C:\Users\jiang\.m2\repository\com\jwy\service-system-api\0.0.1-SNAPSHOT\service-system-api-0.0.1-SNAPSHOT.pom
+[INFO] Installing E:\Data\projects\springcloud-demo\service-system-api\target\service-system-api-0.0.1-SNAPSHOT.jar to C:\Users\jiang\.m2\repository\com\jwy\service-system-api\0.0.1-SNAPSHOT\service-system-api-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] -----------------------< com.jwy:service-system >-----------------------
+[INFO] Building service-system 0.0.1-SNAPSHOT                            [3/10]
+[INFO]   from service-system\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ service-system ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ service-system ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 10 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ service-system ---
+[INFO] Copying 0 resource from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ service-system ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ service-system ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ service-system ---
+[INFO] Building jar: E:\Data\projects\springcloud-demo\service-system\target\service-system-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.0.8:repackage (repackage) @ service-system ---
+[INFO] Replacing main artifact E:\Data\projects\springcloud-demo\service-system\target\service-system-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to E:\Data\projects\springcloud-demo\service-system\target\service-system-0.0.1-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ service-system ---
+[INFO] Installing E:\Data\projects\springcloud-demo\service-system\pom.xml to C:\Users\jiang\.m2\repository\com\jwy\service-system\0.0.1-SNAPSHOT\service-system-0.0.1-SNAPSHOT.pom
+[INFO] Installing E:\Data\projects\springcloud-demo\service-system\target\service-system-0.0.1-SNAPSHOT.jar to C:\Users\jiang\.m2\repository\com\jwy\service-system\0.0.1-SNAPSHOT\service-system-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] ----------------------< com.jwy:service-auth-api >----------------------
+[INFO] Building service-auth-api 0.0.1-SNAPSHOT                          [4/10]
+[INFO]   from service-auth-api\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ service-auth-api ---
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-auth-api\src\main\resources
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-auth-api\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ service-auth-api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ service-auth-api ---
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-auth-api\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ service-auth-api ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ service-auth-api ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ service-auth-api ---
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ service-auth-api ---
+[INFO] Installing E:\Data\projects\springcloud-demo\service-auth-api\pom.xml to C:\Users\jiang\.m2\repository\com\jwy\service-auth-api\0.0.1-SNAPSHOT\service-auth-api-0.0.1-SNAPSHOT.pom
+[INFO] Installing E:\Data\projects\springcloud-demo\service-auth-api\target\service-auth-api-0.0.1-SNAPSHOT.jar to C:\Users\jiang\.m2\repository\com\jwy\service-auth-api\0.0.1-SNAPSHOT\service-auth-api-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] ------------------------< com.jwy:service-auth >------------------------
+[INFO] Building service-auth 0.0.1-SNAPSHOT                              [5/10]
+[INFO]   from service-auth\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ service-auth ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ service-auth ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ service-auth ---
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-auth\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ service-auth ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ service-auth ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ service-auth ---
+[INFO] 
+[INFO] --- spring-boot:4.0.8:repackage (repackage) @ service-auth ---
+[INFO] Replacing main artifact E:\Data\projects\springcloud-demo\service-auth\target\service-auth-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to E:\Data\projects\springcloud-demo\service-auth\target\service-auth-0.0.1-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ service-auth ---
+[INFO] Installing E:\Data\projects\springcloud-demo\service-auth\pom.xml to C:\Users\jiang\.m2\repository\com\jwy\service-auth\0.0.1-SNAPSHOT\service-auth-0.0.1-SNAPSHOT.pom
+[INFO] Installing E:\Data\projects\springcloud-demo\service-auth\target\service-auth-0.0.1-SNAPSHOT.jar to C:\Users\jiang\.m2\repository\com\jwy\service-auth\0.0.1-SNAPSHOT\service-auth-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] ---------------------< com.jwy:service-order-api >----------------------
+[INFO] Building service-order-api 0.0.1-SNAPSHOT                         [6/10]
+[INFO]   from service-order-api\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ service-order-api ---
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-order-api\src\main\resources
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-order-api\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ service-order-api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ service-order-api ---
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-order-api\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ service-order-api ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ service-order-api ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ service-order-api ---
+[INFO] Building jar: E:\Data\projects\springcloud-demo\service-order-api\target\service-order-api-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ service-order-api ---
+[INFO] Installing E:\Data\projects\springcloud-demo\service-order-api\pom.xml to C:\Users\jiang\.m2\repository\com\jwy\service-order-api\0.0.1-SNAPSHOT\service-order-api-0.0.1-SNAPSHOT.pom
+[INFO] Installing E:\Data\projects\springcloud-demo\service-order-api\target\service-order-api-0.0.1-SNAPSHOT.jar to C:\Users\jiang\.m2\repository\com\jwy\service-order-api\0.0.1-SNAPSHOT\service-order-api-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] ---------------------< com.jwy:service-id-gen-api >---------------------
+[INFO] Building service-id-gen-api 0.0.1-SNAPSHOT                        [7/10]
+[INFO]   from service-id-gen-api\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ service-id-gen-api ---
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-id-gen-api\src\main\resources
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-id-gen-api\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ service-id-gen-api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ service-id-gen-api ---
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-id-gen-api\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ service-id-gen-api ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ service-id-gen-api ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ service-id-gen-api ---
+[INFO] Building jar: E:\Data\projects\springcloud-demo\service-id-gen-api\target\service-id-gen-api-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ service-id-gen-api ---
+[INFO] Installing E:\Data\projects\springcloud-demo\service-id-gen-api\pom.xml to C:\Users\jiang\.m2\repository\com\jwy\service-id-gen-api\0.0.1-SNAPSHOT\service-id-gen-api-0.0.1-SNAPSHOT.pom
+[INFO] Installing E:\Data\projects\springcloud-demo\service-id-gen-api\target\service-id-gen-api-0.0.1-SNAPSHOT.jar to C:\Users\jiang\.m2\repository\com\jwy\service-id-gen-api\0.0.1-SNAPSHOT\service-id-gen-api-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] -----------------------< com.jwy:service-order >------------------------
+[INFO] Building service-order 0.0.1-SNAPSHOT                             [8/10]
+[INFO]   from service-order\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ service-order ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ service-order ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 22 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ service-order ---
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-order\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ service-order ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ service-order ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ service-order ---
+[INFO] Building jar: E:\Data\projects\springcloud-demo\service-order\target\service-order-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.0.8:repackage (repackage) @ service-order ---
+[INFO] Replacing main artifact E:\Data\projects\springcloud-demo\service-order\target\service-order-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to E:\Data\projects\springcloud-demo\service-order\target\service-order-0.0.1-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ service-order ---
+[INFO] Installing E:\Data\projects\springcloud-demo\service-order\pom.xml to C:\Users\jiang\.m2\repository\com\jwy\service-order\0.0.1-SNAPSHOT\service-order-0.0.1-SNAPSHOT.pom
+[INFO] Installing E:\Data\projects\springcloud-demo\service-order\target\service-order-0.0.1-SNAPSHOT.jar to C:\Users\jiang\.m2\repository\com\jwy\service-order\0.0.1-SNAPSHOT\service-order-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] -----------------------< com.jwy:service-id-gen >-----------------------
+[INFO] Building service-id-gen 0.0.1-SNAPSHOT                            [9/10]
+[INFO]   from service-id-gen\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ service-id-gen ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ service-id-gen ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 10 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ service-id-gen ---
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-id-gen\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ service-id-gen ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ service-id-gen ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ service-id-gen ---
+[INFO] Building jar: E:\Data\projects\springcloud-demo\service-id-gen\target\service-id-gen-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.0.8:repackage (repackage) @ service-id-gen ---
+[INFO] Replacing main artifact E:\Data\projects\springcloud-demo\service-id-gen\target\service-id-gen-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to E:\Data\projects\springcloud-demo\service-id-gen\target\service-id-gen-0.0.1-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ service-id-gen ---
+[INFO] Installing E:\Data\projects\springcloud-demo\service-id-gen\pom.xml to C:\Users\jiang\.m2\repository\com\jwy\service-id-gen\0.0.1-SNAPSHOT\service-id-gen-0.0.1-SNAPSHOT.pom
+[INFO] Installing E:\Data\projects\springcloud-demo\service-id-gen\target\service-id-gen-0.0.1-SNAPSHOT.jar to C:\Users\jiang\.m2\repository\com\jwy\service-id-gen\0.0.1-SNAPSHOT\service-id-gen-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] ----------------------< com.jwy:service-gateway >-----------------------
+[INFO] Building service-gateway 0.0.1-SNAPSHOT                          [10/10]
+[INFO]   from service-gateway\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ service-gateway ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ service-gateway ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ service-gateway ---
+[INFO] skip non existing resourceDirectory E:\Data\projects\springcloud-demo\service-gateway\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ service-gateway ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ service-gateway ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ service-gateway ---
+[INFO] Building jar: E:\Data\projects\springcloud-demo\service-gateway\target\service-gateway-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.0.8:repackage (repackage) @ service-gateway ---
+[INFO] Replacing main artifact E:\Data\projects\springcloud-demo\service-gateway\target\service-gateway-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to E:\Data\projects\springcloud-demo\service-gateway\target\service-gateway-0.0.1-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ service-gateway ---
+[INFO] Installing E:\Data\projects\springcloud-demo\service-gateway\pom.xml to C:\Users\jiang\.m2\repository\com\jwy\service-gateway\0.0.1-SNAPSHOT\service-gateway-0.0.1-SNAPSHOT.pom
+[INFO] Installing E:\Data\projects\springcloud-demo\service-gateway\target\service-gateway-0.0.1-SNAPSHOT.jar to C:\Users\jiang\.m2\repository\com\jwy\service-gateway\0.0.1-SNAPSHOT\service-gateway-0.0.1-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for springcloud-demo 0.0.1-SNAPSHOT:
+[INFO] 
+[INFO] springcloud-demo ................................... SUCCESS [  0.274 s]
+[INFO] service-system-api ................................. SUCCESS [  1.588 s]
+[INFO] service-system ..................................... SUCCESS [  5.749 s]
+[INFO] service-auth-api ................................... SUCCESS [  0.182 s]
+[INFO] service-auth ....................................... SUCCESS [  0.472 s]
+[INFO] service-order-api .................................. SUCCESS [  0.294 s]
+[INFO] service-id-gen-api ................................. SUCCESS [  0.272 s]
+[INFO] service-order ...................................... SUCCESS [  4.334 s]
+[INFO] service-id-gen ..................................... SUCCESS [  2.773 s]
+[INFO] service-gateway .................................... SUCCESS [  0.789 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  17.226 s
+[INFO] Finished at: 2026-09-21T12:49:29+08:00
+[INFO] ------------------------------------------------------------------------

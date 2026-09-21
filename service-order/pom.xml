@@ -46,6 +46,16 @@
             <version>${project.version}</version>
         </dependency>
 
+        <!-- ★ 发号服务的契约：IdGenApi（Feign 接口）+ SegmentBuffer（号段消费组件）。
+            本服务是【消费方】而不是实现方，因此启动类上用
+            @EnableFeignClients(clients = IdGenApi.class) 精确注册成 Feign 代理
+            （绝不能用 basePackages 宽扫描，理由见启动类注释）。 -->
+        <dependency>
+            <groupId>com.jwy</groupId>
+            <artifactId>service-id-gen-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- ★ 被调用方的契约模块：依赖它才能拿到 SysUserApi 接口，从而通过 Feign 远程调用 service-system。
              注意它只是个「接口 + DTO」的轻量 jar，不含 service-system 的任何实现代码。 -->
         <dependency>

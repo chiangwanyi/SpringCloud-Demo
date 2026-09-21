@@ -1,0 +1,165 @@
+
+
+===== start service-system @ 2026-09-21 12:03:28 =====2026-09-21T12:03:31.174+08:00  INFO 28840 --- [service-system] [main] com.jwy.scd.ServiceSystemApplication     : Starting ServiceSystemApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 28840 (E:\Data\projects\springcloud-demo\service-system\target\service-system-0.0.1-SNAPSHOT.jar started by jiang in c:\windows\system32\driverstore\filerepository\ntprint.inf_amd64_7ec90cac1a11fca1\amd64)
+2026-09-21T12:03:31.177+08:00  INFO 28840 --- [service-system] [main] com.jwy.scd.ServiceSystemApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-09-21T12:03:31.259+08:00  INFO 28840 --- [service-system] [main] c.a.c.n.c.NacosConfigDataLoader          : [Nacos Config] Load config[dataId=service-system.yaml, group=DEFAULT_GROUP] success
+2026-09-21T12:03:32.300+08:00  INFO 28840 --- [service-system] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=755f950e-9099-3122-90f3-627e94d68117
+2026-09-21T12:03:32.787+08:00  INFO 28840 --- [service-system] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-09-21T12:03:32.813+08:00  INFO 28840 --- [service-system] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-21T12:03:32.814+08:00  INFO 28840 --- [service-system] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-21T12:03:32.860+08:00  INFO 28840 --- [service-system] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1598 ms
+2026-09-21T12:03:34.192+08:00  INFO 28840 --- [service-system] [main] m.e.s.MybatisPlusApplicationContextAware : Register ApplicationContext instances org.springframework.boot.web.server.servlet.context.AnnotationConfigServletWebServerApplicationContext@7b66322e
+2026-09-21T12:03:34.444+08:00  INFO 28840 --- [service-system] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2026-09-21T12:03:34.455+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.client.naming          : Nacos client key init properties: 
+	serverAddr=rxs:8848
+	username=nacos
+	password=1****6
+
+2026-09-21T12:03:34.457+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.client.naming          : initializer namespace from ans.namespace attribute : null
+2026-09-21T12:03:34.457+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.client.naming          : initializer namespace from ALIBABA_ALIWARE_NAMESPACE attribute :null
+2026-09-21T12:03:34.458+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.client.naming          : initializer namespace from namespace attribute :null
+2026-09-21T12:03:34.472+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.client.naming          : FailoverDataSource type is class com.alibaba.nacos.client.naming.backups.datasource.DiskFailoverDataSource
+2026-09-21T12:03:34.478+08:00  INFO 28840 --- [service-system] [main] c.a.n.c.a.AbstractServerListManager      : Load and match ServerListProvider com.alibaba.nacos.client.address.EndpointServerListProvider, match result: false
+2026-09-21T12:03:34.480+08:00  INFO 28840 --- [service-system] [main] c.a.n.c.a.AbstractServerListManager      : Load and match ServerListProvider com.alibaba.nacos.client.address.PropertiesListProvider, match result: true
+2026-09-21T12:03:34.480+08:00  INFO 28840 --- [service-system] [main] c.a.n.c.a.AbstractServerListManager      : Will use com.alibaba.nacos.client.address.PropertiesListProvider as ServerListProvider
+2026-09-21T12:03:34.482+08:00  INFO 28840 --- [service-system] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2026-09-21T12:03:34.483+08:00  INFO 28840 --- [service-system] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2026-09-21T12:03:34.565+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [RpcClientFactory] create a new rpc client of 85db6233-766f-405d-8df1-5a3b49f43195
+2026-09-21T12:03:34.568+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.client.naming          : Create naming rpc client for uuid->85db6233-766f-405d-8df1-5a3b49f43195
+2026-09-21T12:03:34.569+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [85db6233-766f-405d-8df1-5a3b49f43195] RpcClient init, ServerListFactory = com.alibaba.nacos.client.naming.core.NamingServerListManager
+2026-09-21T12:03:34.569+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [85db6233-766f-405d-8df1-5a3b49f43195] Registry connection listener to current client:com.alibaba.nacos.client.naming.remote.gprc.redo.NamingGrpcRedoService
+2026-09-21T12:03:34.571+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [85db6233-766f-405d-8df1-5a3b49f43195] Register server push request handler:com.alibaba.nacos.client.naming.remote.gprc.NamingPushRequestHandler
+2026-09-21T12:03:34.574+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [85db6233-766f-405d-8df1-5a3b49f43195] Register server push request handler:com.alibaba.nacos.client.naming.remote.gprc.NamingFuzzyWatchNotifyRequestHandler
+2026-09-21T12:03:34.576+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [85db6233-766f-405d-8df1-5a3b49f43195] Try to connect to server on start up, server: {serverIp = 'rxs', server main port = 8848}
+2026-09-21T12:03:34.577+08:00  INFO 28840 --- [service-system] [main] c.a.n.c.remote.client.grpc.GrpcClient    : grpc client connection server: rxs ip, serverPort: 9848, grpcTslConfig: {"enableTls":false,"mutualAuthEnable":false,"trustAll":true}
+2026-09-21T12:03:34.662+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [85db6233-766f-405d-8df1-5a3b49f43195] Success to connect to server [rxs:8848] on start up, connectionId = 1789963414032_172.17.0.1_44030
+2026-09-21T12:03:34.662+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [85db6233-766f-405d-8df1-5a3b49f43195] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$ConnectResetRequestHandler
+2026-09-21T12:03:34.662+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [85db6233-766f-405d-8df1-5a3b49f43195] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$$Lambda/0x000001abd1431b60
+2026-09-21T12:03:34.662+08:00  INFO 28840 --- [service-system] [com.alibaba.nacos.client.remote.worker.1] com.alibaba.nacos.common.remote.client   : [85db6233-766f-405d-8df1-5a3b49f43195] Notify connected event to listeners.
+2026-09-21T12:03:34.663+08:00  INFO 28840 --- [service-system] [com.alibaba.nacos.client.remote.worker.1] com.alibaba.nacos.client.naming          : Grpc connection connect
+2026-09-21T12:03:34.666+08:00  INFO 28840 --- [service-system] [main] com.alibaba.nacos.client.naming          : [REGISTER-SERVICE] public registering service service-system with instance Instance{instanceId='null', ip='192.168.1.129', port=8081, weight=1.0, healthy=true, enabled=true, ephemeral=true, clusterName='', serviceName='null', metadata={IPv6=null, preserved.register.source=SPRING_CLOUD}}
+2026-09-21T12:03:34.688+08:00  INFO 28840 --- [service-system] [main] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP service-system 192.168.1.129:8081 register finished
+2026-09-21T12:03:34.702+08:00  INFO 28840 --- [service-system] [main] com.jwy.scd.ServiceSystemApplication     : Started ServiceSystemApplication in 5.296 seconds (process running for 5.789)
+2026-09-21T12:03:34.709+08:00  WARN 28840 --- [service-system] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-21T12:03:34.710+08:00  WARN 28840 --- [service-system] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-21T12:03:34.716+08:00  INFO 28840 --- [service-system] [main] c.a.nacos.client.config.impl.CacheData   : config listener notify warn timeout millis use default 60000 millis 
+2026-09-21T12:03:34.719+08:00  INFO 28840 --- [service-system] [main] c.a.nacos.client.config.impl.CacheData   : nacos.cache.data.init.snapshot = true 
+2026-09-21T12:03:34.730+08:00  INFO 28840 --- [service-system] [main] c.a.n.client.config.impl.ClientWorker    : [Config-fixed-public-rxs_8848] [subscribe] service-system.yaml+DEFAULT_GROUP+public
+2026-09-21T12:03:34.744+08:00  INFO 28840 --- [service-system] [main] c.a.nacos.client.config.impl.CacheData   : [Config-fixed-public-rxs_8848] [add-listener] ok, tenant=public, dataId=service-system.yaml, group=DEFAULT_GROUP, cnt=1
+2026-09-21T12:03:34.744+08:00  INFO 28840 --- [service-system] [main] c.a.c.n.refresh.NacosContextRefresher    : [Nacos Config] Listening config: dataId=service-system.yaml, group=DEFAULT_GROUP
+2026-09-21T12:06:23.306+08:00  INFO 28840 --- [service-system] [http-nio-8081-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-21T12:06:23.307+08:00  INFO 28840 --- [service-system] [http-nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-21T12:06:23.309+08:00  INFO 28840 --- [service-system] [http-nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-09-21T12:06:23.398+08:00  INFO 28840 --- [service-system] [http-nio-8081-exec-3] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-21T12:06:23.564+08:00  INFO 28840 --- [service-system] [http-nio-8081-exec-3] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@bf1c4e4
+2026-09-21T12:06:23.565+08:00  INFO 28840 --- [service-system] [http-nio-8081-exec-3] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+
+
+===== start service-system @ 2026-09-21 12:09:26 =====2026-09-21T12:09:29.518+08:00  INFO 19000 --- [service-system] [main] com.jwy.scd.ServiceSystemApplication     : Starting ServiceSystemApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 19000 (E:\Data\projects\springcloud-demo\service-system\target\service-system-0.0.1-SNAPSHOT.jar started by jiang in c:\windows\system32\driverstore\filerepository\ntprint.inf_amd64_7ec90cac1a11fca1\amd64)
+2026-09-21T12:09:29.519+08:00  INFO 19000 --- [service-system] [main] com.jwy.scd.ServiceSystemApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-09-21T12:09:29.603+08:00  INFO 19000 --- [service-system] [main] c.a.c.n.c.NacosConfigDataLoader          : [Nacos Config] Load config[dataId=service-system.yaml, group=DEFAULT_GROUP] success
+2026-09-21T12:09:30.715+08:00  INFO 19000 --- [service-system] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=755f950e-9099-3122-90f3-627e94d68117
+2026-09-21T12:09:31.219+08:00  INFO 19000 --- [service-system] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-09-21T12:09:31.246+08:00  INFO 19000 --- [service-system] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-21T12:09:31.247+08:00  INFO 19000 --- [service-system] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-21T12:09:31.288+08:00  INFO 19000 --- [service-system] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1681 ms
+2026-09-21T12:09:33.022+08:00  INFO 19000 --- [service-system] [main] m.e.s.MybatisPlusApplicationContextAware : Register ApplicationContext instances org.springframework.boot.web.server.servlet.context.AnnotationConfigServletWebServerApplicationContext@43a09ce2
+2026-09-21T12:09:33.334+08:00  INFO 19000 --- [service-system] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2026-09-21T12:09:33.346+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.client.naming          : Nacos client key init properties: 
+	serverAddr=rxs:8848
+	username=nacos
+	password=1****6
+
+2026-09-21T12:09:33.348+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.client.naming          : initializer namespace from ans.namespace attribute : null
+2026-09-21T12:09:33.350+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.client.naming          : initializer namespace from ALIBABA_ALIWARE_NAMESPACE attribute :null
+2026-09-21T12:09:33.351+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.client.naming          : initializer namespace from namespace attribute :null
+2026-09-21T12:09:33.368+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.client.naming          : FailoverDataSource type is class com.alibaba.nacos.client.naming.backups.datasource.DiskFailoverDataSource
+2026-09-21T12:09:33.375+08:00  INFO 19000 --- [service-system] [main] c.a.n.c.a.AbstractServerListManager      : Load and match ServerListProvider com.alibaba.nacos.client.address.EndpointServerListProvider, match result: false
+2026-09-21T12:09:33.376+08:00  INFO 19000 --- [service-system] [main] c.a.n.c.a.AbstractServerListManager      : Load and match ServerListProvider com.alibaba.nacos.client.address.PropertiesListProvider, match result: true
+2026-09-21T12:09:33.376+08:00  INFO 19000 --- [service-system] [main] c.a.n.c.a.AbstractServerListManager      : Will use com.alibaba.nacos.client.address.PropertiesListProvider as ServerListProvider
+2026-09-21T12:09:33.378+08:00  INFO 19000 --- [service-system] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2026-09-21T12:09:33.378+08:00  INFO 19000 --- [service-system] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2026-09-21T12:09:33.478+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [RpcClientFactory] create a new rpc client of 3b8f78ab-d3a1-4e12-9fab-29624c745078
+2026-09-21T12:09:33.480+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.client.naming          : Create naming rpc client for uuid->3b8f78ab-d3a1-4e12-9fab-29624c745078
+2026-09-21T12:09:33.481+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [3b8f78ab-d3a1-4e12-9fab-29624c745078] RpcClient init, ServerListFactory = com.alibaba.nacos.client.naming.core.NamingServerListManager
+2026-09-21T12:09:33.481+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [3b8f78ab-d3a1-4e12-9fab-29624c745078] Registry connection listener to current client:com.alibaba.nacos.client.naming.remote.gprc.redo.NamingGrpcRedoService
+2026-09-21T12:09:33.481+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [3b8f78ab-d3a1-4e12-9fab-29624c745078] Register server push request handler:com.alibaba.nacos.client.naming.remote.gprc.NamingPushRequestHandler
+2026-09-21T12:09:33.481+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [3b8f78ab-d3a1-4e12-9fab-29624c745078] Register server push request handler:com.alibaba.nacos.client.naming.remote.gprc.NamingFuzzyWatchNotifyRequestHandler
+2026-09-21T12:09:33.482+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [3b8f78ab-d3a1-4e12-9fab-29624c745078] Try to connect to server on start up, server: {serverIp = 'rxs', server main port = 8848}
+2026-09-21T12:09:33.482+08:00  INFO 19000 --- [service-system] [main] c.a.n.c.remote.client.grpc.GrpcClient    : grpc client connection server: rxs ip, serverPort: 9848, grpcTslConfig: {"enableTls":false,"mutualAuthEnable":false,"trustAll":true}
+2026-09-21T12:09:33.502+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [3b8f78ab-d3a1-4e12-9fab-29624c745078] Success to connect to server [rxs:8848] on start up, connectionId = 1789963772886_172.17.0.1_47868
+2026-09-21T12:09:33.502+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [3b8f78ab-d3a1-4e12-9fab-29624c745078] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$ConnectResetRequestHandler
+2026-09-21T12:09:33.502+08:00  INFO 19000 --- [service-system] [com.alibaba.nacos.client.remote.worker.0] com.alibaba.nacos.common.remote.client   : [3b8f78ab-d3a1-4e12-9fab-29624c745078] Notify connected event to listeners.
+2026-09-21T12:09:33.503+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [3b8f78ab-d3a1-4e12-9fab-29624c745078] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$$Lambda/0x0000014fcb431660
+2026-09-21T12:09:33.503+08:00  INFO 19000 --- [service-system] [com.alibaba.nacos.client.remote.worker.0] com.alibaba.nacos.client.naming          : Grpc connection connect
+2026-09-21T12:09:33.505+08:00  INFO 19000 --- [service-system] [main] com.alibaba.nacos.client.naming          : [REGISTER-SERVICE] public registering service service-system with instance Instance{instanceId='null', ip='192.168.1.129', port=8081, weight=1.0, healthy=true, enabled=true, ephemeral=true, clusterName='', serviceName='null', metadata={IPv6=null, preserved.register.source=SPRING_CLOUD}}
+2026-09-21T12:09:33.521+08:00  INFO 19000 --- [service-system] [main] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP service-system 192.168.1.129:8081 register finished
+2026-09-21T12:09:33.538+08:00  INFO 19000 --- [service-system] [main] com.jwy.scd.ServiceSystemApplication     : Started ServiceSystemApplication in 5.812 seconds (process running for 6.31)
+2026-09-21T12:09:33.542+08:00  WARN 19000 --- [service-system] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-21T12:09:33.542+08:00  WARN 19000 --- [service-system] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-21T12:09:33.545+08:00  INFO 19000 --- [service-system] [main] c.a.nacos.client.config.impl.CacheData   : config listener notify warn timeout millis use default 60000 millis 
+2026-09-21T12:09:33.547+08:00  INFO 19000 --- [service-system] [main] c.a.nacos.client.config.impl.CacheData   : nacos.cache.data.init.snapshot = true 
+2026-09-21T12:09:33.549+08:00  INFO 19000 --- [service-system] [main] c.a.n.client.config.impl.ClientWorker    : [Config-fixed-public-rxs_8848] [subscribe] service-system.yaml+DEFAULT_GROUP+public
+2026-09-21T12:09:33.559+08:00  INFO 19000 --- [service-system] [main] c.a.nacos.client.config.impl.CacheData   : [Config-fixed-public-rxs_8848] [add-listener] ok, tenant=public, dataId=service-system.yaml, group=DEFAULT_GROUP, cnt=1
+2026-09-21T12:09:33.560+08:00  INFO 19000 --- [service-system] [main] c.a.c.n.refresh.NacosContextRefresher    : [Nacos Config] Listening config: dataId=service-system.yaml, group=DEFAULT_GROUP
+2026-09-21T12:10:35.989+08:00  INFO 19000 --- [service-system] [http-nio-8081-exec-7] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-21T12:10:35.989+08:00  INFO 19000 --- [service-system] [http-nio-8081-exec-7] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-21T12:10:35.991+08:00  INFO 19000 --- [service-system] [http-nio-8081-exec-7] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-09-21T12:10:36.092+08:00  INFO 19000 --- [service-system] [http-nio-8081-exec-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-21T12:10:36.222+08:00  INFO 19000 --- [service-system] [http-nio-8081-exec-7] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@70606f5c
+2026-09-21T12:10:36.223+08:00  INFO 19000 --- [service-system] [http-nio-8081-exec-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+
+
+===== start service-system @ 2026-09-21 12:49:51 =====2026-09-21T12:49:54.585+08:00  INFO 20640 --- [service-system] [main] com.jwy.scd.ServiceSystemApplication     : Starting ServiceSystemApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 20640 (E:\Data\projects\springcloud-demo\service-system\target\service-system-0.0.1-SNAPSHOT.jar started by jiang in c:\windows\system32\driverstore\filerepository\ntprint.inf_amd64_7ec90cac1a11fca1\amd64)
+2026-09-21T12:49:54.586+08:00  INFO 20640 --- [service-system] [main] com.jwy.scd.ServiceSystemApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-09-21T12:49:54.645+08:00  INFO 20640 --- [service-system] [main] c.a.c.n.c.NacosConfigDataLoader          : [Nacos Config] Load config[dataId=service-system.yaml, group=DEFAULT_GROUP] success
+2026-09-21T12:49:55.395+08:00  INFO 20640 --- [service-system] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=755f950e-9099-3122-90f3-627e94d68117
+2026-09-21T12:49:55.716+08:00  INFO 20640 --- [service-system] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-09-21T12:49:55.736+08:00  INFO 20640 --- [service-system] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-21T12:49:55.736+08:00  INFO 20640 --- [service-system] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-21T12:49:55.770+08:00  INFO 20640 --- [service-system] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1123 ms
+2026-09-21T12:49:56.670+08:00  INFO 20640 --- [service-system] [main] m.e.s.MybatisPlusApplicationContextAware : Register ApplicationContext instances org.springframework.boot.web.server.servlet.context.AnnotationConfigServletWebServerApplicationContext@43a09ce2
+2026-09-21T12:49:56.833+08:00  INFO 20640 --- [service-system] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2026-09-21T12:49:56.839+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.client.naming          : Nacos client key init properties: 
+	serverAddr=rxs:8848
+	username=nacos
+	password=1****6
+
+2026-09-21T12:49:56.839+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.client.naming          : initializer namespace from ans.namespace attribute : null
+2026-09-21T12:49:56.840+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.client.naming          : initializer namespace from ALIBABA_ALIWARE_NAMESPACE attribute :null
+2026-09-21T12:49:56.840+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.client.naming          : initializer namespace from namespace attribute :null
+2026-09-21T12:49:56.847+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.client.naming          : FailoverDataSource type is class com.alibaba.nacos.client.naming.backups.datasource.DiskFailoverDataSource
+2026-09-21T12:49:56.852+08:00  INFO 20640 --- [service-system] [main] c.a.n.c.a.AbstractServerListManager      : Load and match ServerListProvider com.alibaba.nacos.client.address.EndpointServerListProvider, match result: false
+2026-09-21T12:49:56.853+08:00  INFO 20640 --- [service-system] [main] c.a.n.c.a.AbstractServerListManager      : Load and match ServerListProvider com.alibaba.nacos.client.address.PropertiesListProvider, match result: true
+2026-09-21T12:49:56.853+08:00  INFO 20640 --- [service-system] [main] c.a.n.c.a.AbstractServerListManager      : Will use com.alibaba.nacos.client.address.PropertiesListProvider as ServerListProvider
+2026-09-21T12:49:56.854+08:00  INFO 20640 --- [service-system] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2026-09-21T12:49:56.854+08:00  INFO 20640 --- [service-system] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2026-09-21T12:49:56.948+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [RpcClientFactory] create a new rpc client of f4bb15f2-0e43-4e53-bd7b-067bff6956e7
+2026-09-21T12:49:56.950+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.client.naming          : Create naming rpc client for uuid->f4bb15f2-0e43-4e53-bd7b-067bff6956e7
+2026-09-21T12:49:56.950+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [f4bb15f2-0e43-4e53-bd7b-067bff6956e7] RpcClient init, ServerListFactory = com.alibaba.nacos.client.naming.core.NamingServerListManager
+2026-09-21T12:49:56.950+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [f4bb15f2-0e43-4e53-bd7b-067bff6956e7] Registry connection listener to current client:com.alibaba.nacos.client.naming.remote.gprc.redo.NamingGrpcRedoService
+2026-09-21T12:49:56.951+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [f4bb15f2-0e43-4e53-bd7b-067bff6956e7] Register server push request handler:com.alibaba.nacos.client.naming.remote.gprc.NamingPushRequestHandler
+2026-09-21T12:49:56.951+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [f4bb15f2-0e43-4e53-bd7b-067bff6956e7] Register server push request handler:com.alibaba.nacos.client.naming.remote.gprc.NamingFuzzyWatchNotifyRequestHandler
+2026-09-21T12:49:56.952+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [f4bb15f2-0e43-4e53-bd7b-067bff6956e7] Try to connect to server on start up, server: {serverIp = 'rxs', server main port = 8848}
+2026-09-21T12:49:56.952+08:00  INFO 20640 --- [service-system] [main] c.a.n.c.remote.client.grpc.GrpcClient    : grpc client connection server: rxs ip, serverPort: 9848, grpcTslConfig: {"enableTls":false,"mutualAuthEnable":false,"trustAll":true}
+2026-09-21T12:49:56.969+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [f4bb15f2-0e43-4e53-bd7b-067bff6956e7] Success to connect to server [rxs:8848] on start up, connectionId = 1789966196317_172.17.0.1_39612
+2026-09-21T12:49:56.969+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [f4bb15f2-0e43-4e53-bd7b-067bff6956e7] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$ConnectResetRequestHandler
+2026-09-21T12:49:56.969+08:00  INFO 20640 --- [service-system] [com.alibaba.nacos.client.remote.worker.0] com.alibaba.nacos.common.remote.client   : [f4bb15f2-0e43-4e53-bd7b-067bff6956e7] Notify connected event to listeners.
+2026-09-21T12:49:56.969+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.common.remote.client   : [f4bb15f2-0e43-4e53-bd7b-067bff6956e7] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$$Lambda/0x000001fb88431d58
+2026-09-21T12:49:56.969+08:00  INFO 20640 --- [service-system] [com.alibaba.nacos.client.remote.worker.0] com.alibaba.nacos.client.naming          : Grpc connection connect
+2026-09-21T12:49:56.970+08:00  INFO 20640 --- [service-system] [main] com.alibaba.nacos.client.naming          : [REGISTER-SERVICE] public registering service service-system with instance Instance{instanceId='null', ip='192.168.1.129', port=8081, weight=1.0, healthy=true, enabled=true, ephemeral=true, clusterName='', serviceName='null', metadata={IPv6=null, preserved.register.source=SPRING_CLOUD}}
+2026-09-21T12:49:56.982+08:00  INFO 20640 --- [service-system] [main] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP service-system 192.168.1.129:8081 register finished
+2026-09-21T12:49:56.992+08:00  INFO 20640 --- [service-system] [main] com.jwy.scd.ServiceSystemApplication     : Started ServiceSystemApplication in 4.04 seconds (process running for 4.702)
+2026-09-21T12:49:56.995+08:00  WARN 20640 --- [service-system] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-21T12:49:56.996+08:00  WARN 20640 --- [service-system] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-21T12:49:56.999+08:00  INFO 20640 --- [service-system] [main] c.a.nacos.client.config.impl.CacheData   : config listener notify warn timeout millis use default 60000 millis 
+2026-09-21T12:49:57.000+08:00  INFO 20640 --- [service-system] [main] c.a.nacos.client.config.impl.CacheData   : nacos.cache.data.init.snapshot = true 
+2026-09-21T12:49:57.002+08:00  INFO 20640 --- [service-system] [main] c.a.n.client.config.impl.ClientWorker    : [Config-fixed-public-rxs_8848] [subscribe] service-system.yaml+DEFAULT_GROUP+public
+2026-09-21T12:49:57.010+08:00  INFO 20640 --- [service-system] [main] c.a.nacos.client.config.impl.CacheData   : [Config-fixed-public-rxs_8848] [add-listener] ok, tenant=public, dataId=service-system.yaml, group=DEFAULT_GROUP, cnt=1
+2026-09-21T12:49:57.011+08:00  INFO 20640 --- [service-system] [main] c.a.c.n.refresh.NacosContextRefresher    : [Nacos Config] Listening config: dataId=service-system.yaml, group=DEFAULT_GROUP
+2026-09-21T12:50:21.598+08:00  INFO 20640 --- [service-system] [http-nio-8081-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-21T12:50:21.598+08:00  INFO 20640 --- [service-system] [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-21T12:50:21.599+08:00  INFO 20640 --- [service-system] [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-09-21T12:50:21.764+08:00  INFO 20640 --- [service-system] [http-nio-8081-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-21T12:50:21.944+08:00  INFO 20640 --- [service-system] [http-nio-8081-exec-2] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@d7c1686
+2026-09-21T12:50:21.945+08:00  INFO 20640 --- [service-system] [http-nio-8081-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.

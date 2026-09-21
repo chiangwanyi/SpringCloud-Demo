@@ -31,6 +31,9 @@
 		<module>service-auth-api</module>
 		<module>service-order</module>
 		<module>service-order-api</module>
+		<!-- 分布式发号（Leaf-segment 号段模式） -->
+		<module>service-id-gen</module>
+		<module>service-id-gen-api</module>
 		<module>service-gateway</module>
 	</modules>
 

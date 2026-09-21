@@ -1,6 +1,7 @@
 package com.jwy.scd;
 
 import com.jwy.scd.api.SysUserApi;
+import com.jwy.scd.api.idgen.IdGenApi;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -33,8 +34,12 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  *
  * 同理，被调用方 service-system 也绝不能用宽范围的 @EnableFeignClients，
  * 否则它会为 SysUserApi 生成代理，与自己实现该接口的 SysUserController 撞车。
+ *
+ * 本服务还要向 service-id-gen 领号段（Leaf-segment 号段模式），所以精确列表里再加上 IdGenApi。
+ * 反过来，service-id-gen 作为 provider 则【不能】加 @EnableFeignClients ——
+ * 否则它会为自己的 IdGenApi 生成代理，与 IdGenController 撞车。
  */
-@EnableFeignClients(clients = SysUserApi.class)
+@EnableFeignClients(clients = {SysUserApi.class, IdGenApi.class})
 @OpenAPIDefinition(
         info = @Info(
                 title = "订单服务 API",

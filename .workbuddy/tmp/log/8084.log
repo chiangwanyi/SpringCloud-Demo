@@ -1,0 +1,420 @@
+
+
+===== start service-id-gen @ 2026-09-21 12:02:20 =====2026-09-21T12:02:22.001+08:00  INFO 32204 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : Starting ServiceIdGenApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 32204 (E:\Data\projects\springcloud-demo\service-id-gen\target\service-id-gen-0.0.1-SNAPSHOT.jar started by jiang in c:\windows\system32\driverstore\filerepository\ntprint.inf_amd64_7ec90cac1a11fca1\amd64)
+2026-09-21T12:02:22.006+08:00  INFO 32204 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : No active profile set, falling back to 1 default profile: "default"
+2026-09-21T12:02:23.030+08:00  INFO 32204 --- [service-id-gen] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=4b115470-e102-3e16-a08a-7cafcd631966
+2026-09-21T12:02:23.421+08:00  INFO 32204 --- [service-id-gen] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8084 (http)
+2026-09-21T12:02:23.437+08:00  INFO 32204 --- [service-id-gen] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-21T12:02:23.438+08:00  INFO 32204 --- [service-id-gen] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-21T12:02:23.465+08:00  INFO 32204 --- [service-id-gen] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1401 ms
+2026-09-21T12:02:24.251+08:00  INFO 32204 --- [service-id-gen] [main] m.e.s.MybatisPlusApplicationContextAware : Register ApplicationContext instances org.springframework.boot.web.server.servlet.context.AnnotationConfigServletWebServerApplicationContext@293d0107
+2026-09-21T12:02:24.466+08:00  INFO 32204 --- [service-id-gen] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8084 (http) with context path '/'
+2026-09-21T12:02:24.480+08:00  INFO 32204 --- [service-id-gen] [Thread-3] c.a.n.c.a.r.identify.CredentialWatcher   : null No credential found
+2026-09-21T12:02:24.484+08:00  INFO 32204 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapterBuilder
+2026-09-21T12:02:24.487+08:00  INFO 32204 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapter match ch.qos.logback.classic.Logger success.
+2026-09-21T12:02:24.488+08:00  INFO 32204 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.log4j2.Log4j2NacosLoggingAdapterBuilder
+2026-09-21T12:02:24.662+08:00  INFO 32204 --- [service-id-gen] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2026-09-21T12:02:24.662+08:00  INFO 32204 --- [service-id-gen] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2026-09-21T12:02:25.611+08:00  INFO 32204 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to get current node abilities...
+2026-09-21T12:02:25.613+08:00  INFO 32204 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to initialize current node abilities, support modes: [SDK_CLIENT]
+2026-09-21T12:02:25.615+08:00  INFO 32204 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Initialize current abilities finish...
+2026-09-21T12:02:25.615+08:00  INFO 32204 --- [service-id-gen] [main] c.a.n.c.a.d.NacosAbilityManagerHolder    : [AbilityControlManager] Successfully initialize AbilityControlManager
+2026-09-21T12:02:25.667+08:00  INFO 32204 --- [service-id-gen] [main] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP service-id-gen 192.168.1.129:8084 register finished
+2026-09-21T12:02:25.683+08:00  INFO 32204 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : Started ServiceIdGenApplication in 4.228 seconds (process running for 4.734)
+2026-09-21T12:02:25.707+08:00  INFO 32204 --- [service-id-gen] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-21T12:02:26.129+08:00  INFO 32204 --- [service-id-gen] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31c56721
+2026-09-21T12:02:26.132+08:00  INFO 32204 --- [service-id-gen] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-09-21T12:02:26.253+08:00  INFO 32204 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 初始化服务端号段缓冲：bizTag=order, 首段=[1, 2000] 剩余 2000/2000
+2026-09-21T12:02:26.257+08:00  INFO 32204 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 预热完成：bizTag=order, SegmentBuffer{bizTag=order, current=[1, 2000] 剩余 2000/2000, next=null, issued=0}
+2026-09-21T12:02:26.259+08:00  INFO 32204 --- [service-id-gen] [main] c.j.scd.idgen.support.IdGenWarmUpRunner  : [id-gen] 启动预热结束，耗时 571 ms
+2026-09-21T12:02:26.261+08:00  WARN 32204 --- [service-id-gen] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-21T12:02:26.261+08:00  WARN 32204 --- [service-id-gen] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-21T12:02:48.636+08:00  INFO 32204 --- [service-id-gen] [http-nio-8084-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-21T12:02:48.636+08:00  INFO 32204 --- [service-id-gen] [http-nio-8084-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-21T12:02:48.637+08:00  INFO 32204 --- [service-id-gen] [http-nio-8084-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2026-09-21T12:02:56.125+08:00 ERROR 32204 --- [service-id-gen] [http-nio-8084-exec-15] c.j.s.i.e.GlobalExceptionHandler         : [id-gen] 号段不可用，拒绝服务：bizTag 未初始化，请先在 leaf_alloc 中插入种子行：bizTag=__not_configured__
+
+com.jwy.scd.api.idgen.support.SegmentUnavailableException: bizTag 未初始化，请先在 leaf_alloc 中插入种子行：bizTag=__not_configured__
+	at com.jwy.scd.idgen.service.LeafAllocator.nextSegment(LeafAllocator.java:91) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.9.jar!/:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.9.jar!/:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at com.jwy.scd.idgen.service.LeafAllocator$$SpringCGLIB$$0.nextSegment(<generated>) ~[!/:0.0.1-SNAPSHOT]
+	at com.jwy.scd.idgen.service.SegmentIdGen.bufferOf(SegmentIdGen.java:99) ~[!/:0.0.1-SNAPSHOT]
+	at com.jwy.scd.idgen.service.SegmentIdGen.nextId(SegmentIdGen.java:72) ~[!/:0.0.1-SNAPSHOT]
+	at com.jwy.scd.idgen.controller.IdGenController.nextId(IdGenController.java:40) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:132) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:59) ~[tomcat-embed-websocket-11.0.24.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:347) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:406) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2036) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:949) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:483) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:74) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-09-21T12:02:56.154+08:00 ERROR 32204 --- [service-id-gen] [http-nio-8084-exec-8] c.j.s.i.e.GlobalExceptionHandler         : [id-gen] 号段不可用，拒绝服务：bizTag 未初始化，请先在 leaf_alloc 中插入种子行：bizTag=__not_configured__
+
+com.jwy.scd.api.idgen.support.SegmentUnavailableException: bizTag 未初始化，请先在 leaf_alloc 中插入种子行：bizTag=__not_configured__
+	at com.jwy.scd.idgen.service.LeafAllocator.nextSegment(LeafAllocator.java:91) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.9.jar!/:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.9.jar!/:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at com.jwy.scd.idgen.service.LeafAllocator$$SpringCGLIB$$0.nextSegment(<generated>) ~[!/:0.0.1-SNAPSHOT]
+	at com.jwy.scd.idgen.service.SegmentIdGen.fetchSegment(SegmentIdGen.java:79) ~[!/:0.0.1-SNAPSHOT]
+	at com.jwy.scd.idgen.controller.IdGenController.getSegment(IdGenController.java:34) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:132) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:59) ~[tomcat-embed-websocket-11.0.24.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:347) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:406) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2036) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:949) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:483) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:74) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+
+
+===== start service-id-gen @ 2026-09-21 12:07:30 =====2026-09-21T12:07:32.402+08:00  INFO 39456 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : Starting ServiceIdGenApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 39456 (E:\Data\projects\springcloud-demo\service-id-gen\target\service-id-gen-0.0.1-SNAPSHOT.jar started by jiang in c:\windows\system32\driverstore\filerepository\ntprint.inf_amd64_7ec90cac1a11fca1\amd64)
+2026-09-21T12:07:32.406+08:00  INFO 39456 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : No active profile set, falling back to 1 default profile: "default"
+2026-09-21T12:07:33.424+08:00  INFO 39456 --- [service-id-gen] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=4b115470-e102-3e16-a08a-7cafcd631966
+2026-09-21T12:07:33.843+08:00  INFO 39456 --- [service-id-gen] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8084 (http)
+2026-09-21T12:07:33.862+08:00  INFO 39456 --- [service-id-gen] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-21T12:07:33.863+08:00  INFO 39456 --- [service-id-gen] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-21T12:07:33.892+08:00  INFO 39456 --- [service-id-gen] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1430 ms
+2026-09-21T12:07:34.671+08:00  INFO 39456 --- [service-id-gen] [main] m.e.s.MybatisPlusApplicationContextAware : Register ApplicationContext instances org.springframework.boot.web.server.servlet.context.AnnotationConfigServletWebServerApplicationContext@293d0107
+2026-09-21T12:07:34.915+08:00  INFO 39456 --- [service-id-gen] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8084 (http) with context path '/'
+2026-09-21T12:07:34.933+08:00  INFO 39456 --- [service-id-gen] [Thread-3] c.a.n.c.a.r.identify.CredentialWatcher   : null No credential found
+2026-09-21T12:07:34.937+08:00  INFO 39456 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapterBuilder
+2026-09-21T12:07:34.938+08:00  INFO 39456 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapter match ch.qos.logback.classic.Logger success.
+2026-09-21T12:07:34.939+08:00  INFO 39456 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.log4j2.Log4j2NacosLoggingAdapterBuilder
+2026-09-21T12:07:35.109+08:00  INFO 39456 --- [service-id-gen] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2026-09-21T12:07:35.109+08:00  INFO 39456 --- [service-id-gen] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2026-09-21T12:07:35.952+08:00  INFO 39456 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to get current node abilities...
+2026-09-21T12:07:35.954+08:00  INFO 39456 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to initialize current node abilities, support modes: [SDK_CLIENT]
+2026-09-21T12:07:35.955+08:00  INFO 39456 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Initialize current abilities finish...
+2026-09-21T12:07:35.956+08:00  INFO 39456 --- [service-id-gen] [main] c.a.n.c.a.d.NacosAbilityManagerHolder    : [AbilityControlManager] Successfully initialize AbilityControlManager
+2026-09-21T12:07:36.010+08:00  INFO 39456 --- [service-id-gen] [main] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP service-id-gen 192.168.1.129:8084 register finished
+2026-09-21T12:07:36.025+08:00  INFO 39456 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : Started ServiceIdGenApplication in 4.139 seconds (process running for 4.623)
+2026-09-21T12:07:36.047+08:00  INFO 39456 --- [service-id-gen] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-21T12:07:36.249+08:00  INFO 39456 --- [service-id-gen] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7a85dc58
+2026-09-21T12:07:36.252+08:00  INFO 39456 --- [service-id-gen] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-09-21T12:07:36.349+08:00  INFO 39456 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 初始化服务端号段缓冲：bizTag=order, 首段=[104001, 106000] 剩余 2000/2000
+2026-09-21T12:07:36.354+08:00  INFO 39456 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 预热完成：bizTag=order, SegmentBuffer{bizTag=order, current=[104001, 106000] 剩余 2000/2000, next=null, issued=0}
+2026-09-21T12:07:36.356+08:00  INFO 39456 --- [service-id-gen] [main] c.j.scd.idgen.support.IdGenWarmUpRunner  : [id-gen] 启动预热结束，耗时 327 ms
+2026-09-21T12:07:36.357+08:00  WARN 39456 --- [service-id-gen] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-21T12:07:36.358+08:00  WARN 39456 --- [service-id-gen] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-21T12:07:39.848+08:00  INFO 39456 --- [service-id-gen] [http-nio-8084-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-21T12:07:39.849+08:00  INFO 39456 --- [service-id-gen] [http-nio-8084-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-21T12:07:39.850+08:00  INFO 39456 --- [service-id-gen] [http-nio-8084-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+
+
+===== start service-id-gen @ 2026-09-21 12:09:36 =====2026-09-21T12:09:39.218+08:00  INFO 4744 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : Starting ServiceIdGenApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 4744 (E:\Data\projects\springcloud-demo\service-id-gen\target\service-id-gen-0.0.1-SNAPSHOT.jar started by jiang in c:\windows\system32\driverstore\filerepository\ntprint.inf_amd64_7ec90cac1a11fca1\amd64)
+2026-09-21T12:09:39.232+08:00  INFO 4744 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : No active profile set, falling back to 1 default profile: "default"
+2026-09-21T12:09:41.247+08:00  INFO 4744 --- [service-id-gen] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=4b115470-e102-3e16-a08a-7cafcd631966
+2026-09-21T12:09:41.831+08:00  INFO 4744 --- [service-id-gen] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8084 (http)
+2026-09-21T12:09:41.851+08:00  INFO 4744 --- [service-id-gen] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-21T12:09:41.851+08:00  INFO 4744 --- [service-id-gen] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-21T12:09:41.881+08:00  INFO 4744 --- [service-id-gen] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2525 ms
+2026-09-21T12:09:42.846+08:00  INFO 4744 --- [service-id-gen] [main] m.e.s.MybatisPlusApplicationContextAware : Register ApplicationContext instances org.springframework.boot.web.server.servlet.context.AnnotationConfigServletWebServerApplicationContext@293d0107
+2026-09-21T12:09:43.108+08:00  INFO 4744 --- [service-id-gen] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8084 (http) with context path '/'
+2026-09-21T12:09:43.125+08:00  INFO 4744 --- [service-id-gen] [Thread-3] c.a.n.c.a.r.identify.CredentialWatcher   : null No credential found
+2026-09-21T12:09:43.129+08:00  INFO 4744 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapterBuilder
+2026-09-21T12:09:43.131+08:00  INFO 4744 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapter match ch.qos.logback.classic.Logger success.
+2026-09-21T12:09:43.133+08:00  INFO 4744 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.log4j2.Log4j2NacosLoggingAdapterBuilder
+2026-09-21T12:09:43.341+08:00  INFO 4744 --- [service-id-gen] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2026-09-21T12:09:43.342+08:00  INFO 4744 --- [service-id-gen] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2026-09-21T12:09:44.128+08:00  INFO 4744 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to get current node abilities...
+2026-09-21T12:09:44.131+08:00  INFO 4744 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to initialize current node abilities, support modes: [SDK_CLIENT]
+2026-09-21T12:09:44.131+08:00  INFO 4744 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Initialize current abilities finish...
+2026-09-21T12:09:44.132+08:00  INFO 4744 --- [service-id-gen] [main] c.a.n.c.a.d.NacosAbilityManagerHolder    : [AbilityControlManager] Successfully initialize AbilityControlManager
+2026-09-21T12:09:44.185+08:00  INFO 4744 --- [service-id-gen] [main] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP service-id-gen 192.168.1.129:8084 register finished
+2026-09-21T12:09:44.199+08:00  INFO 4744 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : Started ServiceIdGenApplication in 5.993 seconds (process running for 6.941)
+2026-09-21T12:09:44.222+08:00  INFO 4744 --- [service-id-gen] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-21T12:09:44.436+08:00  INFO 4744 --- [service-id-gen] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1ab502f6
+2026-09-21T12:09:44.439+08:00  INFO 4744 --- [service-id-gen] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-09-21T12:09:44.534+08:00  INFO 4744 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 初始化服务端号段缓冲：bizTag=demo, 首段=[1, 2000] 剩余 2000/2000
+2026-09-21T12:09:44.539+08:00  INFO 4744 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 预热完成：bizTag=demo, SegmentBuffer{bizTag=demo, current=[1, 2000] 剩余 2000/2000, next=null, issued=0}
+2026-09-21T12:09:44.582+08:00  INFO 4744 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 初始化服务端号段缓冲：bizTag=order, 首段=[114001, 214000] 剩余 100000/100000
+2026-09-21T12:09:44.583+08:00  INFO 4744 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 预热完成：bizTag=order, SegmentBuffer{bizTag=order, current=[114001, 214000] 剩余 100000/100000, next=null, issued=0}
+2026-09-21T12:09:44.590+08:00  INFO 4744 --- [service-id-gen] [main] c.j.scd.idgen.support.IdGenWarmUpRunner  : [id-gen] 启动预热结束，耗时 386 ms
+2026-09-21T12:09:44.592+08:00  WARN 4744 --- [service-id-gen] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-21T12:09:44.592+08:00  WARN 4744 --- [service-id-gen] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-21T12:09:56.880+08:00  INFO 4744 --- [service-id-gen] [http-nio-8084-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-21T12:09:56.880+08:00  INFO 4744 --- [service-id-gen] [http-nio-8084-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-21T12:09:56.881+08:00  INFO 4744 --- [service-id-gen] [http-nio-8084-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-09-21T12:10:04.422+08:00 ERROR 4744 --- [service-id-gen] [http-nio-8084-exec-15] c.j.s.i.e.GlobalExceptionHandler         : [id-gen] 号段不可用，拒绝服务：bizTag 未初始化，请先在 leaf_alloc 中插入种子行：bizTag=__not_configured__
+
+com.jwy.scd.api.idgen.support.SegmentUnavailableException: bizTag 未初始化，请先在 leaf_alloc 中插入种子行：bizTag=__not_configured__
+	at com.jwy.scd.idgen.service.LeafAllocator.nextSegment(LeafAllocator.java:91) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.9.jar!/:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.9.jar!/:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at com.jwy.scd.idgen.service.LeafAllocator$$SpringCGLIB$$0.nextSegment(<generated>) ~[!/:0.0.1-SNAPSHOT]
+	at com.jwy.scd.idgen.service.SegmentIdGen.bufferOf(SegmentIdGen.java:99) ~[!/:0.0.1-SNAPSHOT]
+	at com.jwy.scd.idgen.service.SegmentIdGen.nextId(SegmentIdGen.java:72) ~[!/:0.0.1-SNAPSHOT]
+	at com.jwy.scd.idgen.controller.IdGenController.nextId(IdGenController.java:40) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:132) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:59) ~[tomcat-embed-websocket-11.0.24.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:347) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:406) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2036) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:949) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:483) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:74) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-09-21T12:10:04.438+08:00 ERROR 4744 --- [service-id-gen] [http-nio-8084-exec-3] c.j.s.i.e.GlobalExceptionHandler         : [id-gen] 号段不可用，拒绝服务：bizTag 未初始化，请先在 leaf_alloc 中插入种子行：bizTag=__not_configured__
+
+com.jwy.scd.api.idgen.support.SegmentUnavailableException: bizTag 未初始化，请先在 leaf_alloc 中插入种子行：bizTag=__not_configured__
+	at com.jwy.scd.idgen.service.LeafAllocator.nextSegment(LeafAllocator.java:91) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.9.jar!/:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.9.jar!/:7.0.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.9.jar!/:7.0.9]
+	at com.jwy.scd.idgen.service.LeafAllocator$$SpringCGLIB$$0.nextSegment(<generated>) ~[!/:0.0.1-SNAPSHOT]
+	at com.jwy.scd.idgen.service.SegmentIdGen.fetchSegment(SegmentIdGen.java:79) ~[!/:0.0.1-SNAPSHOT]
+	at com.jwy.scd.idgen.controller.IdGenController.getSegment(IdGenController.java:34) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.9.jar!/:7.0.9]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:132) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:59) ~[tomcat-embed-websocket-11.0.24.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.9.jar!/:7.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:347) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:406) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2036) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:949) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:483) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:74) ~[tomcat-embed-core-11.0.24.jar!/:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+
+
+===== start service-id-gen @ 2026-09-21 12:11:04 =====2026-09-21T12:11:06.352+08:00  INFO 12400 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : Starting ServiceIdGenApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 12400 (E:\Data\projects\springcloud-demo\service-id-gen\target\service-id-gen-0.0.1-SNAPSHOT.jar started by jiang in c:\windows\system32\driverstore\filerepository\ntprint.inf_amd64_7ec90cac1a11fca1\amd64)
+2026-09-21T12:11:06.355+08:00  INFO 12400 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : No active profile set, falling back to 1 default profile: "default"
+2026-09-21T12:11:07.349+08:00  INFO 12400 --- [service-id-gen] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=4b115470-e102-3e16-a08a-7cafcd631966
+2026-09-21T12:11:07.754+08:00  INFO 12400 --- [service-id-gen] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8084 (http)
+2026-09-21T12:11:07.771+08:00  INFO 12400 --- [service-id-gen] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-21T12:11:07.771+08:00  INFO 12400 --- [service-id-gen] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-21T12:11:07.805+08:00  INFO 12400 --- [service-id-gen] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1389 ms
+2026-09-21T12:11:08.647+08:00  INFO 12400 --- [service-id-gen] [main] m.e.s.MybatisPlusApplicationContextAware : Register ApplicationContext instances org.springframework.boot.web.server.servlet.context.AnnotationConfigServletWebServerApplicationContext@293d0107
+2026-09-21T12:11:08.888+08:00  INFO 12400 --- [service-id-gen] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8084 (http) with context path '/'
+2026-09-21T12:11:08.903+08:00  INFO 12400 --- [service-id-gen] [Thread-3] c.a.n.c.a.r.identify.CredentialWatcher   : null No credential found
+2026-09-21T12:11:08.907+08:00  INFO 12400 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapterBuilder
+2026-09-21T12:11:08.909+08:00  INFO 12400 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapter match ch.qos.logback.classic.Logger success.
+2026-09-21T12:11:08.910+08:00  INFO 12400 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.log4j2.Log4j2NacosLoggingAdapterBuilder
+2026-09-21T12:11:09.094+08:00  INFO 12400 --- [service-id-gen] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2026-09-21T12:11:09.094+08:00  INFO 12400 --- [service-id-gen] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2026-09-21T12:11:09.831+08:00  INFO 12400 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to get current node abilities...
+2026-09-21T12:11:09.834+08:00  INFO 12400 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to initialize current node abilities, support modes: [SDK_CLIENT]
+2026-09-21T12:11:09.835+08:00  INFO 12400 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Initialize current abilities finish...
+2026-09-21T12:11:09.836+08:00  INFO 12400 --- [service-id-gen] [main] c.a.n.c.a.d.NacosAbilityManagerHolder    : [AbilityControlManager] Successfully initialize AbilityControlManager
+2026-09-21T12:11:09.877+08:00  INFO 12400 --- [service-id-gen] [main] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP service-id-gen 192.168.1.129:8084 register finished
+2026-09-21T12:11:09.893+08:00  INFO 12400 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : Started ServiceIdGenApplication in 4.049 seconds (process running for 4.532)
+2026-09-21T12:11:09.911+08:00  INFO 12400 --- [service-id-gen] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-21T12:11:10.117+08:00  INFO 12400 --- [service-id-gen] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@579ce2e9
+2026-09-21T12:11:10.119+08:00  INFO 12400 --- [service-id-gen] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-09-21T12:11:10.204+08:00  INFO 12400 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 初始化服务端号段缓冲：bizTag=demo, 首段=[100001, 102000] 剩余 2000/2000
+2026-09-21T12:11:10.209+08:00  INFO 12400 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 预热完成：bizTag=demo, SegmentBuffer{bizTag=demo, current=[100001, 102000] 剩余 2000/2000, next=null, issued=0}
+2026-09-21T12:11:10.252+08:00  INFO 12400 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 初始化服务端号段缓冲：bizTag=order, 首段=[614001, 714000] 剩余 100000/100000
+2026-09-21T12:11:10.253+08:00  INFO 12400 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 预热完成：bizTag=order, SegmentBuffer{bizTag=order, current=[614001, 714000] 剩余 100000/100000, next=null, issued=0}
+2026-09-21T12:11:10.253+08:00  INFO 12400 --- [service-id-gen] [main] c.j.scd.idgen.support.IdGenWarmUpRunner  : [id-gen] 启动预热结束，耗时 356 ms
+2026-09-21T12:11:10.255+08:00  WARN 12400 --- [service-id-gen] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-21T12:11:10.256+08:00  WARN 12400 --- [service-id-gen] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+
+
+===== start service-id-gen @ 2026-09-21 12:52:02 =====2026-09-21T12:52:04.624+08:00  INFO 560 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : Starting ServiceIdGenApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 560 (E:\Data\projects\springcloud-demo\service-id-gen\target\service-id-gen-0.0.1-SNAPSHOT.jar started by jiang in c:\windows\system32\driverstore\filerepository\ntprint.inf_amd64_7ec90cac1a11fca1\amd64)
+2026-09-21T12:52:04.629+08:00  INFO 560 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : No active profile set, falling back to 1 default profile: "default"
+2026-09-21T12:52:06.033+08:00  INFO 560 --- [service-id-gen] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=4b115470-e102-3e16-a08a-7cafcd631966
+2026-09-21T12:52:06.651+08:00  INFO 560 --- [service-id-gen] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8084 (http)
+2026-09-21T12:52:06.688+08:00  INFO 560 --- [service-id-gen] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-21T12:52:06.689+08:00  INFO 560 --- [service-id-gen] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-21T12:52:06.739+08:00  INFO 560 --- [service-id-gen] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1993 ms
+2026-09-21T12:52:08.035+08:00  INFO 560 --- [service-id-gen] [main] m.e.s.MybatisPlusApplicationContextAware : Register ApplicationContext instances org.springframework.boot.web.server.servlet.context.AnnotationConfigServletWebServerApplicationContext@293d0107
+2026-09-21T12:52:08.404+08:00  INFO 560 --- [service-id-gen] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8084 (http) with context path '/'
+2026-09-21T12:52:08.437+08:00  INFO 560 --- [service-id-gen] [Thread-3] c.a.n.c.a.r.identify.CredentialWatcher   : null No credential found
+2026-09-21T12:52:08.444+08:00  INFO 560 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapterBuilder
+2026-09-21T12:52:08.447+08:00  INFO 560 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapter match ch.qos.logback.classic.Logger success.
+2026-09-21T12:52:08.448+08:00  INFO 560 --- [service-id-gen] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.log4j2.Log4j2NacosLoggingAdapterBuilder
+2026-09-21T12:52:08.821+08:00  INFO 560 --- [service-id-gen] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2026-09-21T12:52:08.823+08:00  INFO 560 --- [service-id-gen] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2026-09-21T12:52:10.727+08:00  INFO 560 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to get current node abilities...
+2026-09-21T12:52:10.730+08:00  INFO 560 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to initialize current node abilities, support modes: [SDK_CLIENT]
+2026-09-21T12:52:10.732+08:00  INFO 560 --- [service-id-gen] [main] c.a.n.c.a.AbstractAbilityControlManager  : Initialize current abilities finish...
+2026-09-21T12:52:10.735+08:00  INFO 560 --- [service-id-gen] [main] c.a.n.c.a.d.NacosAbilityManagerHolder    : [AbilityControlManager] Successfully initialize AbilityControlManager
+2026-09-21T12:52:10.853+08:00  INFO 560 --- [service-id-gen] [main] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP service-id-gen 192.168.1.129:8084 register finished
+2026-09-21T12:52:10.869+08:00  INFO 560 --- [service-id-gen] [main] c.jwy.scd.idgen.ServiceIdGenApplication  : Started ServiceIdGenApplication in 7.042 seconds (process running for 7.645)
+2026-09-21T12:52:10.874+08:00  INFO 560 --- [service-id-gen] [main] c.j.scd.idgen.support.IdGenWarmUpRunner  : [id-gen] 启动预热开始
+2026-09-21T12:52:10.893+08:00  INFO 560 --- [service-id-gen] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-21T12:52:11.290+08:00  INFO 560 --- [service-id-gen] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31c56721
+2026-09-21T12:52:11.294+08:00  INFO 560 --- [service-id-gen] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-09-21T12:52:11.391+08:00  INFO 560 --- [service-id-gen] [http-nio-8084-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-21T12:52:11.393+08:00  INFO 560 --- [service-id-gen] [http-nio-8084-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-21T12:52:11.395+08:00  INFO 560 --- [service-id-gen] [http-nio-8084-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-09-21T12:52:11.523+08:00  INFO 560 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 初始化服务端号段缓冲：bizTag=demo, 首段=[120001, 122000] 剩余 2000/2000
+2026-09-21T12:52:11.530+08:00  INFO 560 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 预热完成：bizTag=demo, SegmentBuffer{bizTag=demo, current=[120001, 122000] 剩余 2000/2000, next=null, issued=0}
+2026-09-21T12:52:11.623+08:00  INFO 560 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 初始化服务端号段缓冲：bizTag=order, 首段=[1914001, 2014000] 剩余 100000/100000
+2026-09-21T12:52:11.626+08:00  INFO 560 --- [service-id-gen] [main] com.jwy.scd.idgen.service.SegmentIdGen   : [id-gen] 预热完成：bizTag=order, SegmentBuffer{bizTag=order, current=[1914001, 2014000] 剩余 100000/100000, next=null, issued=0}
+2026-09-21T12:52:11.628+08:00  INFO 560 --- [service-id-gen] [main] c.j.scd.idgen.support.IdGenWarmUpRunner  : [id-gen] 启动预热结束，耗时 754 ms
+2026-09-21T12:52:11.629+08:00  WARN 560 --- [service-id-gen] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-21T12:52:11.633+08:00  WARN 560 --- [service-id-gen] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'

@@ -1,0 +1,60 @@
+server:
+  # 发号服务端口（gateway=8080 / system=8081 / auth=8082 / order=8083 / id-gen=8084）
+  port: 8084
+
+spring:
+  application:
+    name: service-id-gen
+
+  cloud:
+    nacos:
+      # 只注册、不拉配置：发号服务的唯一强依赖是号段库本身，
+      # 把 datasource 再绕一层配置中心，只会让「号段库连不上」这种故障多一种可能的原因。
+      discovery:
+        server-addr: rxs:8848
+        username: nacos
+        password: 123456
+
+  # ============================ 号段库（leaf） ============================
+  # 刻意不放进 Nacos 配置中心（其它服务的 datasource 都是走 nacos:xxx.yaml 的），理由：
+  #   1) 号段库要【独立】于业务库，它只有一张 leaf_alloc 表，配置极其稳定；
+  #   2) 发号服务是全链路最底层的依赖，启动时不该再依赖「配置中心可用」这一条件；
+  #   3) 配置就在这里，谁想知道号段账本在哪，翻一个文件就够。
+  # 将来若要统一到配置中心，把 spring.config.import 改成 nacos:service-id-gen.yaml 即可。
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://rxs:3306/leaf?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true"
+    username: root
+    password: 123456
+
+  sql:
+    init:
+      # never：绝不自动建表。schema 见项目根目录 sql/id-gen.sql，首次部署手工执行一次。
+      # （本项目吃过 sql.init.mode=always 的亏：它会 DROP+CREATE，把真实数据清空。）
+      mode: never
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+    db-config:
+      # 本服务不生成任何业务主键：leaf_alloc 用 biz_tag 做自然主键，不需要 id-type 策略。
+      # 发出去的 ID 不是「数据库自增」，而是「自己算出来的号段区间」，与 MP 主键策略无关。
+      id-type: auto
+
+# ============================ 发号服务参数 ============================
+app:
+  id-gen:
+    # 异步预取线程数。预取是低频操作（每个 bizTag 每 step 次发号才一次），
+    # 给 2 就够；再多也没用，瓶颈在 MySQL 那一行的行锁上。
+    prefetch-threads: 2
+    # 启动时把 leaf_alloc 里所有 bizTag 各取一段放进内存，避免第一个请求承担取段开销
+    warm-up-on-startup: true
+
+logging:
+  level:
+    # 想看每次「批发号段」的区间就打开（Debug 级会打印 begin/end）
+    com.jwy.scd.idgen: info
+    # 发号服务平时不需要 SQL 日志；排查取段问题时把这两行打开
+    # com.jwy.scd.idgen.mapper: debug

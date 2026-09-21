@@ -49,7 +49,7 @@ public interface OrderApi {
 
     @Operation(summary = "按订单号查询订单", description = "根据业务订单号 orderNo 返回订单详情")
     @GetMapping("/api/order/by-no")
-    OrderDTO getOrderByNo(@Parameter(description = "业务订单号", example = "SO202609212097844166456669394")
+    OrderDTO getOrderByNo(@Parameter(description = "业务订单号", example = "SO2026092112345")
                           @RequestParam("orderNo") String orderNo);
 
     @Operation(summary = "查询订单列表",

@@ -1,0 +1,164 @@
+
+
+===== start service-auth @ 2026-09-21 12:03:30 =====2026-09-21T12:03:31.976+08:00  INFO 28116 --- [service-auth] [main] com.jwy.scd.ServiceAuthApplication       : Starting ServiceAuthApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 28116 (E:\Data\projects\springcloud-demo\service-auth\target\service-auth-0.0.1-SNAPSHOT.jar started by jiang in c:\windows\system32\driverstore\filerepository\ntprint.inf_amd64_7ec90cac1a11fca1\amd64)
+2026-09-21T12:03:31.985+08:00  INFO 28116 --- [service-auth] [main] com.jwy.scd.ServiceAuthApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-09-21T12:03:33.205+08:00  INFO 28116 --- [service-auth] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-09-21T12:03:33.208+08:00  INFO 28116 --- [service-auth] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-09-21T12:03:33.253+08:00  INFO 28116 --- [service-auth] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
+2026-09-21T12:03:33.651+08:00  INFO 28116 --- [service-auth] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=911e33c0-a3ef-389e-a39e-dd6e088024e2
+2026-09-21T12:03:34.171+08:00  INFO 28116 --- [service-auth] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8082 (http)
+2026-09-21T12:03:34.195+08:00  INFO 28116 --- [service-auth] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-21T12:03:34.196+08:00  INFO 28116 --- [service-auth] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-21T12:03:34.235+08:00  INFO 28116 --- [service-auth] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2155 ms
+2026-09-21T12:03:34.628+08:00  INFO 28116 --- [service-auth] [main] o.s.c.openfeign.FeignClientFactoryBean   : For 'service-system' URL not provided. Will try picking an instance via load-balancing.
+2026-09-21T12:03:35.977+08:00  WARN 28116 --- [service-auth] [main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-09-21T12:03:36.059+08:00  INFO 28116 --- [service-auth] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8082 (http) with context path '/'
+2026-09-21T12:03:36.085+08:00  INFO 28116 --- [service-auth] [Thread-3] c.a.n.c.a.r.identify.CredentialWatcher   : null No credential found
+2026-09-21T12:03:36.091+08:00  INFO 28116 --- [service-auth] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapterBuilder
+2026-09-21T12:03:36.094+08:00  INFO 28116 --- [service-auth] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapter match ch.qos.logback.classic.Logger success.
+2026-09-21T12:03:36.097+08:00  INFO 28116 --- [service-auth] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.log4j2.Log4j2NacosLoggingAdapterBuilder
+2026-09-21T12:03:36.467+08:00  INFO 28116 --- [service-auth] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2026-09-21T12:03:36.469+08:00  INFO 28116 --- [service-auth] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2026-09-21T12:03:37.585+08:00  INFO 28116 --- [service-auth] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to get current node abilities...
+2026-09-21T12:03:37.593+08:00  INFO 28116 --- [service-auth] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to initialize current node abilities, support modes: [SDK_CLIENT]
+2026-09-21T12:03:37.594+08:00  INFO 28116 --- [service-auth] [main] c.a.n.c.a.AbstractAbilityControlManager  : Initialize current abilities finish...
+2026-09-21T12:03:37.595+08:00  INFO 28116 --- [service-auth] [main] c.a.n.c.a.d.NacosAbilityManagerHolder    : [AbilityControlManager] Successfully initialize AbilityControlManager
+2026-09-21T12:03:37.667+08:00  INFO 28116 --- [service-auth] [main] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP service-auth 192.168.1.129:8082 register finished
+2026-09-21T12:03:37.699+08:00  INFO 28116 --- [service-auth] [main] com.jwy.scd.ServiceAuthApplication       : Started ServiceAuthApplication in 6.44 seconds (process running for 7.066)
+2026-09-21T12:03:37.704+08:00  WARN 28116 --- [service-auth] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-21T12:03:37.706+08:00  WARN 28116 --- [service-auth] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-21T12:06:23.085+08:00  INFO 28116 --- [service-auth] [http-nio-8082-exec-6] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-21T12:06:23.085+08:00  INFO 28116 --- [service-auth] [http-nio-8082-exec-6] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-21T12:06:23.087+08:00  INFO 28116 --- [service-auth] [http-nio-8082-exec-6] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-09-21T12:06:23.176+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-6] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] ---> POST http://service-system/api/sys-user/verify-password HTTP/1.1
+2026-09-21T12:06:23.624+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-6] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] <--- HTTP/1.1 200 (446ms)
+2026-09-21T12:06:23.631+08:00  INFO 28116 --- [service-auth] [http-nio-8082-exec-6] c.jwy.scd.service.impl.AuthServiceImpl   : 凭据校验通过：username=zhangsan（由 service-system 校验）
+2026-09-21T12:06:23.634+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-6] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] ---> GET http://service-system/api/sys-user/by-username?username=zhangsan HTTP/1.1
+2026-09-21T12:06:23.654+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-6] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] <--- HTTP/1.1 200 (20ms)
+2026-09-21T12:06:23.982+08:00  INFO 28116 --- [service-auth] [http-nio-8082-exec-6] c.jwy.scd.service.SessionTokenService    : 签发会话令牌：username=zhangsan, userId=2, key=auth:session:2c6c219984e04b4a8ccb18f765607f43, ttl=1800s
+2026-09-21T12:07:04.685+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-5] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] ---> POST http://service-system/api/sys-user/verify-password HTTP/1.1
+2026-09-21T12:07:04.704+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-5] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] <--- HTTP/1.1 200 (18ms)
+2026-09-21T12:07:04.705+08:00  INFO 28116 --- [service-auth] [http-nio-8082-exec-5] c.jwy.scd.service.impl.AuthServiceImpl   : 凭据校验通过：username=zhangsan（由 service-system 校验）
+2026-09-21T12:07:04.705+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-5] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] ---> GET http://service-system/api/sys-user/by-username?username=zhangsan HTTP/1.1
+2026-09-21T12:07:04.710+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-5] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] <--- HTTP/1.1 200 (4ms)
+2026-09-21T12:07:04.712+08:00  INFO 28116 --- [service-auth] [http-nio-8082-exec-5] c.jwy.scd.service.SessionTokenService    : 签发会话令牌：username=zhangsan, userId=2, key=auth:session:5c0a7bf729584d48933e695e8f9c4424, ttl=1800s
+2026-09-21T12:07:19.350+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-7] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] ---> POST http://service-system/api/sys-user/verify-password HTTP/1.1
+2026-09-21T12:07:19.369+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-7] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] <--- HTTP/1.1 200 (18ms)
+2026-09-21T12:07:19.369+08:00  INFO 28116 --- [service-auth] [http-nio-8082-exec-7] c.jwy.scd.service.impl.AuthServiceImpl   : 凭据校验通过：username=zhangsan（由 service-system 校验）
+2026-09-21T12:07:19.370+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-7] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] ---> GET http://service-system/api/sys-user/by-username?username=zhangsan HTTP/1.1
+2026-09-21T12:07:19.374+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-7] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] <--- HTTP/1.1 200 (4ms)
+2026-09-21T12:07:19.376+08:00  INFO 28116 --- [service-auth] [http-nio-8082-exec-7] c.jwy.scd.service.SessionTokenService    : 签发会话令牌：username=zhangsan, userId=2, key=auth:session:60ff25136e0c439d9af8bb660fdd202d, ttl=1800s
+2026-09-21T12:07:29.467+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-10] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] ---> POST http://service-system/api/sys-user/verify-password HTTP/1.1
+2026-09-21T12:07:29.486+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-10] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] <--- HTTP/1.1 200 (18ms)
+2026-09-21T12:07:29.486+08:00  INFO 28116 --- [service-auth] [http-nio-8082-exec-10] c.jwy.scd.service.impl.AuthServiceImpl   : 凭据校验通过：username=zhangsan（由 service-system 校验）
+2026-09-21T12:07:29.487+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-10] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] ---> GET http://service-system/api/sys-user/by-username?username=zhangsan HTTP/1.1
+2026-09-21T12:07:29.492+08:00 DEBUG 28116 --- [service-auth] [http-nio-8082-exec-10] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] <--- HTTP/1.1 200 (4ms)
+2026-09-21T12:07:29.495+08:00  INFO 28116 --- [service-auth] [http-nio-8082-exec-10] c.jwy.scd.service.SessionTokenService    : 签发会话令牌：username=zhangsan, userId=2, key=auth:session:02843a267eb4430ab3599c49878af07e, ttl=1800s
+
+
+===== start service-auth @ 2026-09-21 12:09:28 =====2026-09-21T12:09:30.008+08:00  INFO 32064 --- [service-auth] [main] com.jwy.scd.ServiceAuthApplication       : Starting ServiceAuthApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 32064 (E:\Data\projects\springcloud-demo\service-auth\target\service-auth-0.0.1-SNAPSHOT.jar started by jiang in c:\windows\system32\driverstore\filerepository\ntprint.inf_amd64_7ec90cac1a11fca1\amd64)
+2026-09-21T12:09:30.013+08:00  INFO 32064 --- [service-auth] [main] com.jwy.scd.ServiceAuthApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-09-21T12:09:31.214+08:00  INFO 32064 --- [service-auth] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-09-21T12:09:31.220+08:00  INFO 32064 --- [service-auth] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-09-21T12:09:31.265+08:00  INFO 32064 --- [service-auth] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 0 Redis repository interfaces.
+2026-09-21T12:09:31.688+08:00  INFO 32064 --- [service-auth] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=911e33c0-a3ef-389e-a39e-dd6e088024e2
+2026-09-21T12:09:32.443+08:00  INFO 32064 --- [service-auth] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8082 (http)
+2026-09-21T12:09:32.484+08:00  INFO 32064 --- [service-auth] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-21T12:09:32.489+08:00  INFO 32064 --- [service-auth] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-21T12:09:32.534+08:00  INFO 32064 --- [service-auth] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2444 ms
+2026-09-21T12:09:32.995+08:00  INFO 32064 --- [service-auth] [main] o.s.c.openfeign.FeignClientFactoryBean   : For 'service-system' URL not provided. Will try picking an instance via load-balancing.
+2026-09-21T12:09:34.338+08:00  WARN 32064 --- [service-auth] [main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-09-21T12:09:34.395+08:00  INFO 32064 --- [service-auth] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8082 (http) with context path '/'
+2026-09-21T12:09:34.417+08:00  INFO 32064 --- [service-auth] [Thread-3] c.a.n.c.a.r.identify.CredentialWatcher   : null No credential found
+2026-09-21T12:09:34.421+08:00  INFO 32064 --- [service-auth] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapterBuilder
+2026-09-21T12:09:34.424+08:00  INFO 32064 --- [service-auth] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapter match ch.qos.logback.classic.Logger success.
+2026-09-21T12:09:34.425+08:00  INFO 32064 --- [service-auth] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.log4j2.Log4j2NacosLoggingAdapterBuilder
+2026-09-21T12:09:34.643+08:00  INFO 32064 --- [service-auth] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2026-09-21T12:09:34.646+08:00  INFO 32064 --- [service-auth] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2026-09-21T12:09:35.908+08:00  INFO 32064 --- [service-auth] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to get current node abilities...
+2026-09-21T12:09:35.914+08:00  INFO 32064 --- [service-auth] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to initialize current node abilities, support modes: [SDK_CLIENT]
+2026-09-21T12:09:35.915+08:00  INFO 32064 --- [service-auth] [main] c.a.n.c.a.AbstractAbilityControlManager  : Initialize current abilities finish...
+2026-09-21T12:09:35.917+08:00  INFO 32064 --- [service-auth] [main] c.a.n.c.a.d.NacosAbilityManagerHolder    : [AbilityControlManager] Successfully initialize AbilityControlManager
+2026-09-21T12:09:35.984+08:00  INFO 32064 --- [service-auth] [main] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP service-auth 192.168.1.129:8082 register finished
+2026-09-21T12:09:36.013+08:00  INFO 32064 --- [service-auth] [main] com.jwy.scd.ServiceAuthApplication       : Started ServiceAuthApplication in 6.709 seconds (process running for 7.363)
+2026-09-21T12:09:36.017+08:00  WARN 32064 --- [service-auth] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-21T12:09:36.018+08:00  WARN 32064 --- [service-auth] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-21T12:10:35.784+08:00  INFO 32064 --- [service-auth] [http-nio-8082-exec-6] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-21T12:10:35.784+08:00  INFO 32064 --- [service-auth] [http-nio-8082-exec-6] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-21T12:10:35.786+08:00  INFO 32064 --- [service-auth] [http-nio-8082-exec-6] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-09-21T12:10:35.875+08:00 DEBUG 32064 --- [service-auth] [http-nio-8082-exec-6] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] ---> POST http://service-system/api/sys-user/verify-password HTTP/1.1
+2026-09-21T12:10:36.275+08:00 DEBUG 32064 --- [service-auth] [http-nio-8082-exec-6] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] <--- HTTP/1.1 200 (399ms)
+2026-09-21T12:10:36.280+08:00  INFO 32064 --- [service-auth] [http-nio-8082-exec-6] c.jwy.scd.service.impl.AuthServiceImpl   : 凭据校验通过：username=zhangsan（由 service-system 校验）
+2026-09-21T12:10:36.282+08:00 DEBUG 32064 --- [service-auth] [http-nio-8082-exec-6] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] ---> GET http://service-system/api/sys-user/by-username?username=zhangsan HTTP/1.1
+2026-09-21T12:10:36.301+08:00 DEBUG 32064 --- [service-auth] [http-nio-8082-exec-6] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] <--- HTTP/1.1 200 (18ms)
+2026-09-21T12:10:36.622+08:00  INFO 32064 --- [service-auth] [http-nio-8082-exec-6] c.jwy.scd.service.SessionTokenService    : 签发会话令牌：username=zhangsan, userId=2, key=auth:session:6896e37cf65b4c1c947bba3dec6d9eb5, ttl=1800s
+2026-09-21T12:10:53.160+08:00 DEBUG 32064 --- [service-auth] [http-nio-8082-exec-7] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] ---> POST http://service-system/api/sys-user/verify-password HTTP/1.1
+2026-09-21T12:10:53.179+08:00 DEBUG 32064 --- [service-auth] [http-nio-8082-exec-7] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] <--- HTTP/1.1 200 (18ms)
+2026-09-21T12:10:53.179+08:00  INFO 32064 --- [service-auth] [http-nio-8082-exec-7] c.jwy.scd.service.impl.AuthServiceImpl   : 凭据校验通过：username=zhangsan（由 service-system 校验）
+2026-09-21T12:10:53.180+08:00 DEBUG 32064 --- [service-auth] [http-nio-8082-exec-7] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] ---> GET http://service-system/api/sys-user/by-username?username=zhangsan HTTP/1.1
+2026-09-21T12:10:53.184+08:00 DEBUG 32064 --- [service-auth] [http-nio-8082-exec-7] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] <--- HTTP/1.1 200 (3ms)
+2026-09-21T12:10:53.186+08:00  INFO 32064 --- [service-auth] [http-nio-8082-exec-7] c.jwy.scd.service.SessionTokenService    : 签发会话令牌：username=zhangsan, userId=2, key=auth:session:6e9c9d1baab44fb782d2764e0aeb2559, ttl=1800s
+2026-09-21T12:11:03.289+08:00 DEBUG 32064 --- [service-auth] [http-nio-8082-exec-5] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] ---> POST http://service-system/api/sys-user/verify-password HTTP/1.1
+2026-09-21T12:11:03.313+08:00 DEBUG 32064 --- [service-auth] [http-nio-8082-exec-5] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] <--- HTTP/1.1 200 (23ms)
+2026-09-21T12:11:03.314+08:00  INFO 32064 --- [service-auth] [http-nio-8082-exec-5] c.jwy.scd.service.impl.AuthServiceImpl   : 凭据校验通过：username=zhangsan（由 service-system 校验）
+2026-09-21T12:11:03.314+08:00 DEBUG 32064 --- [service-auth] [http-nio-8082-exec-5] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] ---> GET http://service-system/api/sys-user/by-username?username=zhangsan HTTP/1.1
+2026-09-21T12:11:03.323+08:00 DEBUG 32064 --- [service-auth] [http-nio-8082-exec-5] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] <--- HTTP/1.1 200 (8ms)
+2026-09-21T12:11:03.328+08:00  INFO 32064 --- [service-auth] [http-nio-8082-exec-5] c.jwy.scd.service.SessionTokenService    : 签发会话令牌：username=zhangsan, userId=2, key=auth:session:935484e124654b89a644d1deefbf3ac4, ttl=1800s
+
+
+===== start service-auth @ 2026-09-21 12:50:36 =====2026-09-21T12:50:37.902+08:00  INFO 19896 --- [service-auth] [main] com.jwy.scd.ServiceAuthApplication       : Starting ServiceAuthApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 19896 (E:\Data\projects\springcloud-demo\service-auth\target\service-auth-0.0.1-SNAPSHOT.jar started by jiang in c:\windows\system32\driverstore\filerepository\ntprint.inf_amd64_7ec90cac1a11fca1\amd64)
+2026-09-21T12:50:37.907+08:00  INFO 19896 --- [service-auth] [main] com.jwy.scd.ServiceAuthApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-09-21T12:50:38.867+08:00  INFO 19896 --- [service-auth] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-09-21T12:50:38.873+08:00  INFO 19896 --- [service-auth] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-09-21T12:50:38.908+08:00  INFO 19896 --- [service-auth] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 0 Redis repository interfaces.
+2026-09-21T12:50:39.223+08:00  INFO 19896 --- [service-auth] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=911e33c0-a3ef-389e-a39e-dd6e088024e2
+2026-09-21T12:50:39.602+08:00  INFO 19896 --- [service-auth] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8082 (http)
+2026-09-21T12:50:39.621+08:00  INFO 19896 --- [service-auth] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-21T12:50:39.622+08:00  INFO 19896 --- [service-auth] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-21T12:50:39.661+08:00  INFO 19896 --- [service-auth] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1684 ms
+2026-09-21T12:50:39.936+08:00  INFO 19896 --- [service-auth] [main] o.s.c.openfeign.FeignClientFactoryBean   : For 'service-system' URL not provided. Will try picking an instance via load-balancing.
+2026-09-21T12:50:41.194+08:00  WARN 19896 --- [service-auth] [main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-09-21T12:50:41.253+08:00  INFO 19896 --- [service-auth] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8082 (http) with context path '/'
+2026-09-21T12:50:41.269+08:00  INFO 19896 --- [service-auth] [Thread-3] c.a.n.c.a.r.identify.CredentialWatcher   : null No credential found
+2026-09-21T12:50:41.277+08:00  INFO 19896 --- [service-auth] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapterBuilder
+2026-09-21T12:50:41.280+08:00  INFO 19896 --- [service-auth] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter: com.alibaba.nacos.logger.adapter.logback14.LogbackNacosLoggingAdapter match ch.qos.logback.classic.Logger success.
+2026-09-21T12:50:41.281+08:00  INFO 19896 --- [service-auth] [main] c.a.nacos.client.logging.NacosLogging    : Nacos Logging Adapter Builder: com.alibaba.nacos.logger.adapter.log4j2.Log4j2NacosLoggingAdapterBuilder
+2026-09-21T12:50:41.455+08:00  INFO 19896 --- [service-auth] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2026-09-21T12:50:41.457+08:00  INFO 19896 --- [service-auth] [main] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2026-09-21T12:50:42.338+08:00  INFO 19896 --- [service-auth] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to get current node abilities...
+2026-09-21T12:50:42.340+08:00  INFO 19896 --- [service-auth] [main] c.a.n.c.a.AbstractAbilityControlManager  : Ready to initialize current node abilities, support modes: [SDK_CLIENT]
+2026-09-21T12:50:42.341+08:00  INFO 19896 --- [service-auth] [main] c.a.n.c.a.AbstractAbilityControlManager  : Initialize current abilities finish...
+2026-09-21T12:50:42.342+08:00  INFO 19896 --- [service-auth] [main] c.a.n.c.a.d.NacosAbilityManagerHolder    : [AbilityControlManager] Successfully initialize AbilityControlManager
+2026-09-21T12:50:42.394+08:00  INFO 19896 --- [service-auth] [main] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP service-auth 192.168.1.129:8082 register finished
+2026-09-21T12:50:42.416+08:00  INFO 19896 --- [service-auth] [main] com.jwy.scd.ServiceAuthApplication       : Started ServiceAuthApplication in 5.076 seconds (process running for 5.781)
+2026-09-21T12:50:42.419+08:00  WARN 19896 --- [service-auth] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-09-21T12:50:42.419+08:00  WARN 19896 --- [service-auth] [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-09-21T12:50:50.518+08:00  INFO 19896 --- [service-auth] [http-nio-8082-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-21T12:50:50.519+08:00  INFO 19896 --- [service-auth] [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-21T12:50:50.520+08:00  INFO 19896 --- [service-auth] [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-09-21T12:50:50.610+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-2] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] ---> POST http://service-system/api/sys-user/verify-password HTTP/1.1
+2026-09-21T12:50:50.727+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-2] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] <--- HTTP/1.1 200 (116ms)
+2026-09-21T12:50:50.735+08:00  WARN 19896 --- [service-auth] [http-nio-8082-exec-2] c.j.s.exception.GlobalExceptionHandler   : 认证异常: 用户名或密码错误
+2026-09-21T12:50:50.781+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-3] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] ---> POST http://service-system/api/sys-user/verify-password HTTP/1.1
+2026-09-21T12:50:50.800+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-3] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] <--- HTTP/1.1 200 (18ms)
+2026-09-21T12:50:50.801+08:00  INFO 19896 --- [service-auth] [http-nio-8082-exec-3] c.jwy.scd.service.impl.AuthServiceImpl   : 凭据校验通过：username=zhangsan（由 service-system 校验）
+2026-09-21T12:50:50.802+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-3] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] ---> GET http://service-system/api/sys-user/by-username?username=zhangsan HTTP/1.1
+2026-09-21T12:50:50.811+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-3] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] <--- HTTP/1.1 200 (7ms)
+2026-09-21T12:50:51.151+08:00  INFO 19896 --- [service-auth] [http-nio-8082-exec-3] c.jwy.scd.service.SessionTokenService    : 签发会话令牌：username=zhangsan, userId=2, key=auth:session:928533ce40d04b1fa3ec5e96206d3338, ttl=1800s
+2026-09-21T12:50:51.339+08:00  INFO 19896 --- [service-auth] [http-nio-8082-exec-4] c.jwy.scd.service.SessionTokenService    : 注销会话令牌：key=auth:session:928533ce40d04b1fa3ec5e96206d3338, 是否命中=true
+2026-09-21T12:50:57.383+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-5] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] ---> POST http://service-system/api/sys-user/verify-password HTTP/1.1
+2026-09-21T12:50:57.404+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-5] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] <--- HTTP/1.1 200 (19ms)
+2026-09-21T12:50:57.405+08:00  WARN 19896 --- [service-auth] [http-nio-8082-exec-5] c.j.s.exception.GlobalExceptionHandler   : 认证异常: 用户名或密码错误
+2026-09-21T12:50:57.416+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-6] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] ---> POST http://service-system/api/sys-user/verify-password HTTP/1.1
+2026-09-21T12:50:57.433+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-6] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] <--- HTTP/1.1 200 (16ms)
+2026-09-21T12:50:57.433+08:00  INFO 19896 --- [service-auth] [http-nio-8082-exec-6] c.jwy.scd.service.impl.AuthServiceImpl   : 凭据校验通过：username=zhangsan（由 service-system 校验）
+2026-09-21T12:50:57.434+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-6] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] ---> GET http://service-system/api/sys-user/by-username?username=zhangsan HTTP/1.1
+2026-09-21T12:50:57.438+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-6] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] <--- HTTP/1.1 200 (4ms)
+2026-09-21T12:50:57.440+08:00  INFO 19896 --- [service-auth] [http-nio-8082-exec-6] c.jwy.scd.service.SessionTokenService    : 签发会话令牌：username=zhangsan, userId=2, key=auth:session:24b80ca590b544bfba6f5c50c9599bf4, ttl=1800s
+2026-09-21T12:50:57.488+08:00  INFO 19896 --- [service-auth] [http-nio-8082-exec-7] c.jwy.scd.service.SessionTokenService    : 注销会话令牌：key=auth:session:24b80ca590b544bfba6f5c50c9599bf4, 是否命中=true
+2026-09-21T12:52:26.693+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-10] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] ---> POST http://service-system/api/sys-user/verify-password HTTP/1.1
+2026-09-21T12:52:26.709+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-10] com.jwy.scd.api.SysUserApi               : [SysUserApi#verifyPassword] <--- HTTP/1.1 200 (15ms)
+2026-09-21T12:52:26.710+08:00  INFO 19896 --- [service-auth] [http-nio-8082-exec-10] c.jwy.scd.service.impl.AuthServiceImpl   : 凭据校验通过：username=zhangsan（由 service-system 校验）
+2026-09-21T12:52:26.710+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-10] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] ---> GET http://service-system/api/sys-user/by-username?username=zhangsan HTTP/1.1
+2026-09-21T12:52:26.718+08:00 DEBUG 19896 --- [service-auth] [http-nio-8082-exec-10] com.jwy.scd.api.SysUserApi               : [SysUserApi#getUserByUsername] <--- HTTP/1.1 200 (7ms)
+2026-09-21T12:52:26.722+08:00  INFO 19896 --- [service-auth] [http-nio-8082-exec-10] c.jwy.scd.service.SessionTokenService    : 签发会话令牌：username=zhangsan, userId=2, key=auth:session:2d6e7a1523ef48218855c64b15b2bb17, ttl=1800s

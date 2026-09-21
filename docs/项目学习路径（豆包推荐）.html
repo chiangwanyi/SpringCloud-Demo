@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div style="width:100%;box-sizing:border-box;font-family:'Microsoft YaHei',system-ui,sans-serif;color:#1f2937;padding:4px 2px;line-height:1.5;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:8px;">微服务学习路线 · 现状与下一步（示意）</div>
+
+    <div style="font-size:13px;font-weight:600;color:#166534;margin:14px 0 6px;">① 已完成主线（git 提交可证）</div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px 2px;font-size:13px;">
+        <span style="background:#dcfce7;border:1px solid #86efac;border-radius:6px;padding:3px 8px;">单体 → 微服务聚合</span><span style="color:#9ca3af;">→</span>
+        <span style="background:#dcfce7;border:1px solid #86efac;border-radius:6px;padding:3px 8px;">MyBatis-Plus + MySQL</span><span style="color:#9ca3af;">→</span>
+        <span style="background:#dcfce7;border:1px solid #86efac;border-radius:6px;padding:3px 8px;">Nacos 注册 / 配置中心</span><span style="color:#9ca3af;">→</span>
+        <span style="background:#dcfce7;border:1px solid #86efac;border-radius:6px;padding:3px 8px;">网关鉴权 + 认证服务</span><span style="color:#9ca3af;">→</span>
+        <span style="background:#dcfce7;border:1px solid #86efac;border-radius:6px;padding:3px 8px;">RFC 7807 异常契约</span><span style="color:#9ca3af;">→</span>
+        <span style="background:#dcfce7;border:1px solid #86efac;border-radius:6px;padding:3px 8px;">Redis 会话令牌</span><span style="color:#9ca3af;">→</span>
+        <span style="background:#dcfce7;border:1px solid #86efac;border-radius:6px;padding:3px 8px;">Sentinel 容错</span><span style="color:#9ca3af;">→</span>
+        <span style="background:#dcfce7;border:1px solid #86efac;border-radius:6px;padding:3px 8px;">号段订单号 + 唯一索引</span><span style="color:#9ca3af;">→</span>
+        <span style="background:#dcfce7;border:1px solid #86efac;border-radius:6px;padding:3px 8px;">网关 CORS</span>
+    </div>
+
+    <div style="font-size:13px;font-weight:600;color:#b45309;margin:14px 0 6px;">② 在手未收尾</div>
+    <div style="background:#fef3c7;border:1px solid #fcd34d;border-radius:8px;padding:8px 12px;font-size:13px;">
+        <b>service-id-gen 号段生成器</b>：双 Buffer 状态机 + 行锁原子取段已写完，但<b>未注册进父工程、未提交</b>。下一步：补 Controller + Feign 客户端，把 service-order 订单号切换过去。
+    </div>
+
+    <div style="font-size:13px;font-weight:600;color:#1e40af;margin:14px 0 6px;">③ 推荐下一步（按优先级）</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <div style="flex:1 1 300px;background:#f0f9ff;border:1px solid #93c5fd;border-radius:8px;padding:8px 12px;font-size:13px;">
+            <div style="font-weight:700;color:#1d4ed8;">P1 消息队列（RocketMQ）</div>
+            <div>订单超时取消 = 现成延迟消息场景；异步解耦消除"事务跨网络"；事务消息通往最终一致性</div>
+        </div>
+        <div style="flex:1 1 300px;background:#f0f9ff;border:1px solid #93c5fd;border-radius:8px;padding:8px 12px;font-size:13px;">
+            <div style="font-weight:700;color:#1d4ed8;">P1 分布式事务（Seata AT）</div>
+            <div>createOrder 本地事务横跨 Feign 调用（代码注释已自标坑）；Nacos + MySQL 已就绪</div>
+        </div>
+        <div style="flex:1 1 300px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:8px 12px;font-size:13px;">
+            <div style="font-weight:700;color:#334155;">P2 Redis 缓存 + 分布式锁</div>
+            <div>商品/用户查询无缓存；防超卖、缓存穿透/击穿/雪崩是高频面试点</div>
+        </div>
+        <div style="flex:1 1 300px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:8px 12px;font-size:13px;">
+            <div style="font-weight:700;color:#334155;">P2 链路追踪 + 监控</div>
+            <div>gateway→order→system 排障靠翻日志；Zipkin + Prometheus/Grafana 补全可观测性</div>
+        </div>
+        <div style="flex:1 1 300px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:13px;">
+            <div style="font-weight:700;color:#475569;">P3 RBAC 授权落地</div>
+            <div>角色表已建、网关只认证未授权；把对比笔记落地成权限校验</div>
+        </div>
+        <div style="flex:1 1 300px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:13px;">
+            <div style="font-weight:700;color:#475569;">P3 容器化 + CI/CD</div>
+            <div>中间件已 Docker 化、业务服务未容器化；多实例验证已打底</div>
+        </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;font-size:12px;color:#6b7280;">
+        <span><span style="background:#f0f9ff;border:1px solid #93c5fd;border-radius:4px;padding:1px 6px;">P1</span> 先学：直接解决你代码里的真实痛点</span>
+        <span><span style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:4px;padding:1px 6px;">P2</span> 高频面试与工程必备</span>
+        <span><span style="background:#f1f5f9;border:1px solid #e2e8f0;border-radius:4px;padding:1px 6px;">P3</span> 有余力再补</span>
+    </div>
+</div>
+</body>
+</html>
