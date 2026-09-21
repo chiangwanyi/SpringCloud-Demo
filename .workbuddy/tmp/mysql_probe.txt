@@ -1,4 +1,0 @@
-﻿mysqlJar: C:\Users\jiang\.m2\repository\com\mysql\mysql-connector-j\9.7.0\mysql-connector-j-9.7.0.jar
-mysqlCli: NOT FOUND
-javac: True
-java: True

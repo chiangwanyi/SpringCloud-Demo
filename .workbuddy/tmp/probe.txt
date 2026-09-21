@@ -1,3 +1,0 @@
-﻿mvn: True
-jdk21: True
-env: apache-maven-3.9.16,jdk-21.0.12.1,nvm

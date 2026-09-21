@@ -1,9 +1,0 @@
-﻿gateway started: True
-=== 网关 -> service-order：下单（整条链路 网关->order->Feign->system） ===
-OK {"createTime":"2026-09-20T14:40:16.8551359","id":2,"items":[{"amount":1299.00,"id":3,"orderId":2,"price":1299.00,"productId":3,"productName":"æ¾ç¤ºå¨ 27å¯¸","quantity":1}],"orderNo":"SO20260920144016241","status":0,"statusDesc":"å·²åå»º","totalAmount":1299.00,"userId":1,"username":"admin"}
-=== 网关 -> service-order：订单列表 ===
-OK [{"createTime":"2026-09-20T14:40:17","id":2,"items":[{"amount":1299.00,"id":3,"orderId":2,"price":1299.00,"productId":3,"productName":"æ¾ç¤ºå¨ 27å¯¸","quantity":1}],"orderNo":"SO20260920144016241","status":0,"statusDesc":"å·²åå»º","totalAmount":1299.00,"userId":1,"username":"admin"},{"createTime":"2026-09-20T14:39:50","id":1,"items":[{"amount":798.00,"id":1,"orderId":1,"price":399.00,"productId":1,"productName":"æºæ¢°é®ç","quantity":2},{"amount":129.00,"id":2,"orderId":1,"price":129.00,"productId":2,"productName":"æ çº¿é¼ æ ","quantity":1}],"orderNo":"SO20260920143949468","status":0,"statusDesc":"å·²åå»º","totalAmount":927.00,"userId":2,"username":"zhangsan"}]
-=== 网关 -> service-system：用户查询 ===
-OK {"createTime":"2026-09-20T04:16:17","deptId":1,"id":2,"nickname":"å¼ ä¸","status":1,"username":"zhangsan"}
-=== 网关 -> service-order：商品列表 ===
-OK [{"createTime":"2026-09-20T06:27:40","id":1,"name":"æºæ¢°é®ç","price":399.00,"status":1,"stock":98},{"createTime":"2026-09-20T06:27:40","id":2,"name":"æ çº¿é¼ æ ","price":129.00,"status":1,"stock":199},{"createTime":"2026-09-20T06:27:40","id":3,"name":"æ¾ç¤ºå¨ 27å¯¸","price":1299.00,"status":1,"stock":29},{"createTime":"2026-09-20T06:27:40","id":4,"name":"å·²ä¸æ¶åå","price":99.00,"status":0,"stock":50}]

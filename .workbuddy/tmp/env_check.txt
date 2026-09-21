@@ -1,6 +1,0 @@
-﻿SERVER_PORT env = ''
-PORT env = ''
-=== service-system 日志中的端口与错误 ===
-2026-09-20T14:35:49.317+08:00  INFO 29580 --- [service-system] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 62513 (http)
-APPLICATION FAILED TO START
-Web server failed to start. Port 62513 was already in use.

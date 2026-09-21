@@ -1,3 +1,0 @@
-﻿token acquired: True
-PUBLISH: {"code":0,"message":"success","data":true}
-READBACK: {"code":20004,"message":"resource not found","data":null}

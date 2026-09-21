@@ -1,6 +1,0 @@
-﻿service-system started: False
-service-order  started: False
---- service-order log tail (errors) ---
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2026-09-20T14:35:56.439+08:00 ERROR 30296 --- [service-order] [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
-APPLICATION FAILED TO START

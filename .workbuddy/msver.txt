@@ -1,3 +1,0 @@
-﻿NO mybatis-spring
-mybatis-plus-boot-starter 3.5.3.1 EXISTS
-=== mybatis-plus* dirs ===
