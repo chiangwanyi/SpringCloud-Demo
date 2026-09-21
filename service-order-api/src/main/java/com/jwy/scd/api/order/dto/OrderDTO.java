@@ -17,7 +17,8 @@ public class OrderDTO {
     @Schema(description = "订单主键 ID", example = "1")
     private Long id;
 
-    @Schema(description = "业务订单号（对外可见，服务端生成）", example = "SO20260920153012001")
+    @Schema(description = "业务订单号（对外可见，服务端生成：SO + yyyyMMdd + 雪花 ID）",
+            example = "SO202609212097844166456669394")
     private String orderNo;
 
     @Schema(description = "下单用户 ID", example = "2")

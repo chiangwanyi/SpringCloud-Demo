@@ -16,20 +16,19 @@ import com.jwy.scd.mapper.BizOrderItemMapper;
 import com.jwy.scd.mapper.BizOrderMapper;
 import com.jwy.scd.mapper.BizProductMapper;
 import com.jwy.scd.service.IOrderService;
+import com.jwy.scd.support.OrderNoGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,7 +36,8 @@ public class OrderServiceImpl extends ServiceImpl<BizOrderMapper, BizOrder> impl
 
     private static final Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
 
-    private static final DateTimeFormatter ORDER_NO_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+    /** order_no 撞唯一索引后的最大重试次数（含首次尝试） */
+    private static final int ORDER_NO_MAX_ATTEMPTS = 3;
 
     /** 订单状态：已创建 */
     public static final int STATUS_CREATED = 0;
@@ -60,12 +60,23 @@ public class OrderServiceImpl extends ServiceImpl<BizOrderMapper, BizOrder> impl
 
     private final BizOrderItemMapper orderItemMapper;
 
+    /**
+     * ★ 业务订单号生成器。
+     *
+     * <p>曾把「SO + 秒级时间戳 + 3 位随机数」写在本类里，压测时必然撞唯一索引
+     * （同秒 100 单的碰撞概率 99.4%）。生成策略抽成独立 Bean 后统一走
+     * {@link OrderNoGenerator}，唯一性由雪花算法保证。
+     */
+    private final OrderNoGenerator orderNoGenerator;
+
     public OrderServiceImpl(SysUserRemoteService sysUserRemoteService,
                             BizProductMapper productMapper,
-                            BizOrderItemMapper orderItemMapper) {
+                            BizOrderItemMapper orderItemMapper,
+                            OrderNoGenerator orderNoGenerator) {
         this.sysUserRemoteService = sysUserRemoteService;
         this.productMapper = productMapper;
         this.orderItemMapper = orderItemMapper;
+        this.orderNoGenerator = orderNoGenerator;
     }
 
     /**
@@ -141,15 +152,14 @@ public class OrderServiceImpl extends ServiceImpl<BizOrderMapper, BizOrder> impl
             totalAmount = totalAmount.add(amount);
         }
 
-        // ---------- 4. 写订单主表 ----------
+        // ---------- 4. 写订单主表（order_no 撞唯一索引时换号重试） ----------
         BizOrder order = new BizOrder();
-        order.setOrderNo(generateOrderNo());
         order.setUserId(user.getId());
         // 冗余存一份用户名快照：查订单时不必再远程调用 service-system
         order.setUsername(user.getUsername());
         order.setTotalAmount(totalAmount);
         order.setStatus(STATUS_CREATED);
-        save(order);
+        saveOrderWithUniqueNo(order);
 
         // ---------- 5. 写明细 ----------
         for (BizOrderItem item : items) {
@@ -244,10 +254,42 @@ public class OrderServiceImpl extends ServiceImpl<BizOrderMapper, BizOrder> impl
         return sysUserRemoteService.getUserById(userId);
     }
 
-    /** 生成业务订单号：SO + 时间戳 + 3 位随机数（演示用，生产应保证全局唯一） */
-    private String generateOrderNo() {
-        return "SO" + LocalDateTime.now().format(ORDER_NO_FORMATTER)
-                + String.format("%03d", ThreadLocalRandom.current().nextInt(1000));
+    /**
+     * 写订单主表，并在 order_no 撞唯一索引时换号重试。
+     *
+     * <p>为什么已经用雪花算法了还要重试？因为两者的角色不同：
+     * <ul>
+     *     <li>雪花算法是<strong>生成侧</strong>的保证——单实例内数学上不会重复；</li>
+     *     <li>{@code uk_order_no} 唯一索引是<strong>存储侧</strong>的保证——数据的最后一道防线。</li>
+     * </ul>
+     * 只有生成侧的假设（比如多实例推导出同一个机器号）被打破时，才会落到这里。
+     * 未雨绸缪地兜一层，代价是几行代码，收益是「理论上的小概率」不会变成用户看到的 500。
+     *
+     * <p><b>事务安全性</b>：这里的重试在同一个 {@code @Transactional} 内进行是安全的。
+     * MySQL 遇到重复键只回滚<strong>那一条语句</strong>，不会作废整个事务；MyBatis-Spring 也不会
+     * 因为有异常就把事务标记为 rollback-only（异常没有穿过事务代理边界，{@code save()} 是自调用）。
+     * 所以前面已扣减的库存仍然处于同一个事务里，换号重试成功后整单一起提交，
+     * 不会出现「库存扣了、订单没落」的中间态。
+     *
+     * <p>连续重试 {@value #ORDER_NO_MAX_ATTEMPTS} 次仍冲突，说明生成器已经失效
+     * （机器号撞车 / 时钟回拨），继续重试只是浪费资源，直接失败并让日志把现场留下来。
+     */
+    private void saveOrderWithUniqueNo(BizOrder order) {
+        for (int attempt = 1; ; attempt++) {
+            order.setOrderNo(orderNoGenerator.next());
+            try {
+                save(order);
+                return;
+            } catch (DuplicateKeyException ex) {
+                log.warn("订单号撞唯一索引，第 {}/{} 次尝试：orderNo={}",
+                        attempt, ORDER_NO_MAX_ATTEMPTS, order.getOrderNo());
+                if (attempt >= ORDER_NO_MAX_ATTEMPTS) {
+                    log.error("订单号连续 {} 次冲突，生成器可能已失效（机器号撞车/时钟回拨？）",
+                            attempt, ex);
+                    throw OrderException.serviceUnavailable("订单号生成冲突，请稍后重试");
+                }
+            }
+        }
     }
 
     private String statusDesc(Integer status) {
